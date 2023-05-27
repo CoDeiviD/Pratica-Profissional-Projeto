@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls,
-  Vcl.StdCtrls, uCadastroClientes, uCliente;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls, Vcl.StdCtrls,
+  uCadastroClientes, uCliente, uCtrlClientes;
 
 type
   TFormConsultaClientes = class(TFormConsultaPessoas)
@@ -13,6 +13,7 @@ type
     { Private declarations }
     umFormCadastroClientes : TFormCadastroClientes;
     oCliente : Clientes;
+    aCtrlCliente: CtrlClientes;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -36,7 +37,7 @@ implementation
 procedure TFormConsultaClientes.Alterar;
 begin
   inherited;
-  umFormCadastroClientes.ConhecaObj(oCliente, nil);
+  umFormCadastroClientes.ConhecaObj(oCliente, aCtrlCliente);
   umFormCadastroClientes.LimpaEdit;
   umFormCadastroClientes.CarregaEdit;
   umFormCadastroClientes.ShowModal;
@@ -54,7 +55,7 @@ begin
   inherited;
   aux := umFormCadastroClientes.btnSalvar.Caption;
   umFormCadastroClientes.btnSalvar.Caption := '&Excluir';
-  umFormCadastroClientes.ConhecaObj(oCliente, nil);
+  umFormCadastroClientes.ConhecaObj(oCliente, aCtrlCliente);
   umFormCadastroClientes.LimpaEdit;
   umFormCadastroClientes.CarregaEdit;
   umFormCadastroClientes.ShowModal;
@@ -65,7 +66,7 @@ end;
 procedure TFormConsultaClientes.Inserir;
 begin
   inherited;
-  umFormCadastroClientes.ConhecaObj(oCliente, nil);
+  umFormCadastroClientes.ConhecaObj(oCliente, aCtrlCliente);
   umFormCadastroClientes.LimpaEdit;
   umFormCadastroClientes.ShowModal;
 end;

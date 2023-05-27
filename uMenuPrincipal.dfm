@@ -35,9 +35,36 @@ object FormSorveteria: TFormSorveteria
           OnClick = Cidades1Click
         end
       end
+      object Usurio1: TMenuItem
+        Caption = 'Usu&'#225'rio'
+        object Clientes1: TMenuItem
+          Caption = '&Clientes'
+          OnClick = Clientes1Click
+        end
+        object Fornecedores1: TMenuItem
+          Caption = 'For&necedores'
+          OnClick = Fornecedores1Click
+        end
+        object Funcionrios1: TMenuItem
+          Caption = 'F&uncion'#225'rios'
+          OnClick = Funcionrios1Click
+        end
+      end
     end
     object Visualizao1: TMenuItem
       Caption = '&Visualiza'#231#227'o'
+      object Local1: TMenuItem
+        Caption = '&Local'
+      end
+      object Clientes2: TMenuItem
+        Caption = '&Clientes'
+      end
+      object Fornecedores2: TMenuItem
+        Caption = 'For&necedores'
+      end
+      object Funcionarios1: TMenuItem
+        Caption = 'F&uncionarios'
+      end
     end
     object Atribui1: TMenuItem
       Caption = 'A&tribui'#231#227'o'

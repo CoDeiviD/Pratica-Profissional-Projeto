@@ -1,6 +1,5 @@
 inherited FormCadastroCidades: TFormCadastroCidades
   Caption = 'Cadastro de Cidades'
-  ExplicitLeft = -85
   PixelsPerInch = 96
   TextHeight = 13
   object lbCidade: TLabel [1]

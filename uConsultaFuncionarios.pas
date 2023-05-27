@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls,
-  Vcl.StdCtrls, uCadastroFuncionarios, uFuncionario;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls, Vcl.StdCtrls,
+  uCadastroFuncionarios, uFuncionario, uCtrlFuncs;
 
 type
   TFormConsultaFuncionarios = class(TFormConsultaPessoas)
@@ -13,6 +13,7 @@ type
     { Private declarations }
     umFormCadastroFuncionarios : TFormCadastroFuncionarios;
     oFuncionario : Funcionarios;
+    aCtrlFuncs : CtrlFuncs;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -36,7 +37,7 @@ implementation
 procedure TFormConsultaFuncionarios.Alterar;
 begin
   inherited;
-  umFormCadastroFuncionarios.ConhecaObj(oFuncionario, nil);
+  umFormCadastroFuncionarios.ConhecaObj(oFuncionario, aCtrlFuncs);
   umFormCadastroFuncionarios.LimpaEdit;
   umFormCadastroFuncionarios.CarregaEdit;
   umFormCadastroFuncionarios.ShowModal;
@@ -54,7 +55,7 @@ begin
   inherited;
   aux := umFormCadastroFuncionarios.btnSalvar.Caption;
   umFormCadastroFuncionarios.btnSalvar.Caption := '&Excluir';
-  umFormCadastroFuncionarios.ConhecaObj(oFuncionario, nil);
+  umFormCadastroFuncionarios.ConhecaObj(oFuncionario, aCtrlFuncs);
   umFormCadastroFuncionarios.LimpaEdit;
   umFormCadastroFuncionarios.CarregaEdit;
   umFormCadastroFuncionarios.ShowModal;
@@ -65,7 +66,7 @@ end;
 procedure TFormConsultaFuncionarios.Inserir;
 begin
   inherited;
-  umFormCadastroFuncionarios.ConhecaObj(oFuncionario, nil);
+  umFormCadastroFuncionarios.ConhecaObj(oFuncionario, aCtrlFuncs);
   umFormCadastroFuncionarios.LimpaEdit;
   umFormCadastroFuncionarios.ShowModal;
 end;

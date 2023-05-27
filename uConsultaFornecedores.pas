@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls,
-  Vcl.StdCtrls, uCadastroFornecedores, uFornecedor;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls, Vcl.StdCtrls,
+  uCadastroFornecedores, uFornecedor, uCtrlForns;
 
 type
   TFormConsultaFornecedores = class(TFormConsultaPessoas)
@@ -13,6 +13,7 @@ type
     { Private declarations }
     umFormCadastroFornecedores : TFormCadastroFornecedores;
     oFornecedor : Fornecedores;
+    aCtrlForns : CtrlForns;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -36,7 +37,7 @@ implementation
 procedure TFormConsultaFornecedores.Alterar;
 begin
   inherited;
-  umFormCadastroFornecedores.ConhecaObj(oFornecedor, nil);
+  umFormCadastroFornecedores.ConhecaObj(oFornecedor, aCtrlForns);
   umFormCadastroFornecedores.LimpaEdit;
   umFormCadastroFornecedores.CarregaEdit;
   umFormCadastroFornecedores.ShowModal;
@@ -54,7 +55,7 @@ begin
   inherited;
   aux := umFormCadastroFornecedores.btnSalvar.Caption;
   umFormCadastroFornecedores.btnSalvar.Caption := '&Excluir';
-  umFormCadastroFornecedores.ConhecaObj(oFornecedor, nil);
+  umFormCadastroFornecedores.ConhecaObj(oFornecedor, aCtrlForns);
   umFormCadastroFornecedores.LimpaEdit;
   umFormCadastroFornecedores.CarregaEdit;
   umFormCadastroFornecedores.ShowModal;
@@ -65,7 +66,7 @@ end;
 procedure TFormConsultaFornecedores.Inserir;
 begin
   inherited;
-  umFormCadastroFornecedores.ConhecaObj(oFornecedor, nil);
+  umFormCadastroFornecedores.ConhecaObj(oFornecedor, aCtrlForns);
   umFormCadastroFornecedores.LimpaEdit;
   umFormCadastroFornecedores.ShowModal;
 end;

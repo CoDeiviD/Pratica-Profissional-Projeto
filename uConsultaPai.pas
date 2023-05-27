@@ -31,6 +31,7 @@ type
     procedure Sair;                       virtual;
     procedure Pesquisar;                  virtual;
     procedure setCadastro(pObj: TObject); virtual;
+    procedure CarregaLV;                  virtual;
   end;
 
 var
@@ -70,6 +71,11 @@ end;
 procedure TFormConsultaPai.btnSairClick(Sender: TObject);
 begin
    Sair;
+end;
+
+procedure TFormConsultaPai.CarregaLV;
+begin
+
 end;
 
 procedure TFormConsultaPai.ConhecaObj(pObj: TObject; pCtrl: TObject);

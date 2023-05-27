@@ -4,7 +4,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroPaises, uPaises;
+  uCadastroPaises, uPaises,
+  uCtrlPaises,
+  uColPaises;
 
 type
   TFormConsultaPaises = class(TFormConsultaPai)
@@ -12,6 +14,7 @@ type
     { Private declarations }
     umFormCadastroPaises : TFormCadastroPaises;
     oPais : Paises;
+    aCtrlPais : CtrlPaises;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -21,6 +24,7 @@ type
     procedure Sair;                       override;
     procedure Pesquisar;                  override;
     procedure setCadastro(pObj: TObject); override;
+    procedure CarregaLV;                  override;
   end;
 
 var
@@ -35,16 +39,23 @@ implementation
 procedure TFormConsultaPaises.Alterar;
 begin
   inherited;
-  umFormCadastroPaises.ConhecaObj(oPais, nil);
+  umFormCadastroPaises.ConhecaObj(oPais, aCtrlPais);
   umFormCadastroPaises.LimpaEdit;
   umFormCadastroPaises.CarregaEdit;
   umFormCadastroPaises.ShowModal;
+end;
+
+procedure TFormConsultaPaises.CarregaLV;
+begin
+  inherited;
+
 end;
 
 procedure TFormConsultaPaises.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
   oPais := Paises(pObj);
+  aCtrlPais := CtrlPaises(pCtrl);
 end;
 
 procedure TFormConsultaPaises.Excluir;
@@ -53,7 +64,7 @@ begin
   inherited;
   aux := umFormCadastroPaises.btnSalvar.Caption;
   umFormCadastroPaises.btnSalvar.Caption := 'Excluir';
-  umFormCadastroPaises.ConhecaObj(oPais, nil);
+  umFormCadastroPaises.ConhecaObj(oPais, aCtrlPais);
 
   umFormCadastroPaises.LimpaEdit;
   umFormCadastroPaises.CarregaEdit;
@@ -66,7 +77,7 @@ end;
 procedure TFormConsultaPaises.Inserir;
 begin
   inherited;
-  umFormCadastroPaises.ConhecaObj(oPais, nil);
+  umFormCadastroPaises.ConhecaObj(oPais, aCtrlPais);
   umFormCadastroPaises.LimpaEdit;
   umFormCadastroPaises.ShowModal;
 end;

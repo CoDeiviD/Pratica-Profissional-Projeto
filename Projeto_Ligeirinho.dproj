@@ -131,8 +131,48 @@
             <Form>FormCadastroEstados</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uPai.pas"/>
+        <DCCReference Include="uPaises.pas"/>
+        <DCCReference Include="uPessoas.pas"/>
+        <DCCReference Include="uEstados.pas"/>
+        <DCCReference Include="uFornecedor.pas"/>
+        <DCCReference Include="uFuncionario.pas"/>
+        <DCCReference Include="uCidades.pas"/>
+        <DCCReference Include="uCliente.pas"/>
+        <DCCReference Include="uConsultaPessoas.pas">
+            <Form>FormConsultaPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroPessoas.pas">
+            <Form>FormCadastroPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="uCadastroCidades.pas">
             <Form>FormCadastroCidades</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroClientes.pas">
+            <Form>FormCadastroClientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroFornecedores.pas">
+            <Form>FormCadastroFornecedores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroFuncionarios.pas">
+            <Form>FormCadastroFuncionarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaClientes.pas">
+            <Form>FormConsultaClientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaFornecedores.pas">
+            <Form>FormConsultaFornecedores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaFuncionarios.pas">
+            <Form>FormConsultaFuncionarios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

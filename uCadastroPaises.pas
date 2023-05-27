@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls,
-  uPaises;
+  uPaises,
+  uCtrlPaises;
 
 type
   TFormCadastroPaises = class(TFormCadastroPai)
@@ -19,6 +20,7 @@ type
   private
     { Private declarations }
      oPais : Paises;
+     aCtrlPais : CtrlPaises;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject); override;
@@ -55,7 +57,8 @@ end;
 procedure TFormCadastroPaises.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
-
+  oPais := Paises(pObj);
+  aCtrlPais := CtrlPaises(pCtrl);
 end;
 
 procedure TFormCadastroPaises.DesbloqueiaEdit;

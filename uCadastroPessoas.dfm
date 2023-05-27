@@ -2,12 +2,17 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
   Caption = 'Cadastro de Pessoas'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited lbCodigo: TLabel
+    Width = 42
+    Caption = 'C'#243'digo *'
+    ExplicitWidth = 42
+  end
   object lbNome: TLabel [4]
     Left = 120
     Top = 21
-    Width = 75
+    Width = 84
     Height = 13
-    Caption = 'Nome Completo'
+    Caption = 'Nome Completo *'
   end
   object lbDtNasc: TLabel [5]
     Left = 408
@@ -19,9 +24,9 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
   object lbCPF_CNPJ: TLabel [6]
     Left = 560
     Top = 21
-    Width = 54
+    Width = 63
     Height = 13
-    Caption = 'CPF / CNPJ'
+    Caption = 'CPF / CNPJ *'
   end
   object lbEndereco: TLabel [7]
     Left = 18
@@ -40,9 +45,12 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
   object lbTelefone: TLabel [9]
     Left = 581
     Top = 96
-    Width = 42
+    Width = 51
     Height = 13
-    Caption = 'Telefone'
+    Caption = 'Telefone *'
+  end
+  inherited btnSalvar: TButton
+    OnExit = btnSalvarExit
   end
   object edtNome: TEdit
     Left = 120
@@ -66,7 +74,7 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
     TabOrder = 7
   end
   object edtEndereco: TEdit
-    Left = 8
+    Left = 18
     Top = 120
     Width = 281
     Height = 21
@@ -75,7 +83,7 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
   object edtEmail: TEdit
     Left = 313
     Top = 120
-    Width = 232
+    Width = 240
     Height = 21
     TabOrder = 9
   end
@@ -85,5 +93,13 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
     Width = 204
     Height = 21
     TabOrder = 10
+  end
+  object btnPesquisar: TButton
+    Left = 729
+    Top = 38
+    Width = 75
+    Height = 25
+    Caption = 'P&esquisar'
+    TabOrder = 11
   end
 end

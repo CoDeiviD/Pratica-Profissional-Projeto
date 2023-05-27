@@ -4,7 +4,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroCidades, uCidades;
+  uCadastroCidades, uCidades, uCtrlCidades;
 
 type
   TFormConsultaCidades = class(TFormConsultaPai)
@@ -12,6 +12,7 @@ type
     { Private declarations }
     umFormCadastroCidades : TFormCadastroCidades;
     aCidade : Cidades;
+    aCtrlCidade: CtrlCidades;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -35,7 +36,7 @@ implementation
 procedure TFormConsultaCidades.Alterar;
 begin
   inherited;
-  umFormCadastroCidades.ConhecaObj(aCidade, nil);
+  umFormCadastroCidades.ConhecaObj(aCidade, aCtrlCidade);
   umFormCadastroCidades.LimpaEdit;
   umFormCadastroCidades.CarregaEdit;
   umFormCadastroCidades.ShowModal;
@@ -50,14 +51,15 @@ end;
 procedure TFormConsultaCidades.Excluir;
 begin
   inherited;
-  umFormConsultaCidades.ConhecaObj(aCidade,nil);
+  umFormConsultaCidades.ConhecaObj(aCidade,aCtrlCidade);
   umFormConsultaCidades.ShowModal;
 end;
 
 procedure TFormConsultaCidades.Inserir;
 begin
   inherited;
-  umFormConsultaCidades.ConhecaObj(aCidade,nil);
+  umFormConsultaCidades.ConhecaObj(aCidade,aCtrlCidade);
+  umFormCadastroCidades.LimpaEdit;
   umFormConsultaCidades.ShowModal;
 end;
 

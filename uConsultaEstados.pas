@@ -4,7 +4,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroEstados, uEstados;
+  uCadastroEstados, uEstados, uCtrlEstados;
 
 type
   TFormConsultaEstados = class(TFormConsultaPai)
@@ -12,6 +12,7 @@ type
     { Private declarations }
     umFormCadastroEstados : TFormCadastroEstados;
     oEstado : Estados;
+    aCtrlEstado : CtrlEstados;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -35,7 +36,7 @@ implementation
 procedure TFormConsultaEstados.Alterar;
 begin
   inherited;
-  umFormCadastroEstados.ConhecaObj(oEstado, nil);
+  umFormCadastroEstados.ConhecaObj(oEstado, aCtrlEstado);
   umFormCadastroEstados.LimpaEdit;
   umFormCadastroEstados.CarregaEdit;
   umFormCadastroEstados.ShowModal;
@@ -53,7 +54,7 @@ begin
   inherited;
   aux := umFormCadastroEstados.btnSalvar.Caption;
   umFormCadastroEstados.btnSalvar.Caption := '&Excluir';
-  umFormCadastroEstados.ConhecaObj(oEstado, nil);
+  umFormCadastroEstados.ConhecaObj(oEstado, aCtrlEstado);
   umFormCadastroEstados.LimpaEdit;
   umFormCadastroEstados.CarregaEdit;
   umFormCadastroEstados.ShowModal;
@@ -64,7 +65,7 @@ end;
 procedure TFormConsultaEstados.Inserir;
 begin
   inherited;
-  umFormCadastroEstados.ConhecaObj(oEstado, nil);
+  umFormCadastroEstados.ConhecaObj(oEstado, aCtrlEstado);
   umFormCadastroEstados.LimpaEdit;
   umFormCadastroEstados.ShowModal;
 end;
