@@ -61,7 +61,7 @@ begin
    Email := '';
    Telefone := '';
    QtdeCarga := 0;
-   VCombustivel := 0;
+   VCombustivel := 0.00;
 end;
 
 destructor Fornecedores.Destrua_se;

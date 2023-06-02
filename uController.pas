@@ -8,10 +8,16 @@ interface
        constructor CrieObj;
        destructor Destrua_se;
        function Salvar( pObj : TObject): string; virtual;
+       function CarregarColecao: TObject;        virtual;
   end;
 implementation
 
 { Controller }
+
+function Controller.CarregarColecao: TObject;
+begin
+
+end;
 
 constructor Controller.CrieObj;
 begin

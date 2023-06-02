@@ -10,6 +10,10 @@ uses
 
 type
   TFormConsultaPaises = class(TFormConsultaPai)
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroPaises : TFormCadastroPaises;
@@ -45,9 +49,49 @@ begin
   umFormCadastroPaises.ShowModal;
 end;
 
-procedure TFormConsultaPaises.CarregaLV;
+procedure TFormConsultaPaises.btnAlterarClick(Sender: TObject);
 begin
   inherited;
+  self.Alterar;
+end;
+
+procedure TFormConsultaPaises.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+  self.Excluir;
+end;
+
+procedure TFormConsultaPaises.btnInserirClick(Sender: TObject);
+begin
+  inherited;
+  self.Inserir;
+end;
+
+procedure TFormConsultaPaises.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  self.Sair;
+end;
+
+procedure TFormConsultaPaises.CarregaLV;
+var LVItem : TListItem;
+    tam, k : integer;
+    oPais  : Paises;
+    aColPaises : ColPaises;
+begin
+  inherited;
+  aColPaises := ColPaises(aCtrlPais.CarregarColecao);
+  self.ListView1.Clear;
+  tam := aColPaises.getTam;
+  for k  := 1 to tam do
+  begin
+     oPais := Paises(aColPaises.Carregar(k));
+     LVItem := ListView1.Items.Add;
+     LVItem.Caption := inttostr(oPais.getCodigo);
+     LVItem.SubItems.Add(oPais.getPais);
+     LVItem.SubItems.Add(oPais.getSigla);
+     LVItem.SubItems.Add(oPais.getDDI);
+  end;
 
 end;
 
@@ -80,6 +124,7 @@ begin
   umFormCadastroPaises.ConhecaObj(oPais, aCtrlPais);
   umFormCadastroPaises.LimpaEdit;
   umFormCadastroPaises.ShowModal;
+  self.CarregaLV;
 end;
 
 procedure TFormConsultaPaises.Pesquisar;
@@ -91,7 +136,7 @@ end;
 procedure TFormConsultaPaises.Sair;
 begin
   inherited;
-
+  Close;
 end;
 
 procedure TFormConsultaPaises.setCadastro(pObj: TObject);

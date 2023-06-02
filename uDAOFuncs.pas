@@ -11,10 +11,16 @@ interface
       constructor CrieObj;
       destructor Destrua_se;
       function salvar(pObj : TObject): string; override;
+      function CarregarColecao: TObject;        override;
  end;
 implementation
 
 { DAOFuncs }
+
+function DAOFuncs.CarregarColecao: TObject;
+begin
+   Result := aColFuncs;
+end;
 
 constructor DAOFuncs.CrieObj;
 begin
