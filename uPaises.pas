@@ -30,6 +30,7 @@ implementation
 constructor Paises.CrieInit(pCodigo: integer; pPais, pSigla, pDDI,
   pMoeda: String);
 begin
+ //  inherited;
    codigo := pCodigo;
    pais := pPais;
    Sigla := pSigla;
@@ -39,6 +40,7 @@ end;
 
 constructor Paises.CrieObj;
 begin
+  inherited;
    codigo := 0;
    Pais := '';
    Sigla := '';

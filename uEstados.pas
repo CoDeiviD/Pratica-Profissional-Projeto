@@ -27,6 +27,7 @@ implementation
 constructor Estados.CrieInit(pCodigo: integer; pEstado, pUF: String;
   pCodPais: integer);
 begin
+  //inherited;
    codigo := pCodigo;
    Estado := pEstado;
    UF := pUF;
@@ -35,6 +36,7 @@ end;
 
 constructor Estados.CrieObj;
 begin
+  inherited;
    codigo := 0;
    Estado := '';
    UF := '';

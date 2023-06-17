@@ -14,7 +14,7 @@ interface
        Telefone : string[13];
     public
       constructor CrieObj;
-      constructor CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime);
+      constructor CrieInit(pCodigo: integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime);
       destructor Destrua_se;
       procedure setNome(pNome:string);
       procedure setDtNasc(pDtNasc:TDateTime);
@@ -33,8 +33,10 @@ implementation
 
 { Pessoas }
 
-constructor Pessoas.CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc: TDateTime);
+constructor Pessoas.CrieInit(pCodigo: integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc: TDateTime);
 begin
+//  inherited;
+   codigo := pCodigo;
    Nome := pNome;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
@@ -45,6 +47,8 @@ end;
 
 constructor Pessoas.CrieObj;
 begin
+  inherited;
+   codigo := 0;
    Nome := '';
    DtNasc := 00/00/00;
    CPF_CNPJ := '';

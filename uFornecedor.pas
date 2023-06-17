@@ -16,7 +16,7 @@ interface
        QtdeCarga: integer;
     public
       constructor CrieObj;
-      constructor CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime; pQtdeCarga: integer; pVCombustivel: Double);
+      constructor CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime; pQtdeCarga: integer; pVCombustivel: Double);
       destructor Destrua_se;
       procedure setNome(pNome:string);
       procedure setDtNasc(pDtNasc:TDateTime);
@@ -39,10 +39,12 @@ implementation
 
 { Fornecedores }
 
-constructor Fornecedores.CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail,
+constructor Fornecedores.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
   pTelefone: string; pDtNasc: TDateTime; pQtdeCarga: integer;
   pVCombustivel: Double);
 begin
+ // inherited;
+   codigo := pCodigo;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
    Endereco := pEndereco;
@@ -54,6 +56,8 @@ end;
 
 constructor Fornecedores.CrieObj;
 begin
+  inherited;
+   codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;
    CPF_CNPJ := '';

@@ -16,7 +16,7 @@ interface
        CargaH: TDateTime;
     public
       constructor CrieObj;
-      constructor CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc, pCargaH : TDateTime; pSalario: Double);
+      constructor CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc, pCargaH : TDateTime; pSalario: Double);
       destructor Destrua_se;
       procedure setNome(pNome:string);
       procedure setDtNasc(pDtNasc:TDateTime);
@@ -39,9 +39,11 @@ implementation
 
 { Funcionarios }
 
-constructor Funcionarios.CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail,
+constructor Funcionarios.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
   pTelefone: string; pDtNasc, pCargaH: TDateTime; pSalario: Double);
 begin
+ // inherited;
+   codigo := pCodigo;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
    Endereco := pEndereco;
@@ -53,6 +55,8 @@ end;
 
 constructor Funcionarios.CrieObj;
 begin
+  inherited;
+   codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;
    CPF_CNPJ := '';
