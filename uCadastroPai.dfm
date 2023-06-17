@@ -76,7 +76,7 @@ object FormCadastroPai: TFormCadastroPai
   object edtDtUltAlt: TEdit
     Left = 392
     Top = 379
-    Width = 57
+    Width = 70
     Height = 21
     TabOrder = 4
   end

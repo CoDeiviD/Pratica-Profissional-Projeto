@@ -13,7 +13,7 @@ interface
        oForn   : Fornecedores;
     public
       constructor CrieObj;
-      constructor CrieInit(pValor, pVPago: double; pDtVencimento, pDtPagamento: TDateTime; poForn: string);
+      constructor CrieInit(pCodigo : integer; pValor, pVPago: double; pDtVencimento, pDtPagamento: TDateTime; poForn: string);
       destructor Destrua_se;
       procedure setValor(pValor:double);
       procedure setDtVencimento(pDtVencimento:TDateTime);
@@ -30,18 +30,20 @@ implementation
 
 { ContasPgr }
 
-constructor ContasPgr.CrieInit(pValor, pVPago: double;
+constructor ContasPgr.CrieInit(pCodigo : integer; pValor, pVPago: double;
   pDtVencimento, pDtPagamento: TDateTime; poForn: string);
 begin
+//  inherited;
    Valor  := pValor;
    DtVencimento := pDtVencimento;
    DtPagamento := pDtPagamento;
    VPago  := pVPago;
-   oForn   := Fornecedores.CrieInit(poForn,'','','','',00/00/00,0,0);
+//   oForn   := Fornecedores.CrieInit(poForn,'','','','',00/00/00,0,0);
 end;
 
 constructor ContasPgr.CrieObj;
 begin
+  inherited;
    Valor := 0.00;
    DtVencimento := 00/00/00;
    DtPagamento := 00/00/00;

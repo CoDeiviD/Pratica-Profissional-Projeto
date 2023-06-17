@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroFuncionarios, uFuncionario, uCtrlFuncs, uColFuncs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
+  uCadastroFuncionarios, uFuncionario, uCtrlFuncs, uColFuncs, uConsultaPessoas;
 
 type
   TFormConsultaFuncionarios = class(TFormConsultaPessoas)
@@ -20,14 +20,14 @@ type
     aCtrlFuncs : CtrlFuncs;
   public
     { Public declarations }
-    procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
-    procedure Inserir;                    override;
-    procedure Alterar;                    override;
-    procedure Excluir;                    override;
-    procedure Sair;                       override;
-    procedure Pesquisar;                  override;
-    procedure setCadastro(pObj: TObject); override;
-    procedure CarregaLV;                  override;
+    procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  virtual;
+    procedure Inserir;                    virtual;
+    procedure Alterar;                    virtual;
+    procedure Excluir;                    virtual;
+    procedure Sair;                       virtual;
+    procedure Pesquisar;                  virtual;
+    procedure setCadastro(pObj: TObject); virtual;
+    procedure CarregaLV;                  virtual;
   end;
 
 var

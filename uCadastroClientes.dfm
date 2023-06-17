@@ -14,9 +14,6 @@ inherited FormCadastroClientes: TFormCadastroClientes
     Height = 13
     Caption = 'Quantidade no Grupo *'
   end
-  inherited btnSalvar: TButton
-    OnExit = btnSalvarExit
-  end
   object edtQtdeGrupo: TEdit [22]
     Left = 8
     Top = 187

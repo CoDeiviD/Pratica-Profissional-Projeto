@@ -17,6 +17,8 @@ type
     lbSigla: TLabel;
     lbDDI: TLabel;
     procedure edtPaisExit(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
      oPais : Paises;
@@ -46,6 +48,18 @@ procedure TFormCadastroPaises.BloqueiaEdit;
 begin
   inherited;
 
+end;
+
+procedure TFormCadastroPaises.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  self.Sair;
+end;
+
+procedure TFormCadastroPaises.btnSalvarClick(Sender: TObject);
+begin
+  inherited;
+  self.Salvar;
 end;
 
 procedure TFormCadastroPaises.CarregaEdit;

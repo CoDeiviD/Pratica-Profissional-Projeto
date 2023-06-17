@@ -13,7 +13,7 @@ interface
        oCliente   : Clientes;
     public
       constructor CrieObj;
-      constructor CrieInit(pValor, pVReceb: double; pDtVencimento, pDtPagamento: TDateTime; poCliente: string);
+      constructor CrieInit(pCodigo : integer; pValor, pVReceb: double; pDtVencimento, pDtPagamento: TDateTime; poCliente: string);
       destructor Destrua_se;
       procedure setValor(pValor:double);
       procedure setDtVencimento(pDtVencimento:TDateTime);
@@ -30,18 +30,20 @@ implementation
 
 { ContasRcb }
 
-constructor ContasRcb.CrieInit(pValor, pVReceb: double;
+constructor ContasRcb.CrieInit(pCodigo : integer; pValor, pVReceb: double;
   pDtVencimento, pDtPagamento: TDateTime; poCliente: string);
 begin
+//  inherited;
    Valor  := pValor;
    DtVencimento := pDtVencimento;
    DtPagamento := pDtPagamento;
    VReceb  := pVReceb;
-   oCliente := Clientes.CrieInit(poCliente,'','','','',00/00/00,0,False);
+//   oCliente := Clientes.CrieInit(poCliente,'','','','',00/00/00,0,False);
 end;
 
 constructor ContasRcb.CrieObj;
 begin
+  inherited;
    Valor := 0.00;
    DtVencimento := 00/00/00;
    DtPagamento := 00/00/00;

@@ -26,9 +26,9 @@ inherited FormCadastroContaPgo: TFormCadastroContaPgo
   object lbValorPgo: TLabel [7]
     Left = 536
     Top = 21
-    Width = 51
+    Width = 60
     Height = 13
-    Caption = 'Valor Pago'
+    Caption = 'Valor Pago *'
   end
   object lbCodForn: TLabel [8]
     Left = 18

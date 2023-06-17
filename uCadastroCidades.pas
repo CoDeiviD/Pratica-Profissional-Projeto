@@ -21,6 +21,7 @@ type
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnSalvarExit(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
     aCidade : Cidades;
@@ -44,6 +45,12 @@ begin
   umaConsultaEstados.ShowModal;
   self.edtCodEstado.Text := inttostr(aCidade.getoEstado.getCodigo);
   self.edtEstado.Text := aCidade.getoEstado.getEstado;
+end;
+
+procedure TFormCadastroCidades.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  Close;
 end;
 
 procedure TFormCadastroCidades.btnSalvarClick(Sender: TObject);

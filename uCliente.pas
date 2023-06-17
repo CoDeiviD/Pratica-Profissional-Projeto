@@ -16,7 +16,7 @@ interface
        Pagou : Boolean;
     public
       constructor CrieObj;
-      constructor CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime; pQtdeGrupo: integer; pPagou: Boolean);
+      constructor CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime; pQtdeGrupo: integer; pPagou: Boolean);
       destructor Destrua_se;
       procedure setNome(pNome:string);
       procedure setDtNasc(pDtNasc:TDateTime);
@@ -39,10 +39,12 @@ implementation
 
 { Clientes }
 
-constructor Clientes.CrieInit(pNome, pCPF_CNPJ, pEndereco, pEmail,
+constructor Clientes.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
   pTelefone: string; pDtNasc: TDateTime; pQtdeGrupo: integer; pPagou: Boolean);
 begin
-Nome  := pNome;
+ // inherited;
+   Codigo := pCodigo;
+   Nome  := pNome;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
    Endereco := pEndereco;
@@ -54,6 +56,8 @@ end;
 
 constructor Clientes.CrieObj;
 begin
+  inherited;
+   codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;
    CPF_CNPJ := '';
@@ -66,6 +70,7 @@ end;
 
 destructor Clientes.Destrua_se;
 begin
+inherited;
 
 end;
 

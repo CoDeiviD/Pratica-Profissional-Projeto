@@ -16,9 +16,6 @@ inherited FormCadastroFornecedores: TFormCadastroFornecedores
     Height = 13
     Caption = 'Quantidade Carga *'
   end
-  inherited btnSalvar: TButton
-    OnExit = btnSalvarExit
-  end
   inherited btnPesquisar: TButton
     TabOrder = 13
   end

@@ -27,6 +27,7 @@ implementation
 constructor Cidades.CrieInit(pCodigo: integer; pCidade, pDDD: String;
   poEstado: integer);
 begin
+ // inherited;
    codigo := pCodigo;
    cidade := pCidade;
    DDD := pDDD;
@@ -35,6 +36,7 @@ end;
 
 constructor Cidades.CrieObj;
 begin
+  inherited;
    codigo := 0;
    Cidade := '';
    DDD := '';

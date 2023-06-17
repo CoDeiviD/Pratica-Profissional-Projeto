@@ -33,9 +33,9 @@ inherited FormCadastroContaRcb: TFormCadastroContaRcb
   object lbValorRcbdo: TLabel [8]
     Left = 648
     Top = 21
-    Width = 71
+    Width = 80
     Height = 13
-    Caption = 'Valor Recebido'
+    Caption = 'Valor Recebido *'
   end
   inherited edtCodigo: TEdit
     Left = 18

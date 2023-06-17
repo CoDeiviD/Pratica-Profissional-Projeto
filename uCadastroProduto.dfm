@@ -5,9 +5,9 @@ inherited FormCadastroProduto: TFormCadastroProduto
   object lbNomeProd: TLabel [4]
     Left = 144
     Top = 16
-    Width = 83
+    Width = 92
     Height = 13
-    Caption = 'Nome do Produto'
+    Caption = 'Nome do Produto *'
   end
   object lbSabor: TLabel [5]
     Left = 424

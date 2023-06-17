@@ -98,53 +98,8 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uMenuPrincipal.pas">
-            <Form>FormSorveteria</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uConsultaPai.pas">
-            <Form>FormConsultaPai</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uConsultaPaises.pas">
-            <Form>FormConsultaPaises</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uConsultaEstados.pas">
-            <Form>FormConsultaEstados</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uConsultaCidades.pas">
-            <Form>FormConsultaCidades</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uInter.pas"/>
-        <DCCReference Include="uCadastroPai.pas">
-            <Form>FormCadastroPai</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uCadastroPaises.pas">
-            <Form>FormCadastroPaises</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uCadastroEstados.pas">
-            <Form>FormCadastroEstados</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uPai.pas"/>
-        <DCCReference Include="uPaises.pas"/>
-        <DCCReference Include="uPessoas.pas"/>
-        <DCCReference Include="uEstados.pas"/>
-        <DCCReference Include="uFornecedor.pas"/>
-        <DCCReference Include="uFuncionario.pas"/>
-        <DCCReference Include="uCidades.pas"/>
-        <DCCReference Include="uCliente.pas"/>
-        <DCCReference Include="uConsultaPessoas.pas">
-            <Form>FormConsultaPessoas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uCadastroPessoas.pas">
-            <Form>FormCadastroPessoas</Form>
+        <DCCReference Include="uCadastroCaixa.pas">
+            <Form>FormCadastroCaixa</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uCadastroCidades.pas">
@@ -155,6 +110,18 @@
             <Form>FormCadastroClientes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uCadastroContaPgo.pas">
+            <Form>FormCadastroContaPgo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroContaRcb.pas">
+            <Form>FormCadastroContaRcb</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroEstados.pas">
+            <Form>FormCadastroEstados</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="uCadastroFornecedores.pas">
             <Form>FormCadastroFornecedores</Form>
             <FormType>dfm</FormType>
@@ -163,8 +130,62 @@
             <Form>FormCadastroFuncionarios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uCadastroPai.pas">
+            <Form>FormCadastroPai</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroPaises.pas">
+            <Form>FormCadastroPaises</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroPessoas.pas">
+            <Form>FormCadastroPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroProduto.pas">
+            <Form>FormCadastroProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadPessoas.pas">
+            <Form>FormCadPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCaixas.pas"/>
+        <DCCReference Include="uCidades.pas"/>
+        <DCCReference Include="uCliente.pas"/>
+        <DCCReference Include="uColCaixas.pas"/>
+        <DCCReference Include="uColCidades.pas"/>
+        <DCCReference Include="uColClientes.pas"/>
+        <DCCReference Include="uColContasPgr.pas"/>
+        <DCCReference Include="uColContasRcb.pas"/>
+        <DCCReference Include="uColecoes.pas"/>
+        <DCCReference Include="uColEstados.pas"/>
+        <DCCReference Include="uColForns.pas"/>
+        <DCCReference Include="uColFuncs.pas"/>
+        <DCCReference Include="uColPaises.pas"/>
+        <DCCReference Include="uColProdutos.pas"/>
+        <DCCReference Include="uConsultaCaixa.pas">
+            <Form>FormConsultaCaixa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaCidades.pas">
+            <Form>FormConsultaCidades</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="uConsultaClientes.pas">
             <Form>FormConsultaClientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaContaPgo.pas">
+            <Form>FormConsultaContaPgo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaContaRcb.pas">
+            <Form>FormConsultaContaRcb</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaEstados.pas">
+            <Form>FormConsultaEstados</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uConsultaFornecedores.pas">
@@ -175,6 +196,66 @@
             <Form>FormConsultaFuncionarios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uConsultaPai.pas">
+            <Form>FormConsultaPai</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaPaises.pas">
+            <Form>FormConsultaPaises</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaPessoas.pas">
+            <Form>FormConsultaPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uConsultaProduto.pas">
+            <Form>FormConsultaProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uContasPgr.pas"/>
+        <DCCReference Include="uContasRcb.pas"/>
+        <DCCReference Include="uController.pas"/>
+        <DCCReference Include="uCtrlCaixas.pas"/>
+        <DCCReference Include="uCtrlCidades.pas"/>
+        <DCCReference Include="uCtrlClientes.pas"/>
+        <DCCReference Include="uCtrlContasPgr.pas"/>
+        <DCCReference Include="uCtrlContasRcb.pas"/>
+        <DCCReference Include="uCtrlEstados.pas"/>
+        <DCCReference Include="uCtrlForns.pas"/>
+        <DCCReference Include="uCtrlFuncs.pas"/>
+        <DCCReference Include="uCtrlPaises.pas"/>
+        <DCCReference Include="uCtrlProdutos.pas"/>
+        <DCCReference Include="uDao.pas"/>
+        <DCCReference Include="uDAOCaixas.pas"/>
+        <DCCReference Include="uDAOCidades.pas"/>
+        <DCCReference Include="uDAOClientes.pas"/>
+        <DCCReference Include="uDAOContasPgr.pas"/>
+        <DCCReference Include="uDAOContasRcb.pas"/>
+        <DCCReference Include="uDAOEstados.pas"/>
+        <DCCReference Include="uDAOForns.pas"/>
+        <DCCReference Include="uDAOFuncs.pas"/>
+        <DCCReference Include="uDAOPaises.pas"/>
+        <DCCReference Include="uDAOProdutos.pas"/>
+        <DCCReference Include="uDM.pas">
+            <Form>DataModule1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uEstados.pas"/>
+        <DCCReference Include="uFornecedor.pas"/>
+        <DCCReference Include="uFuncionario.pas"/>
+        <DCCReference Include="uInter.pas"/>
+        <DCCReference Include="uMenuPrincipal.pas">
+            <Form>FormSorveteria</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uPai.pas"/>
+        <DCCReference Include="uPaises.pas"/>
+        <DCCReference Include="uPessoas.pas"/>
+        <DCCReference Include="uProdutos.pas"/>
+        <DCCReference Include="uCtrlPessoas.pas"/>
+        <DCCReference Include="uDAOPessoas.pas"/>
+        <DCCReference Include="uColPessoas.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

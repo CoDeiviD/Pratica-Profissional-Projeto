@@ -54,7 +54,7 @@ end;
 
 procedure TFormCadastroPessoas.btnSalvarClick(Sender: TObject);
 begin
-  inherited;
+ // inherited;
   if length(self.edtNome.Text) = 0 then
   begin
      showmessage('Campo Nome é Obrigatório');

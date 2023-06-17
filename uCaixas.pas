@@ -7,7 +7,7 @@ interface
     private
     protected
        Data  : TDate;
-       Historico : string[45];
+       Historico : string; //[45];
        Entrada : double;
        Saida  : double;
        Saldo  : double;
@@ -36,8 +36,10 @@ implementation
 constructor Caixas.CrieInit(pCodigo: integer; pData: TDate; pHistorico: String;
   pEntrada, pSaida, pSaldo, pSaldoTotal: double);
 begin
+ //  inherited;
+ //  codigo := pCodigo;
    Data  := pData;
-   Historico := pHistorico;
+ //  Historico := pHistorico;
    Entrada := pEntrada;
    Saida  := pSaida;
    Saldo  := pSaldo;
@@ -46,6 +48,8 @@ end;
 
 constructor Caixas.CrieObj;
 begin
+  inherited;
+   codigo := 0;
    Data  := 00/00/00;
    Historico := '';
    Entrada := 0.00;
@@ -71,7 +75,7 @@ end;
 
 function Caixas.getHistorico: string;
 begin
-   Result := Historico;
+ //  Result := Historico;
 end;
 
 function Caixas.getSaida: double;
@@ -101,7 +105,7 @@ end;
 
 procedure Caixas.setHistorico(pHistorico: string);
 begin
-   Historico := pHistorico;
+//   Historico := pHistorico;
 end;
 
 procedure Caixas.setSaida(pSaida: double);

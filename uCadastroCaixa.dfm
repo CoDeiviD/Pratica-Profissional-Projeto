@@ -5,16 +5,16 @@ inherited FormCadastroCaixa: TFormCadastroCaixa
   object lbData: TLabel [4]
     Left = 113
     Top = 21
-    Width = 23
+    Width = 32
     Height = 13
-    Caption = 'Data'
+    Caption = 'Data *'
   end
   object lbHistorico: TLabel [5]
     Left = 233
     Top = 21
-    Width = 41
+    Width = 50
     Height = 13
-    Caption = 'Hist'#243'rico'
+    Caption = 'Hist'#243'rico *'
   end
   object lbEntrada: TLabel [6]
     Left = 18
@@ -33,9 +33,9 @@ inherited FormCadastroCaixa: TFormCadastroCaixa
   object lbSaldoBase: TLabel [8]
     Left = 264
     Top = 80
-    Width = 52
+    Width = 61
     Height = 13
-    Caption = 'Saldo Base'
+    Caption = 'Saldo Base *'
   end
   object edtData: TEdit
     Left = 113
