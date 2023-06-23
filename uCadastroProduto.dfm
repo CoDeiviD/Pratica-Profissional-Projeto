@@ -23,6 +23,9 @@ inherited FormCadastroProduto: TFormCadastroProduto
     Height = 13
     Caption = 'Pre'#231'o'
   end
+  inherited btnSalvar: TButton
+    OnExit = btnSalvarExit
+  end
   object edtNomeProd: TEdit
     Left = 136
     Top = 40

@@ -13,6 +13,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroFuncionarios : TFormCadastroFuncionarios;
@@ -63,6 +64,12 @@ end;
 procedure TFormConsultaFuncionarios.btnInserirClick(Sender: TObject);
 begin
    self.Inserir;
+end;
+
+procedure TFormConsultaFuncionarios.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TFormConsultaFuncionarios.btnSairClick(Sender: TObject);
@@ -130,7 +137,7 @@ end;
 procedure TFormConsultaFuncionarios.Pesquisar;
 begin
   inherited;
-
+  aCtrlFuncs.Pesquisar(self.edtChave.Text, oFuncionario);
 end;
 
 procedure TFormConsultaFuncionarios.Sair;

@@ -4,8 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls,
-  uPessoas;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls, uPai,
+  uPessoas,
+  uCtrlPessoas;
 
 type
   TFormCadastroPessoas = class(TFormCadastroPai)
@@ -22,11 +23,11 @@ type
     edtEmail: TEdit;
     edtTelefone: TEdit;
     btnPesquisar: TButton;
-    procedure btnSalvarClick(Sender: TObject);
     procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     aPessoa : Pessoas;
+    aCtrlPessoa : CtrlPessoas;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject); override;
@@ -36,7 +37,6 @@ type
     procedure DesbloqueiaEdit;                           override;
     procedure Salvar;                                    override;
     procedure Sair;                                      override;
-    procedure setConsulta(pObj: TObject);                override;
   end;
 
 var
@@ -49,12 +49,71 @@ implementation
 procedure TFormCadastroPessoas.BloqueiaEdit;
 begin
   inherited;
-
+  self.edtNome.Enabled := false;
+  self.edtDtNasc.Enabled := false;
+  self.edtCPF_CNPJ.Enabled := false;
+  self.edtEndereco.Enabled := false;
+  self.edtEmail.Enabled := false;
+  self.edtTelefone.Enabled := false;
 end;
 
-procedure TFormCadastroPessoas.btnSalvarClick(Sender: TObject);
+procedure TFormCadastroPessoas.btnSalvarExit(Sender: TObject);
 begin
- // inherited;
+  inherited;
+  if self.edtNome.Text <> '' then
+     self.edtNome.Color := clWindow;
+end;
+
+procedure TFormCadastroPessoas.CarregaEdit;
+begin
+  inherited;
+  self.edtCodigo.Text := inttostr(aPessoa.getCodigo);
+  self.edtNome.Text := aPessoa.getNome;
+  self.edtDtNasc.Text := datetostr(aPessoa.getDtNasc);
+  self.edtCPF_CNPJ.Text :=  aPessoa.getCPF_CNPJ;
+  self.edtEndereco.Text := aPessoa.getEndereco;
+  self.edtEmail.Text := aPessoa.getEmail;
+  self.edtTelefone.Text := aPessoa.getTelefone;
+end;
+
+procedure TFormCadastroPessoas.ConhecaObj(pObj, pCtrl: TObject);
+begin
+  inherited;
+  aPessoa := Pessoas(pObj);
+  aCtrlPessoa := CtrlPessoas(pCtrl);
+end;
+
+procedure TFormCadastroPessoas.DesbloqueiaEdit;
+begin
+  inherited;
+  self.edtNome.Enabled := true;
+  self.edtDtNasc.Enabled := true;
+  self.edtCPF_CNPJ.Enabled := true;
+  self.edtEndereco.Enabled := true;
+  self.edtEmail.Enabled := true;
+  self.edtTelefone.Enabled := true;
+end;
+
+procedure TFormCadastroPessoas.LimpaEdit;
+begin
+  inherited;
+  edtCodigo.Text := '0';
+  edtNome.Clear;
+  edtCPF_CNPJ.Clear;
+  edtEndereco.Clear;
+  edtEmail.Clear;
+  edtTelefone.Clear;
+end;
+
+procedure TFormCadastroPessoas.Sair;
+begin
+  inherited;
+  Close;
+end;
+
+procedure TFormCadastroPessoas.Salvar;
+begin
+  inherited;
   if length(self.edtNome.Text) = 0 then
   begin
      showmessage('Campo Nome é Obrigatório');
@@ -80,55 +139,6 @@ begin
      aPessoa.setCPF_CNPJ(self.edtCPF_CNPJ.Text);
      aPessoa.setTelefone(self.edtTelefone.Text);
 end;
-end;
-
-procedure TFormCadastroPessoas.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtNome.Text <> '' then
-     self.edtNome.Color := clWindow;
-end;
-
-procedure TFormCadastroPessoas.CarregaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroPessoas.ConhecaObj(pObj, pCtrl: TObject);
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroPessoas.DesbloqueiaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroPessoas.LimpaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroPessoas.Sair;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroPessoas.Salvar;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroPessoas.setConsulta(pObj: TObject);
-begin
-  inherited;
-
 end;
 
 end.

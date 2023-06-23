@@ -2,9 +2,6 @@ inherited FormConsultaFuncionarios: TFormConsultaFuncionarios
   Caption = 'Ver Funcionarios'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited btnInserir: TButton
-    OnClick = btnInserirClick
-  end
   inherited btnAlterar: TButton
     OnClick = btnAlterarClick
   end
@@ -13,6 +10,9 @@ inherited FormConsultaFuncionarios: TFormConsultaFuncionarios
   end
   inherited btnSair: TButton
     OnClick = btnSairClick
+  end
+  inherited btnPesquisa: TButton
+    OnClick = btnPesquisaClick
   end
   inherited ListView1: TListView
     Columns = <

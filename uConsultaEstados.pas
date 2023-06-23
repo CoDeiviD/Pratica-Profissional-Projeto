@@ -12,6 +12,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroEstados : TFormCadastroEstados;
@@ -63,6 +64,12 @@ procedure TFormConsultaEstados.btnInserirClick(Sender: TObject);
 begin
   inherited;
   self.Inserir;
+end;
+
+procedure TFormConsultaEstados.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TFormConsultaEstados.btnSairClick(Sender: TObject);
@@ -124,7 +131,7 @@ end;
 procedure TFormConsultaEstados.Pesquisar;
 begin
   inherited;
-
+  aCtrlEstado.Pesquisar(self.edtChave.Text, oEstado);
 end;
 
 procedure TFormConsultaEstados.Sair;

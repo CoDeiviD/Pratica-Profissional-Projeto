@@ -14,4 +14,7 @@ inherited FormConsultaContaRcb: TFormConsultaContaRcb
   inherited btnSair: TButton
     OnClick = btnSairClick
   end
+  inherited btnPesquisa: TButton
+    OnClick = btnPesquisaClick
+  end
 end

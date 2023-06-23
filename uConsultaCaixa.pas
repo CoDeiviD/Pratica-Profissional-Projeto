@@ -13,6 +13,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroCaixas : TFormCadastroCaixa;
@@ -61,6 +62,12 @@ procedure TFormConsultaCaixa.btnInserirClick(Sender: TObject);
 begin
   inherited;
   self.Inserir;
+end;
+
+procedure TFormConsultaCaixa.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TFormConsultaCaixa.btnSairClick(Sender: TObject);
@@ -125,7 +132,7 @@ end;
 procedure TFormConsultaCaixa.Pesquisar;
 begin
   inherited;
-
+  aCtrlCaixa.Pesquisar(self.edtChave.Text, aCaixa);
 end;
 
 procedure TFormConsultaCaixa.Sair;

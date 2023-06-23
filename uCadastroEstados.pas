@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls,
-  uConsultaPaises, uEstados;
+  uConsultaPaises, uEstados,
+  uCtrlEstados;
 
 type
   TFormCadastroEstados = class(TFormCadastroPai)
@@ -19,11 +20,11 @@ type
     lbCodPais: TLabel;
     lbPais: TLabel;
     procedure btnPesquisarClick(Sender: TObject);
-    procedure btnSalvarClick(Sender: TObject);
     procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     oEstado : Estados;
+    aCtrlEstado : CtrlEstados;
     umaConsultaPaises : TFormConsultaPaises;
   public
     { Public declarations }
@@ -49,7 +50,8 @@ implementation
 procedure TFormCadastroEstados.BloqueiaEdit;
 begin
   inherited;
-
+  self.edtEstado.Enabled := false;
+  self.edtUF.Enabled := false;
 end;
 
 procedure TFormCadastroEstados.btnPesquisarClick(Sender: TObject);
@@ -65,7 +67,51 @@ begin
   self.edtPais.Text := oEstado.getoPais.getPais;
 end;
 
-procedure TFormCadastroEstados.btnSalvarClick(Sender: TObject);
+procedure TFormCadastroEstados.btnSalvarExit(Sender: TObject);
+begin
+  inherited;
+  if self.edtEstado.Text <> '' then
+     self.edtEstado.Color := clWindow;
+  self.Sair;
+end;
+
+procedure TFormCadastroEstados.CarregaEdit;
+begin
+  inherited;
+    self.edtCodigo.Text := inttostr(oEstado.getCodigo);
+    self.edtEstado.Text := oEstado.getEstado;
+    self.edtUF.Text := oEstado.getUF;
+end;
+
+procedure TFormCadastroEstados.ConhecaObj(pObj, pCtrl: TObject);
+begin
+  inherited;
+  oEstado := Estados(pObj);
+  aCtrlEstado := CtrlEstados(pCtrl);
+end;
+
+procedure TFormCadastroEstados.DesbloqueiaEdit;
+begin
+  inherited;
+  self.edtEstado.Enabled := true;
+  self.edtUF.Enabled := true;
+end;
+
+procedure TFormCadastroEstados.LimpaEdit;
+begin
+  inherited;
+  edtCodigo.Text := '0';
+  edtEstado.Clear;
+  edtUF.Clear;
+end;
+
+procedure TFormCadastroEstados.Sair;
+begin
+  inherited;
+
+end;
+
+procedure TFormCadastroEstados.Salvar;
 begin
   inherited;
   if length(self.edtEstado.Text) = 0 then
@@ -85,52 +131,8 @@ begin
      oEstado.setCodigo(strtoint(self.edtCodigo.Text));
      oEstado.setEstado(self.edtEstado.Text);
      oEstado.setUF(self.edtUF.Text);
+     aCtrlEstado.Salvar(oEstado.clone);
   end;
-end;
-
-procedure TFormCadastroEstados.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtEstado.Text <> '' then
-     self.edtEstado.Color := clWindow;
-end;
-
-procedure TFormCadastroEstados.CarregaEdit;
-begin
-  inherited;
-    self.edtCodigo.Text := inttostr(oEstado.getCodigo);
-    self.edtEstado.Text := oEstado.getEstado;
-    self.edtUF.Text := oEstado.getUF;
-end;
-
-procedure TFormCadastroEstados.ConhecaObj(pObj, pCtrl: TObject);
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroEstados.DesbloqueiaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroEstados.LimpaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroEstados.Sair;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroEstados.Salvar;
-begin
-  inherited;
-
 end;
 
 procedure TFormCadastroEstados.setConsulta(pObj: TObject);

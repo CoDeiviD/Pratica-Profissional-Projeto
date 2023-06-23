@@ -14,33 +14,25 @@ inherited FormConsultaPaises: TFormConsultaPaises
   inherited btnSair: TButton
     OnClick = btnSairClick
   end
+  inherited btnPesquisa: TButton
+    OnClick = btnPesquisaClick
+  end
   inherited ListView1: TListView
     Columns = <
       item
-        Caption = 'Codigo'
+        Caption = 'C'#243'digo'
       end
       item
         Caption = 'Pais'
-        Width = 100
       end
       item
         Caption = 'Sigla'
       end
       item
         Caption = 'DDI'
-        Width = 70
       end
       item
         Caption = 'Moeda'
-        Width = 60
-      end
-      item
-        Caption = 'DataCadastro'
-        Width = 100
-      end
-      item
-        Caption = 'DataUltimaAlteracao'
-        Width = 120
       end>
     ViewStyle = vsReport
   end

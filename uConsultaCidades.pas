@@ -4,7 +4,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroCidades, uCidades, uCtrlCidades, uColCidades;
+  uCadastroCidades, uCidades, uCtrlCidades, uColCidades, uPai;
 
 type
   TFormConsultaCidades = class(TFormConsultaPai)
@@ -116,7 +116,7 @@ end;
 procedure TFormConsultaCidades.Pesquisar;
 begin
   inherited;
-
+  aCtrlCidade.Pesquisar(self.edtChave.Text, aCidade);
 end;
 
 procedure TFormConsultaCidades.Sair;

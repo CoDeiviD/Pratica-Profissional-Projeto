@@ -13,6 +13,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroFornecedores : TFormCadastroFornecedores;
@@ -63,6 +64,12 @@ end;
 procedure TFormConsultaFornecedores.btnInserirClick(Sender: TObject);
 begin
    self.Inserir;
+end;
+
+procedure TFormConsultaFornecedores.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TFormConsultaFornecedores.btnSairClick(Sender: TObject);
@@ -130,7 +137,7 @@ end;
 procedure TFormConsultaFornecedores.Pesquisar;
 begin
   inherited;
-
+  aCtrlForns.Pesquisar(self.edtChave.Text, oFornecedor);
 end;
 
 procedure TFormConsultaFornecedores.Sair;

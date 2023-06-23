@@ -14,6 +14,9 @@ inherited FormConsultaEstados: TFormConsultaEstados
   inherited btnSair: TButton
     OnClick = btnSairClick
   end
+  inherited btnPesquisa: TButton
+    OnClick = btnPesquisaClick
+  end
   inherited ListView1: TListView
     Columns = <
       item

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls, uPai,
   uPaises,
   uCtrlPaises;
 
@@ -16,9 +16,9 @@ type
     lbPais: TLabel;
     lbSigla: TLabel;
     lbDDI: TLabel;
-    procedure edtPaisExit(Sender: TObject);
-    procedure btnSalvarClick(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
+    edtMoeda: TEdit;
+    lbMoeda: TLabel;
+    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
      oPais : Paises;
@@ -33,6 +33,7 @@ type
     procedure Salvar;                                    override;
     procedure Sair;                                      override;
     procedure setConsulta(pObj: TObject);                override;
+
   end;
 
 var
@@ -47,25 +48,27 @@ implementation
 procedure TFormCadastroPaises.BloqueiaEdit;
 begin
   inherited;
-
+  self.edtPais.Enabled := false;
+  self.edtSigla.Enabled := false;
+  self.edtDDI.Enabled := false;
+  self.edtMoeda.Enabled := false;
 end;
 
-procedure TFormCadastroPaises.btnSairClick(Sender: TObject);
+procedure TFormCadastroPaises.btnSalvarExit(Sender: TObject);
 begin
   inherited;
-  self.Sair;
-end;
-
-procedure TFormCadastroPaises.btnSalvarClick(Sender: TObject);
-begin
-  inherited;
-  self.Salvar;
+  if self.edtPais.Text <> '' then
+     self.edtPais.Color := clWindow;
 end;
 
 procedure TFormCadastroPaises.CarregaEdit;
 begin
   inherited;
-
+  self.edtCodigo.Text := inttostr(oPais.getCodigo);
+  self.edtPais.Text := oPais.getPais;
+  self.edtSigla.Text := oPais.getSigla;
+  self.edtDDI.Text := oPais.getDDI;
+  self.edtMoeda.Text := oPais.getMoeda;
 end;
 
 procedure TFormCadastroPaises.ConhecaObj(pObj, pCtrl: TObject);
@@ -78,20 +81,20 @@ end;
 procedure TFormCadastroPaises.DesbloqueiaEdit;
 begin
   inherited;
-
-end;
-
-procedure TFormCadastroPaises.edtPaisExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtPais.Text <> '' then
-     self.edtPais.Color := clWindow;
+  self.edtPais.Enabled := true;
+  self.edtSigla.Enabled := true;
+  self.edtDDI.Enabled := true;
+  self.edtMoeda.Enabled := true;
 end;
 
 procedure TFormCadastroPaises.LimpaEdit;
 begin
   inherited;
-
+  edtCodigo.Text := '0';
+  edtPais.Clear;
+  edtSigla.Clear;
+  edtDDI.Clear;
+  edtMoeda.Clear;
 end;
 
 procedure TFormCadastroPaises.Sair;
@@ -121,12 +124,21 @@ begin
      self.edtDDI.Color := clYellow;
      self.edtDDI.SetFocus;
   end
+  else if (self.edtMoeda.Text) = '' then
+  begin
+     showmessage('Campo Moeda é Obrigatório');
+     self.edtMoeda.Color := clYellow;
+     self.edtMoeda.SetFocus;
+  end
   else
   begin
      oPais.setCodigo(strtoint(self.edtCodigo.Text));
      oPais.setPais(self.edtPais.Text);
      oPais.setSigla(self.edtSigla.Text);
      oPais.setDDI(self.edtDDI.Text);
+     oPais.setMoeda(self.edtMoeda.Text);
+     aCtrlPais.Salvar(oPais.clone);
+     inherited;
   end;
 end;
 

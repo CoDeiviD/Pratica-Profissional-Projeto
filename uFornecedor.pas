@@ -34,16 +34,21 @@ interface
       function getTelefone: string;
       function getVCombustivel: double;
       function getQtdeCarga: integer;
+      function clone : Fornecedores;
     end;
 implementation
 
 { Fornecedores }
 
+function Fornecedores.clone: Fornecedores;
+begin
+   Result := Fornecedores.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc,QtdeCarga,VCombustivel);
+end;
+
 constructor Fornecedores.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
   pTelefone: string; pDtNasc: TDateTime; pQtdeCarga: integer;
   pVCombustivel: Double);
 begin
- // inherited;
    codigo := pCodigo;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
@@ -56,7 +61,6 @@ end;
 
 constructor Fornecedores.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;

@@ -28,18 +28,23 @@ interface
       function getSaida: double;
       function getSaldo: double;
       function getSaldoTot : double;
+      function clone : Caixas;
 end;
 implementation
 
 { Caixas }
 
+function Caixas.clone: Caixas;
+begin
+   Result := Caixas.CrieInit(codigo,Data,Historico,Entrada,Saida,Saldo,SaldoTotal);
+end;
+
 constructor Caixas.CrieInit(pCodigo: integer; pData: TDate; pHistorico: String;
   pEntrada, pSaida, pSaldo, pSaldoTotal: double);
 begin
- //  inherited;
- //  codigo := pCodigo;
+   codigo := pCodigo;
    Data  := pData;
- //  Historico := pHistorico;
+   Historico := pHistorico;
    Entrada := pEntrada;
    Saida  := pSaida;
    Saldo  := pSaldo;
@@ -48,7 +53,6 @@ end;
 
 constructor Caixas.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Data  := 00/00/00;
    Historico := '';

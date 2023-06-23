@@ -107,7 +107,7 @@ end;
 procedure TFormConsultaPessoas.Pesquisar;
 begin
   inherited;
-
+  aCtrlPessoa.Pesquisar(self.edtChave.Text, aPessoa);
 end;
 
 procedure TFormConsultaPessoas.Sair;

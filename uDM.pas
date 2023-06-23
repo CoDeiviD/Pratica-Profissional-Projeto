@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.Client;
 
 type
-  TDataModule1 = class(TDataModule)
+  TDM = class(TDataModule)
     FDBanco: TFDConnection;
     FDTrans: TFDTransaction;
     qPaises: TFDQuery;
@@ -41,7 +41,7 @@ type
   end;
 
 var
-  DataModule1: TDataModule1;
+  DM: TDM;
 
 implementation
 

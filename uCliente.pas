@@ -34,15 +34,20 @@ interface
       function getTelefone: string;
       function getQtdeGrupo: integer;
       function getPagou: Boolean;
+      function clone : Clientes;
 end;
 implementation
 
 { Clientes }
 
+function Clientes.clone: Clientes;
+begin
+   Result := Clientes.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc,QtdeGrupo,Pagou);
+end;
+
 constructor Clientes.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
   pTelefone: string; pDtNasc: TDateTime; pQtdeGrupo: integer; pPagou: Boolean);
 begin
- // inherited;
    Codigo := pCodigo;
    Nome  := pNome;
    DtNasc := pDtNasc;
@@ -56,7 +61,6 @@ end;
 
 constructor Clientes.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;

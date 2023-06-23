@@ -13,7 +13,7 @@ object FormConsultaPai: TFormConsultaPai
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object edtBusca: TEdit
+  object edtChave: TEdit
     Left = 24
     Top = 24
     Width = 241

@@ -13,6 +13,7 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroClientes : TFormCadastroClientes;
@@ -65,6 +66,12 @@ begin
    self.Inserir;
 end;
 
+procedure TFormConsultaClientes.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
+end;
+
 procedure TFormConsultaClientes.btnSairClick(Sender: TObject);
 begin
   inherited;
@@ -111,6 +118,7 @@ begin
   aux := umFormCadastroClientes.btnSalvar.Caption;
   umFormCadastroClientes.btnSalvar.Caption := '&Excluir';
   umFormCadastroClientes.ConhecaObj(oCliente, aCtrlCliente);
+
   umFormCadastroClientes.LimpaEdit;
   umFormCadastroClientes.CarregaEdit;
   umFormCadastroClientes.ShowModal;
@@ -130,7 +138,7 @@ end;
 procedure TFormConsultaClientes.Pesquisar;
 begin
   inherited;
-
+  aCtrlCliente.Pesquisar(self.edtChave.Text, oCliente);
 end;
 
 procedure TFormConsultaClientes.Sair;

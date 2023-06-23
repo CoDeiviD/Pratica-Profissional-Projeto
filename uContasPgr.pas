@@ -25,15 +25,20 @@ interface
       function getDtPagamento: TDateTime;
       function getVPago: double;
       function getoForn : Fornecedores;
+      function clone : ContasPgr;
 end;
 implementation
 
 { ContasPgr }
 
+function ContasPgr.clone: ContasPgr;
+begin
+   Result := ContasPgr.CrieInit(codigo,Valor,VPago,DtVencimento,DtPagamento,oForn.getNome);
+end;
+
 constructor ContasPgr.CrieInit(pCodigo : integer; pValor, pVPago: double;
   pDtVencimento, pDtPagamento: TDateTime; poForn: string);
 begin
-//  inherited;
    Valor  := pValor;
    DtVencimento := pDtVencimento;
    DtPagamento := pDtPagamento;
@@ -43,7 +48,6 @@ end;
 
 constructor ContasPgr.CrieObj;
 begin
-  inherited;
    Valor := 0.00;
    DtVencimento := 00/00/00;
    DtPagamento := 00/00/00;

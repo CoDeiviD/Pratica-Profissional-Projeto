@@ -4,11 +4,12 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, uPai;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, uPai,
+  Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TFormConsultaPai = class(TForm)
-    edtBusca: TEdit;
+    edtChave: TEdit;
     btnInserir: TButton;
     btnAlterar: TButton;
     btnExcluir: TButton;
@@ -50,22 +51,22 @@ end;
 
 procedure TFormConsultaPai.btnAlterarClick(Sender: TObject);
 begin
-   Alterar;
+   self.Alterar;
 end;
 
 procedure TFormConsultaPai.btnExcluirClick(Sender: TObject);
 begin
-   Excluir;
+   self.Excluir;
 end;
 
 procedure TFormConsultaPai.btnInserirClick(Sender: TObject);
 begin
-   Inserir;
+   self.Inserir;
 end;
 
 procedure TFormConsultaPai.btnPesquisaClick(Sender: TObject);
 begin
-   Pesquisar;
+   self.Pesquisar;
 end;
 
 procedure TFormConsultaPai.btnSairClick(Sender: TObject);

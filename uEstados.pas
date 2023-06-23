@@ -19,15 +19,20 @@ interface
       function getEstado: string;
       function getUF: string;
       function getoPais : Paises;
+      function clone : Estados;
 end;
 implementation
 
 { Estados }
 
+function Estados.clone: Estados;
+begin
+   Result := Estados.CrieInit(codigo,Estado,UF,oPais.getCodigo);
+end;
+
 constructor Estados.CrieInit(pCodigo: integer; pEstado, pUF: String;
   pCodPais: integer);
 begin
-  //inherited;
    codigo := pCodigo;
    Estado := pEstado;
    UF := pUF;
@@ -36,7 +41,6 @@ end;
 
 constructor Estados.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Estado := '';
    UF := '';

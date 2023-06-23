@@ -1,7 +1,7 @@
 unit uDAOFuncs;
 
 interface
- uses uDao, uColFuncs, uFuncionario;
+ uses uDao, uDM, uColFuncs, uFuncionario, Data.DB;
 
  type DAOFuncs = class(DAO)
    private
@@ -10,12 +10,19 @@ interface
    public
       constructor CrieObj;
       destructor Destrua_se;
+      function getDS : TDataSource;   override;
       function salvar(pObj : TObject): string; override;
       function CarregarColecao: TObject;        override;
+      function Carregar(pPos : integer): TObject;                override;
  end;
 implementation
 
 { DAOFuncs }
+
+function DAOFuncs.Carregar(pPos: integer): TObject;
+begin
+   Result := aColFuncs.Carregar(pPos);
+end;
 
 function DAOFuncs.CarregarColecao: TObject;
 begin
@@ -32,9 +39,17 @@ begin
    aColFuncs.Destrua_se;
 end;
 
-function DAOFuncs.salvar(pObj: TObject): string;
+function DAOFuncs.getDS: TDataSource;
 begin
+   Result := umDM.DSFuncs;
+end;
 
+function DAOFuncs.salvar(pObj: TObject): string;
+var aux: integer;
+begin
+   aux := aColFuncs.getTam + 1;
+   Funcionarios(pObj).setCodigo(aux);
+   aColFuncs.InsereFim(pObj);
 end;
 
 end.

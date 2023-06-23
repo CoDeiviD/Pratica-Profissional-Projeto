@@ -237,7 +237,7 @@
         <DCCReference Include="uDAOPaises.pas"/>
         <DCCReference Include="uDAOProdutos.pas"/>
         <DCCReference Include="uDM.pas">
-            <Form>DataModule1</Form>
+            <Form>DM</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>

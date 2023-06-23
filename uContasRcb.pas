@@ -25,15 +25,20 @@ interface
       function getDtPagamento: TDateTime;
       function getVReceb: double;
       function getoCliente : Clientes;
+      function clone : ContasRcb;
 end;
 implementation
 
 { ContasRcb }
 
+function ContasRcb.clone: ContasRcb;
+begin
+   Result := ContasRcb.CrieInit(codigo,Valor,DtVencimento,DtPagamento,VReceb,oCliente.getNome);
+end;
+
 constructor ContasRcb.CrieInit(pCodigo : integer; pValor, pVReceb: double;
   pDtVencimento, pDtPagamento: TDateTime; poCliente: string);
 begin
-//  inherited;
    Valor  := pValor;
    DtVencimento := pDtVencimento;
    DtPagamento := pDtPagamento;
@@ -43,7 +48,6 @@ end;
 
 constructor ContasRcb.CrieObj;
 begin
-  inherited;
    Valor := 0.00;
    DtVencimento := 00/00/00;
    DtPagamento := 00/00/00;

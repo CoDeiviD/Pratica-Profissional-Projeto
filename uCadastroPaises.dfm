@@ -23,6 +23,16 @@ inherited FormCadastroPaises: TFormCadastroPaises
     Height = 13
     Caption = 'DDI *'
   end
+  object lbMoeda: TLabel [7]
+    Left = 464
+    Top = 24
+    Width = 41
+    Height = 13
+    Caption = 'Moeda *'
+  end
+  inherited btnSalvar: TButton
+    OnExit = btnSalvarExit
+  end
   inherited edtDtCad: TEdit
     TabOrder = 6
   end
@@ -36,7 +46,6 @@ inherited FormCadastroPaises: TFormCadastroPaises
     Height = 21
     ParentColor = True
     TabOrder = 3
-    OnExit = edtPaisExit
   end
   object edtSigla: TEdit
     Left = 329
@@ -51,5 +60,12 @@ inherited FormCadastroPaises: TFormCadastroPaises
     Width = 41
     Height = 21
     TabOrder = 5
+  end
+  object edtMoeda: TEdit
+    Left = 464
+    Top = 40
+    Width = 65
+    Height = 21
+    TabOrder = 8
   end
 end

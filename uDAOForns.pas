@@ -1,7 +1,7 @@
 unit uDAOForns;
 
 interface
- uses uDao, uColForns, uFornecedor;
+ uses uDao, uDM, uColForns, uFornecedor, Data.DB;
 
  type DAOForns = class(DAO)
    private
@@ -10,12 +10,19 @@ interface
    public
       constructor CrieObj;
       destructor Destrua_se;
+      function getDS : TDataSource;   override;
       function salvar(pObj : TObject): string; override;
       function CarregarColecao: TObject;        override;
+      function Carregar(pPos : integer): TObject;                override;
  end;
 implementation
 
 { DAOForns }
+
+function DAOForns.Carregar(pPos: integer): TObject;
+begin
+   Result := aColForns.Carregar(pPos);
+end;
 
 function DAOForns.CarregarColecao: TObject;
 begin
@@ -32,9 +39,17 @@ begin
    aColForns.Destrua_se;
 end;
 
-function DAOForns.salvar(pObj: TObject): string;
+function DAOForns.getDS: TDataSource;
 begin
+   Result := umDM.DsForns;
+end;
 
+function DAOForns.salvar(pObj: TObject): string;
+var aux: integer;
+begin
+   aux := aColForns.getTam + 1;
+   Fornecedores(pObj).setCodigo(aux);
+   aColForns.InsereFim(pObj);
 end;
 
 end.

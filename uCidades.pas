@@ -6,6 +6,7 @@ interface
          Cidades = class(Pai)
     private
     protected
+       Codigo : integer;
        Cidade  : string[40];
        DDD : string[3];
        oEstado   : Estados;
@@ -13,21 +14,28 @@ interface
       constructor CrieObj;
       constructor CrieInit(pCodigo: integer; pCidade, pDDD: String; poEstado: integer);
       destructor Destrua_se;
+      procedure setCodigo(pCodigo: integer);
       procedure setCidade(pCidade:string);
       procedure setDDD(pDDD:string);
       procedure setoEstado(poEstado:estados);
+      function getCodigo: integer;
       function getCidade: string;
       function getDDD: string;
       function getoEstado : Estados;
+      function clone : Cidades;
 end;
 implementation
 
 { Cidades }
 
+function Cidades.clone: Cidades;
+begin
+   Result := Cidades.CrieInit(codigo,Cidade,DDD,oEstado.getCodigo);
+end;
+
 constructor Cidades.CrieInit(pCodigo: integer; pCidade, pDDD: String;
   poEstado: integer);
 begin
- // inherited;
    codigo := pCodigo;
    cidade := pCidade;
    DDD := pDDD;
@@ -36,7 +44,6 @@ end;
 
 constructor Cidades.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Cidade := '';
    DDD := '';
@@ -53,6 +60,11 @@ begin
    Result := Cidade;
 end;
 
+function Cidades.getCodigo: integer;
+begin
+   Result := Codigo;
+end;
+
 function Cidades.getDDD: string;
 begin
    Result := DDD;
@@ -66,6 +78,11 @@ end;
 procedure Cidades.setCidade(pCidade: string);
 begin
    Cidade := pCidade;
+end;
+
+procedure Cidades.setCodigo(pCodigo: integer);
+begin
+   Codigo := pCodigo;
 end;
 
 procedure Cidades.setDDD(pDDD: string);

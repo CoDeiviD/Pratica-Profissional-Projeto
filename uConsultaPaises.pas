@@ -6,7 +6,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
   uCadastroPaises, uPaises,
   uCtrlPaises,
-  uColPaises;
+  uColPaises, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TFormConsultaPaises = class(TFormConsultaPai)
@@ -14,6 +14,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroPaises : TFormCadastroPaises;
@@ -47,6 +48,8 @@ begin
   umFormCadastroPaises.LimpaEdit;
   umFormCadastroPaises.CarregaEdit;
   umFormCadastroPaises.ShowModal;
+  self.Excluir;
+  self.Inserir;
 end;
 
 procedure TFormConsultaPaises.btnAlterarClick(Sender: TObject);
@@ -65,6 +68,12 @@ procedure TFormConsultaPaises.btnInserirClick(Sender: TObject);
 begin
   inherited;
   self.Inserir;
+end;
+
+procedure TFormConsultaPaises.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
 end;
 
 procedure TFormConsultaPaises.btnSairClick(Sender: TObject);
@@ -91,6 +100,7 @@ begin
      LVItem.SubItems.Add(oPais.getPais);
      LVItem.SubItems.Add(oPais.getSigla);
      LVItem.SubItems.Add(oPais.getDDI);
+     LVItem.SubItems.Add(oPais.getMoeda);
   end;
 
 end;
@@ -116,6 +126,7 @@ begin
   umFormCadastroPaises.ShowModal;
   umFormCadastroPaises.DesbloqueiaEdit;
   umFormCadastroPaises.btnSalvar.Caption := aux;
+  oPais.Destrua_se;
 end;
 
 procedure TFormConsultaPaises.Inserir;
@@ -130,7 +141,7 @@ end;
 procedure TFormConsultaPaises.Pesquisar;
 begin
   inherited;
-
+  aCtrlPais.Pesquisar(self.edtChave.Text, oPais);
 end;
 
 procedure TFormConsultaPaises.Sair;

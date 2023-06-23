@@ -14,7 +14,7 @@ type
     lbQtdeCarga: TLabel;
     edtVCombustivel: TEdit;
     edtQtdeCarga: TEdit;
-    procedure btnSalvarClick(Sender: TObject);
+    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     oForn : Fornecedores;
@@ -28,7 +28,6 @@ type
     procedure DesbloqueiaEdit;                           override;
     procedure Salvar;                                    override;
     procedure Sair;                                      override;
-    procedure setConsulta(pObj: TObject);                override;
   end;
 
 var
@@ -41,10 +40,79 @@ implementation
 procedure TFormCadastroFornecedores.BloqueiaEdit;
 begin
   inherited;
-
+  self.edtNome.Enabled := false;
+  self.edtDtNasc.Enabled := false;
+  self.edtCPF_CNPJ.Enabled := false;
+  self.edtEndereco.Enabled := false;
+  self.edtEmail.Enabled := false;
+  self.edtTelefone.Enabled := false;
+  self.edtQtdeCarga.Enabled := false;
+  self.edtVCombustivel.Enabled := false;
 end;
 
-procedure TFormCadastroFornecedores.btnSalvarClick(Sender: TObject);
+procedure TFormCadastroFornecedores.btnSalvarExit(Sender: TObject);
+begin
+  inherited;
+  if self.edtNome.Text <> '' then
+     self.edtNome.Color := clWindow;
+  self.Sair;
+end;
+
+procedure TFormCadastroFornecedores.CarregaEdit;
+begin
+  inherited;
+  self.edtCodigo.Text := inttostr(oForn.getCodigo);
+  self.edtNome.Text := oForn.getNome;
+  self.edtDtNasc.Text := datetostr(oForn.getDtNasc);
+  self.edtCPF_CNPJ.Text :=  oForn.getCPF_CNPJ;
+  self.edtEndereco.Text := oForn.getEndereco;
+  self.edtEmail.Text := oForn.getEmail;
+  self.edtTelefone.Text := oForn.getTelefone;
+  self.edtQtdeCarga.Text := floattostr(oForn.getQtdeCarga);
+  self.edtVCombustivel.Text := floattostr(oForn.getVCombustivel);
+end;
+
+procedure TFormCadastroFornecedores.ConhecaObj(pObj, pCtrl: TObject);
+begin
+  inherited;
+  oForn :=  Fornecedores(pObj);
+  aCtrlForns := CtrlForns(pCtrl);
+end;
+
+procedure TFormCadastroFornecedores.DesbloqueiaEdit;
+begin
+  inherited;
+  self.edtNome.Enabled := true;
+  self.edtDtNasc.Enabled := true;
+  self.edtCPF_CNPJ.Enabled := true;
+  self.edtEndereco.Enabled := true;
+  self.edtEmail.Enabled := true;
+  self.edtTelefone.Enabled := true;
+  self.edtQtdeCarga.Enabled := true;
+  self.edtVCombustivel.Enabled := true;
+end;
+
+procedure TFormCadastroFornecedores.LimpaEdit;
+begin
+  inherited;
+  edtCodigo.Text := '0';
+  edtNome.Clear;
+  edtDtNasc.Clear;
+  edtCPF_CNPJ.Clear;
+  edtEndereco.Clear;
+  edtEmail.Clear;
+  edtTelefone.Clear;
+  edtVCombustivel.Clear;
+  edtQtdeCarga.Clear;
+end;
+
+procedure TFormCadastroFornecedores.Sair;
+begin
+  inherited;
+  Close;
+end;
+
+procedure TFormCadastroFornecedores.Salvar;
 begin
   inherited;
   if length(self.edtNome.Text) = 0 then
@@ -81,54 +149,13 @@ begin
   begin
      oForn.setCodigo(strtoint(self.edtCodigo.Text));
      oForn.setNome(self.edtNome.Text);
+     oForn.setDtNasc(self.edtDtNasc.MaxLength);
      oForn.setCPF_CNPJ(self.edtCPF_CNPJ.Text);
      oForn.setTelefone(self.edtTelefone.Text);
      oForn.setVCombustivel(self.edtVCombustivel.MaxLength);
      oForn.setQtdeCarga(self.edtQtdeCarga.MaxLength);
+     aCtrlForns.Salvar(oForn.clone);
   end;
-end;
-
-procedure TFormCadastroFornecedores.CarregaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFornecedores.ConhecaObj(pObj, pCtrl: TObject);
-begin
-  inherited;
-  oForn :=  Fornecedores(pObj);
-  aCtrlForns := CtrlForns(pCtrl);
-end;
-
-procedure TFormCadastroFornecedores.DesbloqueiaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFornecedores.LimpaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFornecedores.Sair;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFornecedores.Salvar;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFornecedores.setConsulta(pObj: TObject);
-begin
-  inherited;
-
 end;
 
 end.

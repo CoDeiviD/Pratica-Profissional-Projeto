@@ -14,7 +14,7 @@ type
     lbCargaH: TLabel;
     edtSalario: TEdit;
     edtCargaH: TEdit;
-    procedure btnSalvarClick(Sender: TObject);
+    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     oFunc : Funcionarios;
@@ -28,7 +28,6 @@ type
     procedure DesbloqueiaEdit;                           override;
     procedure Salvar;                                    override;
     procedure Sair;                                      override;
-    procedure setConsulta(pObj: TObject);                override;
   end;
 
 var
@@ -41,10 +40,79 @@ implementation
 procedure TFormCadastroFuncionarios.BloqueiaEdit;
 begin
   inherited;
-
+  self.edtNome.Enabled := false;
+  self.edtDtNasc.Enabled := false;
+  self.edtCPF_CNPJ.Enabled := false;
+  self.edtEndereco.Enabled := false;
+  self.edtEmail.Enabled := false;
+  self.edtTelefone.Enabled := false;
+  self.edtSalario.Enabled := false;
+  self.edtCargaH.Enabled := false;
 end;
 
-procedure TFormCadastroFuncionarios.btnSalvarClick(Sender: TObject);
+procedure TFormCadastroFuncionarios.btnSalvarExit(Sender: TObject);
+begin
+  inherited;
+  if self.edtNome.Text <> '' then
+     self.edtNome.Color := clWindow;
+  self.Sair;
+end;
+
+procedure TFormCadastroFuncionarios.CarregaEdit;
+begin
+  inherited;
+  self.edtCodigo.Text := inttostr(oFunc.getCodigo);
+  self.edtNome.Text := oFunc.getNome;
+  self.edtDtNasc.Text := datetostr(oFunc.getDtNasc);
+  self.edtCPF_CNPJ.Text :=  oFunc.getCPF_CNPJ;
+  self.edtEndereco.Text := oFunc.getEndereco;
+  self.edtEmail.Text := oFunc.getEmail;
+  self.edtTelefone.Text := oFunc.getTelefone;
+  self.edtSalario.Text := floattostr(oFunc.getSalario);
+  self.edtCargaH.Text := timetostr(oFunc.getCargaH);
+end;
+
+procedure TFormCadastroFuncionarios.ConhecaObj(pObj, pCtrl: TObject);
+begin
+  inherited;
+  oFunc := Funcionarios(pObj);
+  aCtrlFuncs := CtrlFuncs(pCtrl);
+end;
+
+procedure TFormCadastroFuncionarios.DesbloqueiaEdit;
+begin
+  inherited;
+  self.edtNome.Enabled := true;
+  self.edtDtNasc.Enabled := true;
+  self.edtCPF_CNPJ.Enabled := true;
+  self.edtEndereco.Enabled := true;
+  self.edtEmail.Enabled := true;
+  self.edtTelefone.Enabled := true;
+  self.edtSalario.Enabled := true;
+  self.edtCargaH.Enabled := true;
+end;
+
+procedure TFormCadastroFuncionarios.LimpaEdit;
+begin
+  inherited;
+  edtCodigo.Text := '0';
+  edtNome.Clear;
+  edtDtNasc.Clear;
+  edtCPF_CNPJ.Clear;
+  edtEndereco.Clear;
+  edtEmail.Clear;
+  edtTelefone.Clear;
+  edtSalario.Clear;
+  edtCargaH.Clear;
+end;
+
+procedure TFormCadastroFuncionarios.Sair;
+begin
+  inherited;
+  Close;
+end;
+
+procedure TFormCadastroFuncionarios.Salvar;
 begin
   inherited;
   if length(self.edtNome.Text) = 0 then
@@ -65,13 +133,13 @@ begin
      self.edtTelefone.Color := clYellow;
      self.edtTelefone.SetFocus;
   end
-  else if (self.edtSalario.MaxLength) = 0 then
+  else if (self.edtSalario.Text) = '' then
   begin
      showmessage('Campo Salário (R$) é Obrigatório');
      self.edtSalario.Color := clYellow;
      self.edtSalario.SetFocus;
   end
-  else if (self.edtCargaH.MaxLength) = 0 then
+  else if (self.edtCargaH.Text) = '' then
   begin
      showmessage('Campo Carga Horária é Obrigatório');
      self.edtCargaH.Color := clYellow;
@@ -81,53 +149,13 @@ begin
   begin
      oFunc.setCodigo(strtoint(self.edtCodigo.Text));
      oFunc.setNome(self.edtNome.Text);
+     oFunc.setDtNasc(self.edtDtNasc.MaxLength);
      oFunc.setCPF_CNPJ(self.edtCPF_CNPJ.Text);
      oFunc.setTelefone(self.edtTelefone.Text);
      oFunc.setSalario(self.edtSalario.MaxLength);
      oFunc.setCargaH(self.edtCargaH.MaxLength);
+     aCtrlFuncs.Salvar(oFunc.clone);
   end;
-end;
-
-procedure TFormCadastroFuncionarios.CarregaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFuncionarios.ConhecaObj(pObj, pCtrl: TObject);
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFuncionarios.DesbloqueiaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFuncionarios.LimpaEdit;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFuncionarios.Sair;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFuncionarios.Salvar;
-begin
-  inherited;
-
-end;
-
-procedure TFormCadastroFuncionarios.setConsulta(pObj: TObject);
-begin
-  inherited;
-
 end;
 
 end.

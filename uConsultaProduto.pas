@@ -13,11 +13,12 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroProdutos : TFormCadastroProduto;
-    oProduto : Produtos;
-    aCtrlProduto: CtrlProdutos;
+    oProd : Produtos;
+    aCtrlProd: CtrlProdutos;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -42,7 +43,10 @@ implementation
 procedure TFormConsultaProduto.Alterar;
 begin
   inherited;
-
+  umFormCadastroProdutos.ConhecaObj(oProd, aCtrlProd);
+  umFormCadastroProdutos.LimpaEdit;
+  umFormCadastroProdutos.CarregaEdit;
+  umFormCadastroProdutos.ShowModal;
 end;
 
 procedure TFormConsultaProduto.btnAlterarClick(Sender: TObject);
@@ -62,6 +66,12 @@ begin
    self.Inserir;
 end;
 
+procedure TFormConsultaProduto.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
+end;
+
 procedure TFormConsultaProduto.btnSairClick(Sender: TObject);
 begin
   inherited;
@@ -75,25 +85,25 @@ var LVItem : TListItem;
     aColProdutos : ColProdutos;
 begin
   inherited;
-  aColProdutos := ColProdutos(aCtrlProduto.CarregarColecao);
+  aColProdutos := ColProdutos(aCtrlProd.CarregarColecao);
   self.ListView1.Clear;
   tam := aColProdutos.getTam;
   for k  := 1 to tam do
   begin
-     oProduto := Produtos(aColProdutos.Carregar(k));
+     oProd := Produtos(aColProdutos.Carregar(k));
      LVItem := ListView1.Items.Add;
-     LVItem.Caption := inttostr(oProduto.getCodigo);
-     LVItem.SubItems.Add(oProduto.getTpProduto);
-     LVItem.SubItems.Add(oProduto.getSabor);
-     LVItem.Caption := floattostr(oProduto.getPreco);
+     LVItem.Caption := inttostr(oProd.getCodigo);
+     LVItem.SubItems.Add(oProd.getTpProduto);
+     LVItem.SubItems.Add(oProd.getSabor);
+     LVItem.Caption := floattostr(oProd.getPreco);
   end;
 end;
 
 procedure TFormConsultaProduto.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
-  oProduto := Produtos(pObj);
-  aCtrlProduto := CtrlProdutos(pCtrl);
+  oProd := Produtos(pObj);
+  aCtrlProd := CtrlProdutos(pCtrl);
 end;
 
 procedure TFormConsultaProduto.Excluir;
@@ -102,7 +112,8 @@ begin
   inherited;
   aux := umFormCadastroProdutos.btnSalvar.Caption;
   umFormCadastroProdutos.btnSalvar.Caption := '&Excluir';
-  umFormCadastroProdutos.ConhecaObj(oProduto, aCtrlProduto);
+  umFormCadastroProdutos.ConhecaObj(oProd, aCtrlProd);
+
   umFormCadastroProdutos.LimpaEdit;
   umFormCadastroProdutos.CarregaEdit;
   umFormCadastroProdutos.ShowModal;
@@ -112,7 +123,7 @@ end;
 procedure TFormConsultaProduto.Inserir;
 begin
   inherited;
-  umFormCadastroProdutos.ConhecaObj(oProduto, aCtrlProduto);
+  umFormCadastroProdutos.ConhecaObj(oProd, aCtrlProd);
   umFormCadastroProdutos.LimpaEdit;
   umFormCadastroProdutos.ShowModal;
   self.CarregaLV;
@@ -121,7 +132,7 @@ end;
 procedure TFormConsultaProduto.Pesquisar;
 begin
   inherited;
-
+  aCtrlProd.Pesquisar(self.edtChave.Text, oProd);
 end;
 
 procedure TFormConsultaProduto.Sair;

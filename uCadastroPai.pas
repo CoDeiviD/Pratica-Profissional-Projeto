@@ -17,8 +17,8 @@ type
     edtDtCad: TEdit;
     edtDtUltAlt: TEdit;
     lbObrigadtorio: TLabel;
-    procedure btnSairClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +49,7 @@ end;
 
 procedure TFormCadastroPai.btnSairClick(Sender: TObject);
 begin
-   Sair;
+   Close;
 end;
 
 procedure TFormCadastroPai.btnSalvarClick(Sender: TObject);

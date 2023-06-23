@@ -67,7 +67,7 @@ uses
   uDAOFuncs in 'uDAOFuncs.pas',
   uDAOPaises in 'uDAOPaises.pas',
   uDAOProdutos in 'uDAOProdutos.pas',
-  uDM in 'uDM.pas' {DataModule1: TDataModule},
+  uDM in 'uDM.pas' {DM: TDataModule},
   uEstados in 'uEstados.pas',
   uFornecedor in 'uFornecedor.pas',
   uFuncionario in 'uFuncionario.pas',
@@ -111,7 +111,7 @@ begin
   Application.CreateForm(TFormConsultaContaPgo, FormConsultaContaPgo);
   Application.CreateForm(TFormConsultaContaRcb, FormConsultaContaRcb);
   Application.CreateForm(TFormConsultaCaixa, FormConsultaCaixa);
-  Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TDM, DM);
   Application.CreateForm(TFormCadastroCaixa, FormCadastroCaixa);
   Application.CreateForm(TFormCadastroCidades, FormCadastroCidades);
   Application.CreateForm(TFormCadastroClientes, FormCadastroClientes);
@@ -136,7 +136,7 @@ begin
   Application.CreateForm(TFormConsultaPaises, FormConsultaPaises);
   Application.CreateForm(TFormConsultaPessoas, FormConsultaPessoas);
   Application.CreateForm(TFormConsultaProduto, FormConsultaProduto);
-  Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TDM, DM);
   Application.CreateForm(TFormSorveteria, FormSorveteria);
   Application.Run;
 end.
