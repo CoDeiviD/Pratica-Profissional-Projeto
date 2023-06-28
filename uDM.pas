@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, FireDAC.Phys.IBBase;
 
 type
   TDM = class(TDataModule)
@@ -34,6 +34,48 @@ type
     DSProdutos: TDataSource;
     DSCaixas: TDataSource;
     DSContRcb: TDataSource;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    qPaisesCODPAIS: TIntegerField;
+    qPaisesPAIS: TStringField;
+    qPaisesSIGLA: TStringField;
+    qPaisesDDI: TStringField;
+    qPaisesMOEDA: TStringField;
+    qEstadosCODESTADO: TIntegerField;
+    qEstadosESTADO: TStringField;
+    qEstadosUF: TStringField;
+    qEstadosCODPAIS: TIntegerField;
+    qCidadesCODCIDADE: TIntegerField;
+    qCidadesCIDADE: TStringField;
+    qCidadesDDD: TStringField;
+    qCidadesCODESTADO: TIntegerField;
+    qClientesCODIGO: TIntegerField;
+    qClientesNOME: TStringField;
+    qClientesDTNASC: TDateField;
+    qClientesCPF_CNPJ: TStringField;
+    qClientesENDERECO: TStringField;
+    qClientesEMAIL: TStringField;
+    qClientesTELEFONE: TStringField;
+    qClientesQTDEGRUPO: TIntegerField;
+    qClientesPAGOU: TBooleanField;
+    qContPgrVALOR: TCurrencyField;
+    qContPgrDTVENCIMENTO: TDateField;
+    qContPgrDTPAGAMENTO: TDateField;
+    qContPgrVPAGO: TCurrencyField;
+    qContPgrFORNECEDOR: TStringField;
+    qContRcbVALOR: TCurrencyField;
+    qContRcbDTVENCIMENTO: TDateField;
+    qContRcbDTPAGAMENTO: TDateField;
+    qContRcbVRECEB: TCurrencyField;
+    qContRcbCLIENTE: TStringField;
+    qProdutosTPPRODUTO: TStringField;
+    qProdutosSABOR: TStringField;
+    qProdutosPRECO: TCurrencyField;
+    qCaixasDATA: TDateField;
+    qCaixasHISTORICO: TStringField;
+    qCaixasENTRADA: TCurrencyField;
+    qCaixasSAIDA: TCurrencyField;
+    qCaixasSALDO: TCurrencyField;
+    qCaixasSALDOTOTAL: TCurrencyField;
   private
     { Private declarations }
   public

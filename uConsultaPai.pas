@@ -31,7 +31,7 @@ type
     procedure Excluir;                    virtual;
     procedure Sair;                       virtual;
     procedure Pesquisar;                  virtual;
-    procedure setCadastro(pObj: TObject); virtual;
+    procedure setCadastro(pCad: TObject); virtual;
     procedure CarregaLV;                  virtual;
   end;
 
@@ -104,7 +104,7 @@ begin
    Close;
 end;
 
-procedure TFormConsultaPai.setCadastro(pObj: TObject);
+procedure TFormConsultaPai.setCadastro(pCad: TObject);
 begin
 
 end;

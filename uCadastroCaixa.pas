@@ -20,6 +20,7 @@ type
     edtEntrada: TEdit;
     edtSaida: TEdit;
     edtSaldoBase: TEdit;
+    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     aCaixa : Caixas;
@@ -50,6 +51,14 @@ begin
   self.edtEntrada.Enabled := false;
   self.edtSaida.Enabled := false;
   self.edtSaldoBase.Enabled := false;
+end;
+
+procedure TFormCadastroCaixa.btnSalvarExit(Sender: TObject);
+begin
+  inherited;
+  if self.edtSaldoBase.Text <> '' then
+     self.edtSaldoBase.Color := clWindow;
+  self.Sair;
 end;
 
 procedure TFormCadastroCaixa.CarregaEdit;
@@ -121,8 +130,10 @@ begin
   else
   begin
      aCaixa.setCodigo(strtoint(self.edtCodigo.Text));
+     aCaixa.setHistorico(self.edtHistorico.Text);
      aCaixa.setEntrada(self.edtEntrada.MaxLength);
      aCaixa.setSaida(self.edtSaida.MaxLength);
+     aCaixa.setSaldo(self.edtSaldoBase.MaxLength);
      aCtrlCaixa.Salvar(aCaixa.clone);
   end;
 end;

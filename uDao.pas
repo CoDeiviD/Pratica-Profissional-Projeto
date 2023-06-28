@@ -7,6 +7,7 @@ interface
     protected
       umDM : TDM;
     public
+
        procedure setDM (pDM : TObject); virtual;
        function getDS : TDataSource;   virtual;
        function Salvar( pObj : TObject): string; virtual;
