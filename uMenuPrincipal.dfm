@@ -70,15 +70,9 @@ object FormSorveteria: TFormSorveteria
         OnClick = Produto1Click
       end
     end
-    object Atribui1: TMenuItem
-      Caption = 'A&tribui'#231#227'o'
-    end
     object Sair1: TMenuItem
       Caption = '&Sair'
-      object Sair2: TMenuItem
-        Caption = 'Sair'
-        OnClick = Sair2Click
-      end
+      OnClick = Sair1Click
     end
   end
 end

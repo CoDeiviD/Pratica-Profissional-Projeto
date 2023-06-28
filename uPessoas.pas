@@ -28,14 +28,19 @@ interface
       function getEndereco: string;
       function getEmail: string;
       function getTelefone: string;
+      function clone: Pessoas;
 end;
 implementation
 
 { Pessoas }
 
+function Pessoas.clone: Pessoas;
+begin
+   Result := Pessoas.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc);
+end;
+
 constructor Pessoas.CrieInit(pCodigo: integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc: TDateTime);
 begin
-//  inherited;
    codigo := pCodigo;
    Nome := pNome;
    DtNasc := pDtNasc;
@@ -47,7 +52,6 @@ end;
 
 constructor Pessoas.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Nome := '';
    DtNasc := 00/00/00;

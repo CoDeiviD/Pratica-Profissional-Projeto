@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus,
-  uInter,
+  uInter, uDM,
   uPaises, uEstados, uCidades,
   uCliente, uFornecedor, uFuncionario,
   uContasPgr, uContasRcb, uProdutos, uCaixas,
@@ -22,8 +22,6 @@ type
     Estados1: TMenuItem;
     Cidades1: TMenuItem;
     Sair1: TMenuItem;
-    Atribui1: TMenuItem;
-    Sair2: TMenuItem;
     Usurio1: TMenuItem;
     Clientes1: TMenuItem;
     Fornecedores1: TMenuItem;
@@ -37,7 +35,6 @@ type
     procedure Pases1Click(Sender: TObject);
     procedure Estados1Click(Sender: TObject);
     procedure Cidades1Click(Sender: TObject);
-    procedure Sair2Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
     procedure Fornecedores1Click(Sender: TObject);
     procedure Funcionrios1Click(Sender: TObject);
@@ -45,6 +42,7 @@ type
     procedure ContasPagas1Click(Sender: TObject);
     procedure ContasRecebidas1Click(Sender: TObject);
     procedure Caixa1Click(Sender: TObject);
+    procedure Sair1Click(Sender: TObject);
   private
     { Private declarations }
     aInter : Interfaces;
@@ -58,6 +56,8 @@ type
     aContaRcb: ContasRcb;
     oProd: Produtos;
     aCaixa: Caixas;
+
+    umDM: TDM;
 
     aCtrlPais: CtrlPaises;
     aCtrlEstado: CtrlEstados;
@@ -124,6 +124,8 @@ begin
    oProd:= Produtos.CrieObj;
    aCaixa:= Caixas.CrieObj;
 
+   umDM := TDM.Create(nil);
+
    aCtrlPais := CtrlPaises.CrieObj;
    aCtrlEstado:= CtrlEstados.CrieObj;
    aCtrlCidade:= CtrlCidades.CrieObj;
@@ -134,6 +136,17 @@ begin
    aCtrlContaRcb:= CtrlContasRcb.CrieObj;
    aCtrlProduto:= CtrlProdutos.CrieObj;
    aCtrlCaixa:= CtrlCaixas.CrieObj;
+
+   aCtrlPais.setDM(umDM);
+   aCtrlEstado.setDM(umDM);
+   aCtrlCidade.setDM(umDM);
+   aCtrlCliente.setDM(umDM);
+   aCtrlForn.setDM(umDM);
+   aCtrlFunc.setDM(umDM);
+   aCtrlContaPgr.setDM(umDM);
+   aCtrlContaRcb.setDM(umDM);
+   aCtrlProduto.setDM(umDM);
+   aCtrlCaixa.setDM(umDM);
 end;
 
 procedure TFormSorveteria.Fornecedores1Click(Sender: TObject);
@@ -156,7 +169,7 @@ begin
    aInter.PDProdutos(oProd, aCtrlProduto);
 end;
 
-procedure TFormSorveteria.Sair2Click(Sender: TObject);
+procedure TFormSorveteria.Sair1Click(Sender: TObject);
 begin
    Close;
 end;

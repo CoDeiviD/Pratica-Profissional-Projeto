@@ -22,16 +22,21 @@ interface
       function getSigla: string;
       function getDDI : string;
       function getMoeda : string;
+      function clone: Paises;
 end;
 implementation
 
 { Paises }
 
+function Paises.clone: Paises;
+begin
+   Result := Paises.CrieInit(codigo,Pais,Sigla,DDI,Moeda);
+end;
+
 constructor Paises.CrieInit(pCodigo: integer; pPais, pSigla, pDDI,
   pMoeda: String);
 begin
- //  inherited;
-   codigo := pCodigo;
+   Codigo := pCodigo;
    pais := pPais;
    Sigla := pSigla;
    DDI := pDDI;
@@ -40,7 +45,6 @@ end;
 
 constructor Paises.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Pais := '';
    Sigla := '';

@@ -34,15 +34,20 @@ interface
       function getTelefone: string;
       function getSalario: Double;
       function getCargaH: TDateTime;
+      function clone : Funcionarios;
     end;
 implementation
 
 { Funcionarios }
 
+function Funcionarios.clone: Funcionarios;
+begin
+   Result := Funcionarios.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc,Salario,CargaH);
+end;
+
 constructor Funcionarios.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
   pTelefone: string; pDtNasc, pCargaH: TDateTime; pSalario: Double);
 begin
- // inherited;
    codigo := pCodigo;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
@@ -55,7 +60,6 @@ end;
 
 constructor Funcionarios.CrieObj;
 begin
-  inherited;
    codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;

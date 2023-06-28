@@ -19,15 +19,20 @@ interface
       function getTpProduto: string;
       function getSabor: string;
       function getPreco : double;
+      function clone : Produtos;
 end;
 implementation
 
 { Produtos }
 
+function Produtos.clone: Produtos;
+begin
+   Result := Produtos.CrieInit(codigo,TpProduto,Sabor,Preco);
+end;
+
 constructor Produtos.CrieInit(pCodigo: integer; pTpProduto, pSabor: String;
   pPreco: double);
 begin
- // inherited;
    codigo := pCodigo;
    TpProduto := pTpProduto;
    Sabor := pSabor;
@@ -36,7 +41,6 @@ end;
 
 constructor Produtos.CrieObj;
 begin
-  inherited;
    codigo := 0;
    TpProduto  := '';
    Sabor := '';
