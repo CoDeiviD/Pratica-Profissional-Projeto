@@ -11,7 +11,10 @@ uses
   uContasPgr, uContasRcb, uProdutos, uCaixas,
   uCtrlPaises, uCtrlEstados, uCtrlCidades,
   uCtrlClientes, uCtrlForns, uCtrlFuncs,
-  uCtrlContasPgr, uCtrlContasRcb, uCtrlProdutos, uCtrlCaixas;
+  uCtrlContasPgr, uCtrlContasRcb, uCtrlProdutos, uCtrlCaixas,
+  uConsultaPaises, uConsultaEstados, uConsultaCidades,
+  uConsultaClientes, uConsultaFornecedores, uConsultaFuncionarios,
+  uConsultaContaPgo, uConsultaContaRcb, uConsultaProduto, uConsultaCaixa;
 
 type
   TFormSorveteria = class(TForm)
@@ -69,6 +72,8 @@ type
     aCtrlContaRcb: CtrlContasRcb;
     aCtrlProduto: CtrlProdutos;
     aCtrlCaixa: CtrlCaixas;
+
+    oConsultaPais : TFormConsultaPaises;
   public
     { Public declarations }
   end;
@@ -147,6 +152,8 @@ begin
    aCtrlContaRcb.setDM(umDM);
    aCtrlProduto.setDM(umDM);
    aCtrlCaixa.setDM(umDM);
+
+   oConsultaPais := TFormConsultaPaises.Create(nil);
 end;
 
 procedure TFormSorveteria.Fornecedores1Click(Sender: TObject);
@@ -161,7 +168,8 @@ end;
 
 procedure TFormSorveteria.Pases1Click(Sender: TObject);
 begin
-   aInter.PDPaises(oPais, aCtrlPais);
+   //aInter.PDPaises(oPais, aCtrlPais);
+   oConsultaPais.ShowModal;
 end;
 
 procedure TFormSorveteria.Produto1Click(Sender: TObject);

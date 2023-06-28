@@ -12,7 +12,6 @@ object DM: TDM
       'Server=localhost'
       'Port=3050'
       'DriverID=FB')
-    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 48
@@ -24,11 +23,13 @@ object DM: TDM
   end
   object qPaises: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Paises')
     Left = 264
     Top = 8
     object qPaisesCODPAIS: TIntegerField
+      DisplayLabel = 'C'#211'DIGO'
       FieldName = 'CODPAIS'
       Origin = 'CODPAIS'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -63,6 +64,7 @@ object DM: TDM
   end
   object qEstados: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Estados')
     Left = 264
@@ -96,6 +98,7 @@ object DM: TDM
   end
   object qCidades: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Cidades')
     Left = 264
@@ -139,6 +142,7 @@ object DM: TDM
   end
   object qClientes: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Clientes')
     Left = 264
@@ -193,6 +197,7 @@ object DM: TDM
   end
   object qForns: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Fornecedores')
     Left = 264
@@ -200,6 +205,7 @@ object DM: TDM
   end
   object qFuncs: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Funcionario')
     Left = 264
@@ -212,6 +218,7 @@ object DM: TDM
   end
   object qContPgr: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from ContasPgr')
     Left = 264
@@ -243,6 +250,7 @@ object DM: TDM
   end
   object qContRcb: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from ContasRcb')
     Left = 264
@@ -274,6 +282,7 @@ object DM: TDM
   end
   object qProdutos: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Produtos')
     Left = 264
@@ -298,6 +307,7 @@ object DM: TDM
   end
   object qCaixas: TFDQuery
     Connection = FDBanco
+    Transaction = FDTrans
     SQL.Strings = (
       'select * from Caixas')
     Left = 264

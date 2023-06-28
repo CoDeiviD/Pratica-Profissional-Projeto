@@ -1,39 +1,45 @@
 unit uFornecedor;
 
 interface
-   uses uPai, uPessoas;
+   uses uPai, uCidades, uProdutos;
    type
          Fornecedores = class(Pai)
     private
     protected
-       Nome  : string[35];
-       DtNasc : TDateTime;
-       CPF_CNPJ : string[11];
+       NomeFantasia  : string[35];
+       RazaoSocial : string[21];
+       InscrEstadual : string[21];
+       CNPJ : string[11];
+       CEP : string[9];
        Endereco : string[21];
        Email : string[22];
        Telefone : string[13];
-       VCombustivel: Double;
-       QtdeCarga: integer;
+       oProduto : Produtos;
+       aCidade : Cidades;
     public
       constructor CrieObj;
-      constructor CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime; pQtdeCarga: integer; pVCombustivel: Double);
+      constructor CrieInit(pCodigo : integer; pNomeFantasia, pRazaoSocial, pInscrEstadual, pCNPJ, pCEP, pEndereco, pEmail, pTelefone: string; pCodProduto, pCodCidade: integer);
       destructor Destrua_se;
-      procedure setNome(pNome:string);
-      procedure setDtNasc(pDtNasc:TDateTime);
-      procedure setCPF_CNPJ(pCPF_CNPJ:string);
+      procedure setNomeFantasia(pNomeFantasia:string);
+      procedure setRazaoSocial(pRazaoSocial:string);
+      procedure setInscrEstadual(pInscrEstadual:string);
+      procedure setCNPJ(pCNPJ:string);
+      procedure setCEP(pCEP:string);
       procedure setEndereco(pEndereco:string);
       procedure setEmail(pEmail:string);
       procedure setTelefone(pTelefone:string);
-      procedure setVCombustivel(pVCombustivel:double);
-      procedure setQtdeCarga(pQtdeCarga:integer);
-      function getNome: string;
-      function getDtNasc: TDateTime;
-      function getCPF_CNPJ: string;
+      procedure setoProduto(poProduto:Produtos);
+      procedure setaCidade(paCidade:Cidades);
+      function getNomeFantasia: string;
+      function getRazaoSocial: string;
+      function getInscrEstadual: string;
+      function getCNPJ: string;
+      function getCEP: string;
       function getEndereco: string;
       function getEmail: string;
       function getTelefone: string;
-      function getVCombustivel: double;
-      function getQtdeCarga: integer;
+      function getoProduto: Produtos;
+      function getaCidade: Cidades;
       function clone : Fornecedores;
     end;
 implementation
@@ -42,49 +48,63 @@ implementation
 
 function Fornecedores.clone: Fornecedores;
 begin
-   Result := Fornecedores.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc,QtdeCarga,VCombustivel);
+   Result := Fornecedores.CrieInit(codigo,NomeFantasia,RazaoSocial,InscrEstadual,CNPJ,CEP,Endereco,Email,Telefone,oProduto.getCodigo,aCidade.getCodigo);
 end;
 
-constructor Fornecedores.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
-  pTelefone: string; pDtNasc: TDateTime; pQtdeCarga: integer;
-  pVCombustivel: Double);
+constructor Fornecedores.CrieInit(pCodigo : integer; pNomeFantasia, pRazaoSocial, pInscrEstadual, pCNPJ, pCEP, pEndereco, pEmail,
+  pTelefone: string; pCodProduto, pCodCidade: integer);
 begin
    codigo := pCodigo;
-   DtNasc := pDtNasc;
-   CPF_CNPJ := pCPF_CNPJ;
+   NomeFantasia := pNomeFantasia;
+   RazaoSocial := pRazaoSocial;
+   InscrEstadual := pInscrEstadual;
+   CNPJ := pCNPJ;
+   CEP := pCEP;
    Endereco := pEndereco;
    Email := pEmail;
    Telefone := pTelefone;
-   QtdeCarga := pQtdeCarga;
-   VCombustivel := pVCombustivel;
+   oProduto := Produtos.CrieInit(pCodProduto,'','',0.00);
+   aCidade := Cidades.CrieInit(pCodCidade,'','',0);
 end;
 
 constructor Fornecedores.CrieObj;
 begin
    codigo := 0;
-   Nome  := '';
-   DtNasc := 00/00/0000;
-   CPF_CNPJ := '';
+   NomeFantasia  := '';
+   RazaoSocial := '';
+   InscrEstadual := '';
+   CNPJ := '';
    Endereco := '';
    Email := '';
    Telefone := '';
-   QtdeCarga := 0;
-   VCombustivel := 0.00;
+   aCidade := Cidades.CrieObj;
 end;
 
 destructor Fornecedores.Destrua_se;
 begin
-
+inherited;
+   oProduto.Destrua_se;
+   aCidade.Destrua_se;
 end;
 
-function Fornecedores.getCPF_CNPJ: string;
+function Fornecedores.getaCidade: Cidades;
 begin
-   Result := CPF_CNPJ;
+   Result := aCidade;
 end;
 
-function Fornecedores.getDtNasc: TDateTime;
+function Fornecedores.getCEP: string;
 begin
-   Result := DtNasc;
+   Result := CEP;
+end;
+
+function Fornecedores.getCNPJ: string;
+begin
+   Result := CNPJ;
+end;
+
+function Fornecedores.getRazaoSocial: string;
+begin
+   Result := RazaoSocial;
 end;
 
 function Fornecedores.getEmail: string;
@@ -97,14 +117,19 @@ begin
    Result := Endereco;
 end;
 
-function Fornecedores.getNome: string;
+function Fornecedores.getInscrEstadual: string;
 begin
-   Result := Nome;
+   Result := InscrEstadual;
 end;
 
-function Fornecedores.getQtdeCarga: integer;
+function Fornecedores.getNomeFantasia: string;
 begin
-   Result := QtdeCarga;
+   Result := NomeFantasia;
+end;
+
+function Fornecedores.getoProduto: Produtos;
+begin
+   Result := oProduto;
 end;
 
 function Fornecedores.getTelefone: string;
@@ -112,19 +137,24 @@ begin
    Result := Telefone;
 end;
 
-function Fornecedores.getVCombustivel: double;
+procedure Fornecedores.setaCidade(paCidade: Cidades);
 begin
-   Result := VCombustivel;
+   aCidade := paCidade;
 end;
 
-procedure Fornecedores.setCPF_CNPJ(pCPF_CNPJ: string);
+procedure Fornecedores.setCEP(pCEP: string);
 begin
-   CPF_CNPJ := pCPF_CNPJ;
+   CEP := pCEP;
 end;
 
-procedure Fornecedores.setDtNasc(pDtNasc: TDateTime);
+procedure Fornecedores.setCNPJ(pCNPJ: string);
 begin
-   DtNasc := pDtNasc;
+   CNPJ := pCNPJ;
+end;
+
+procedure Fornecedores.setRazaoSocial(pRazaoSocial: string);
+begin
+   RazaoSocial := pRazaoSocial;
 end;
 
 procedure Fornecedores.setEmail(pEmail: string);
@@ -137,24 +167,24 @@ begin
    Endereco := pEndereco;
 end;
 
-procedure Fornecedores.setNome(pNome: string);
+procedure Fornecedores.setInscrEstadual(pInscrEstadual: string);
 begin
-   Nome := pNome;
+   InscrEstadual := pInscrEstadual;
 end;
 
-procedure Fornecedores.setQtdeCarga(pQtdeCarga: integer);
+procedure Fornecedores.setNomeFantasia(pNomeFantasia: string);
 begin
-   QtdeCarga := pQtdeCarga;
+   NomeFantasia := pNomeFantasia;
+end;
+
+procedure Fornecedores.setoProduto(poProduto: Produtos);
+begin
+   oProduto := poProduto;
 end;
 
 procedure Fornecedores.setTelefone(pTelefone: string);
 begin
    Telefone := pTelefone;
-end;
-
-procedure Fornecedores.setVCombustivel(pVCombustivel: double);
-begin
-   VCombustivel := pVCombustivel;
 end;
 
 end.

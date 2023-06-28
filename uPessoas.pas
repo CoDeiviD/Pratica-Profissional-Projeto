@@ -1,7 +1,7 @@
 unit uPessoas;
 
 interface
-   uses uPai;
+   uses uPai, uCidades;
    type
          Pessoas = class(Pai)
     private
@@ -9,6 +9,9 @@ interface
        Nome  : string[35];
        DtNasc : TDateTime;
        CPF_CNPJ : string[11];
+       RG : string[7];
+       CodCidade: Cidades;
+       CEP : string[9];
        Endereco : string[21];
        Email : string[22];
        Telefone : string[13];
@@ -36,7 +39,7 @@ implementation
 
 function Pessoas.clone: Pessoas;
 begin
-   Result := Pessoas.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc);
+  Result := Pessoas.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc);
 end;
 
 constructor Pessoas.CrieInit(pCodigo: integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc: TDateTime);
