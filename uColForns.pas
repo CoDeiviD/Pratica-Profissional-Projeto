@@ -7,7 +7,6 @@ interface
   protected
   public
      function Pesquisar(pChave: string; pQuero: boolean): integer; overload;
-     function Pesquisar(pChave: integer; pQuero: boolean): integer; overload;
      procedure SalvarArq;
      procedure LerArq;
   end;
@@ -28,14 +27,14 @@ begin
    else
    begin
       k := 1;
-      while (k <= tam) and (pChave > Fornecedores(item[k]).getNome) do
+      while (k <= tam) and (pChave > Fornecedores(item[k]).getNomeFantasia) do
          k := k + 1;
       if pQuero then
       begin
          if k > tam then
             Result := 0
          else
-            if pChave = Fornecedores(item[k]).getNome then
+            if pChave = Fornecedores(item[k]).getNomeFantasia then
                Result := k
             else
                Result := 0
@@ -45,17 +44,12 @@ begin
          if k > tam then
             Result := k
          else
-           if pChave = Fornecedores(item[k]).getNome then
+           if pChave = Fornecedores(item[k]).getNomeFantasia then
               Result := 0
            else
               Result := k;
       end;
    end;
-end;
-
-function ColFornecedores.Pesquisar(pChave: integer; pQuero: boolean): integer;
-begin
-
 end;
 
 procedure ColFornecedores.SalvarArq;

@@ -1,5 +1,6 @@
 inherited FormConsultaContaRcb: TFormConsultaContaRcb
   Caption = 'Ver Contas a Receber'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited btnInserir: TButton
@@ -13,8 +14,5 @@ inherited FormConsultaContaRcb: TFormConsultaContaRcb
   end
   inherited btnSair: TButton
     OnClick = btnSairClick
-  end
-  inherited btnPesquisa: TButton
-    OnClick = btnPesquisaClick
   end
 end

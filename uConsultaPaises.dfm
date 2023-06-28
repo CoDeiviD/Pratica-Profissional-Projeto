@@ -1,5 +1,6 @@
 inherited FormConsultaPaises: TFormConsultaPaises
   Caption = 'Ver Paises'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited btnInserir: TButton
@@ -15,25 +16,10 @@ inherited FormConsultaPaises: TFormConsultaPaises
     OnClick = btnSairClick
   end
   inherited btnPesquisa: TButton
-    OnClick = btnPesquisaClick
+    OnClick = nil
   end
-  inherited ListView1: TListView
-    Columns = <
-      item
-        Caption = 'C'#243'digo'
-      end
-      item
-        Caption = 'Pais'
-      end
-      item
-        Caption = 'Sigla'
-      end
-      item
-        Caption = 'DDI'
-      end
-      item
-        Caption = 'Moeda'
-      end>
-    ViewStyle = vsReport
+  inherited DBGrid1: TDBGrid
+    DataSource = DM.DsPaises
+    ReadOnly = True
   end
 end

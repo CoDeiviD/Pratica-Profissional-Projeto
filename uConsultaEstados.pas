@@ -4,15 +4,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroEstados, uEstados, uCtrlEstados, uColEstados;
+  uCadastroEstados, uEstados, uCtrlEstados, uColEstados, Data.DB, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TFormConsultaEstados = class(TFormConsultaPai)
-    procedure btnInserirClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
-    procedure btnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroEstados : TFormCadastroEstados;
@@ -26,8 +23,7 @@ type
     procedure Excluir;                    override;
     procedure Sair;                       override;
     procedure Pesquisar;                  override;
-    procedure setCadastro(pObj: TObject); override;
-    procedure CarregaLV;                  override;
+    procedure setCadastro(pCad: TObject); override;
   end;
 
 var
@@ -40,62 +36,14 @@ implementation
 { TFormConsultaEstados }
 
 procedure TFormConsultaEstados.Alterar;
+var mMsg: string;
 begin
   inherited;
+  mMsg := aCtrlEstado.Carregar(oEstado);
   umFormCadastroEstados.ConhecaObj(oEstado, aCtrlEstado);
   umFormCadastroEstados.LimpaEdit;
   umFormCadastroEstados.CarregaEdit;
   umFormCadastroEstados.ShowModal;
-end;
-
-procedure TFormConsultaEstados.btnAlterarClick(Sender: TObject);
-begin
-  inherited;
-  self.Alterar;
-end;
-
-procedure TFormConsultaEstados.btnExcluirClick(Sender: TObject);
-begin
-  inherited;
-  self.Excluir;
-end;
-
-procedure TFormConsultaEstados.btnInserirClick(Sender: TObject);
-begin
-  inherited;
-  self.Inserir;
-end;
-
-procedure TFormConsultaEstados.btnPesquisaClick(Sender: TObject);
-begin
-  inherited;
-  Pesquisar;
-end;
-
-procedure TFormConsultaEstados.btnSairClick(Sender: TObject);
-begin
-  inherited;
-  self.Sair;
-end;
-
-procedure TFormConsultaEstados.CarregaLV;
-var LVItem : TListItem;
-    tam, k : integer;
-    oEstado : Estados;
-    aColEstados : ColEstados;
-begin
-  inherited;
-  aColEstados := ColEstados(aCtrlEstado.CarregarColecao);
-  self.ListView1.Clear;
-  tam := aColEstados.getTam;
-  for k  := 1 to tam do
-  begin
-     oEstado := Estados(aColEstados.Carregar(k));
-     LVItem := ListView1.Items.Add;
-     LVItem.Caption := inttostr(oEstado.getCodigo);
-     LVItem.SubItems.Add(oEstado.getEstado);
-     LVItem.SubItems.Add(oEstado.getUF);
-  end;
 end;
 
 procedure TFormConsultaEstados.ConhecaObj(pObj, pCtrl: TObject);
@@ -103,47 +51,60 @@ begin
   inherited;
   oEstado := Estados(pObj);
   aCtrlEstado := CtrlEstados(pCtrl);
+  self.DBGrid1.DataSource := aCtrlEstado.getDS;
+  aCtrlEstado.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaEstados.Excluir;
-var aux : string;
+var mMsg, mAux :string;
 begin
   inherited;
-  aux := umFormCadastroEstados.btnSalvar.Caption;
-  umFormCadastroEstados.btnSalvar.Caption := '&Excluir';
+  mMsg := aCtrlEstado.Carregar(oEstado);
   umFormCadastroEstados.ConhecaObj(oEstado, aCtrlEstado);
+  mAux := umFormCadastroEstados.btnSalvar.Caption;
+  umFormCadastroEstados.btnSalvar.Caption := '&Excluir';
   umFormCadastroEstados.LimpaEdit;
-  umFormCadastroEstados.CarregaEdit;
-  umFormCadastroEstados.ShowModal;
-  umFormCadastroEstados.btnSalvar.Caption := aux;
 
+  umFormCadastroEstados.CarregaEdit;
+  umFormCadastroEstados.BloqueiaEdit;
+  umFormCadastroEstados.ShowModal;
+  umFormCadastroEstados.DesbloqueiaEdit;
+  umFormCadastroEstados.btnSalvar.Caption := mAux;
+  self.Pesquisar;
+end;
+
+procedure TFormConsultaEstados.FormCreate(Sender: TObject);
+begin
+  inherited;
+  umFormCadastroEstados := TFormCadastroEstados.Create(nil);
 end;
 
 procedure TFormConsultaEstados.Inserir;
 begin
   inherited;
+  oEstado.setCodigo(0);
   umFormCadastroEstados.ConhecaObj(oEstado, aCtrlEstado);
   umFormCadastroEstados.LimpaEdit;
   umFormCadastroEstados.ShowModal;
-  self.CarregaLV;
+  self.Pesquisar;
 end;
 
 procedure TFormConsultaEstados.Pesquisar;
 begin
   inherited;
-  aCtrlEstado.Pesquisar(self.edtChave.Text, oEstado);
+  aCtrlEstado.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaEstados.Sair;
 begin
   inherited;
-  Close;
+//  Close;
 end;
 
-procedure TFormConsultaEstados.setCadastro(pObj: TObject);
+procedure TFormConsultaEstados.setCadastro(pCad: TObject);
 begin
   inherited;
-  umFormCadastroEstados := TFormCadastroEstados(pObj);
+//  umFormCadastroEstados := TFormCadastroEstados(pCad);
 end;
 
 end.

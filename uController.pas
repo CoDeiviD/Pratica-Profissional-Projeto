@@ -10,21 +10,16 @@ interface
        destructor Destrua_se;
        procedure setDM (pDM : TObject); virtual;
        function getDS : TDataSource;    virtual;
-       function Salvar( pObj : TObject): string; virtual;
-       function CarregarColecao: TObject;        virtual;
-       function Carregar(pPos : integer): TObject;        virtual;
-       function Pesquisar (pChave: string; pOBJ: TObject): integer; virtual;
+       function Salvar( pObj : TObject): string;  virtual;
+       function Carregar(pObj : TObject): string; virtual;
+       function Pesquisar (pChave: string): string; virtual;
+       function Excluir (pObj : TOBject): string;   virtual;
   end;
 implementation
 
 { Controller }
 
-function Controller.Carregar(pPos : integer): TObject;
-begin
-
-end;
-
-function Controller.CarregarColecao: TObject;
+function Controller.Carregar(pObj : TObject): string;
 begin
 
 end;
@@ -39,12 +34,17 @@ begin
 
 end;
 
+function Controller.Excluir(pObj: TOBject): string;
+begin
+
+end;
+
 function Controller.getDS: TDataSource;
 begin
 
 end;
 
-function Controller.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function Controller.Pesquisar(pChave: string): string;
 begin
 
 end;

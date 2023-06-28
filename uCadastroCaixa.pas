@@ -14,13 +14,12 @@ type
     lbHistorico: TLabel;
     lbEntrada: TLabel;
     lbSaida: TLabel;
-    lbSaldoBase: TLabel;
     edtData: TEdit;
     edtHistorico: TEdit;
     edtEntrada: TEdit;
     edtSaida: TEdit;
-    edtSaldoBase: TEdit;
-    procedure btnSalvarExit(Sender: TObject);
+    lbSaldoTot: TLabel;
+    edtSaldoTot: TEdit;
   private
     { Private declarations }
     aCaixa : Caixas;
@@ -50,15 +49,7 @@ begin
   self.edtHistorico.Enabled := false;
   self.edtEntrada.Enabled := false;
   self.edtSaida.Enabled := false;
-  self.edtSaldoBase.Enabled := false;
-end;
-
-procedure TFormCadastroCaixa.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtSaldoBase.Text <> '' then
-     self.edtSaldoBase.Color := clWindow;
-  self.Sair;
+  self.edtSaldoTot.Enabled := false;
 end;
 
 procedure TFormCadastroCaixa.CarregaEdit;
@@ -69,7 +60,7 @@ begin
   self.edtHistorico.Text := aCaixa.getHistorico;
   self.edtEntrada.Text := floattostr(aCaixa.getEntrada);
   self.edtSaida.Text := floattostr(aCaixa.getSaida);
-  self.edtSaldoBase.Text := floattostr(aCaixa.getSaldo);
+  self.edtSaldoTot.Text := floattostr(aCaixa.getSaldo);
 end;
 
 procedure TFormCadastroCaixa.ConhecaObj(pObj, pCtrl: TObject);
@@ -86,7 +77,7 @@ begin
   self.edtHistorico.Enabled := true;
   self.edtEntrada.Enabled := true;
   self.edtSaida.Enabled := true;
-  self.edtSaldoBase.Enabled := true;
+  self.edtSaldoTot.Enabled := true;
 end;
 
 procedure TFormCadastroCaixa.LimpaEdit;
@@ -97,7 +88,7 @@ begin
   edtHistorico.Clear;
   edtEntrada.Clear;
   edtSaida.Clear;
-  edtSaldoBase.Clear;
+  edtSaldoTot.Clear;
 end;
 
 procedure TFormCadastroCaixa.Sair;
@@ -107,35 +98,55 @@ begin
 end;
 
 procedure TFormCadastroCaixa.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtData.Text) = 0 then
-  begin
-     showmessage('Campo Cidade é Obrigatório');
      self.edtData.Color := clYellow;
-     self.edtData.SetFocus;
-  end
-  else if (self.edtHistorico.Text) = '' then
-  begin
-     showmessage('Campo DDD é Obrigatório');
+  if (self.edtHistorico.Text) = '' then
      self.edtHistorico.Color := clYellow;
+  if (self.edtSaldoTot.Text) = '' then
+     self.edtSaldoTot.Color := clYellow;
+     if ehObrigatorio(self.edtData.Text, '*') and (length(self.edtData.Text)= 0) then
+     begin
+     showmessage('Campo Data é Obrigatório');
+     self.edtData.SetFocus;
+     end
+     else if ehObrigatorio(self.edtData.Text, '*') and (self.edtHistorico.Text = '') then
+     begin
+     showmessage('Campo Historico é Obrigatório');
      self.edtHistorico.SetFocus;
-  end
-  else if (self.edtSaldoBase.Text) = '' then
-  begin
-     showmessage('Campo DDD é Obrigatório');
-     self.edtSaldoBase.Color := clYellow;
-     self.edtSaldoBase.SetFocus;
-  end
-  else
-  begin
-     aCaixa.setCodigo(strtoint(self.edtCodigo.Text));
-     aCaixa.setHistorico(self.edtHistorico.Text);
-     aCaixa.setEntrada(self.edtEntrada.MaxLength);
-     aCaixa.setSaida(self.edtSaida.MaxLength);
-     aCaixa.setSaldo(self.edtSaldoBase.MaxLength);
-     aCtrlCaixa.Salvar(aCaixa.clone);
-  end;
+     end
+     else if ehObrigatorio(self.edtData.Text, '*') and (self.edtSaldoTot.Text = '') then
+     begin
+     showmessage('Campo Saldo Total é Obrigatório');
+     self.edtHistorico.SetFocus;
+     end
+     else
+     begin
+       if self.btnSalvar.Caption = '&Salvar' then
+       begin
+          aCaixa.setCodigo(strtoint(self.edtCodigo.Text));
+          aCaixa.setHistorico(self.edtHistorico.Text);
+          aCaixa.setEntrada(self.edtEntrada.MaxLength);
+          aCaixa.setSaida(self.edtSaida.MaxLength);
+          aCaixa.setSaldo(self.edtSaldoTot.MaxLength);
+          msg := aCtrlCaixa.Salvar(aCaixa.clone);
+          if msg = '' then
+             showmessage('Caixa Salvo com sucesso!')
+          else
+             showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlCaixa.Excluir(aCaixa.clone);
+           if msg = '' then
+              showmessage('Caixa Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+         inherited;
+     end;
 end;
 
 end.

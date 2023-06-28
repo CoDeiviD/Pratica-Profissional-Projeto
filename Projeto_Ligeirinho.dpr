@@ -10,7 +10,6 @@ uses
   uCadastroContaPgo in 'uCadastroContaPgo.pas' {FormCadastroContaPgo},
   uCadastroContaRcb in 'uCadastroContaRcb.pas' {FormCadastroContaRcb},
   uCadastroEstados in 'uCadastroEstados.pas' {FormCadastroEstados},
-  uCadastroFornecedores in 'uCadastroFornecedores.pas' {FormCadastroFornecedores},
   uCadastroFuncionarios in 'uCadastroFuncionarios.pas' {FormCadastroFuncionarios},
   uCadastroPai in 'uCadastroPai.pas' {FormCadastroPai},
   uCadastroPaises in 'uCadastroPaises.pas' {FormCadastroPaises},
@@ -27,7 +26,6 @@ uses
   uColContasRcb in 'uColContasRcb.pas',
   uColecoes in 'uColecoes.pas',
   uColEstados in 'uColEstados.pas',
-  uColForns in 'uColForns.pas',
   uColFuncs in 'uColFuncs.pas',
   uColPaises in 'uColPaises.pas',
   uColProdutos in 'uColProdutos.pas',
@@ -37,7 +35,6 @@ uses
   uConsultaContaPgo in 'uConsultaContaPgo.pas' {FormConsultaContaPgo},
   uConsultaContaRcb in 'uConsultaContaRcb.pas' {FormConsultaContaRcb},
   uConsultaEstados in 'uConsultaEstados.pas' {FormConsultaEstados},
-  uConsultaFornecedores in 'uConsultaFornecedores.pas' {FormConsultaFornecedores},
   uConsultaFuncionarios in 'uConsultaFuncionarios.pas' {FormConsultaFuncionarios},
   uConsultaPai in 'uConsultaPai.pas' {FormConsultaPai},
   uConsultaPaises in 'uConsultaPaises.pas' {FormConsultaPaises},
@@ -69,7 +66,6 @@ uses
   uDAOProdutos in 'uDAOProdutos.pas',
   uDM in 'uDM.pas' {DM: TDataModule},
   uEstados in 'uEstados.pas',
-  uFornecedor in 'uFornecedor.pas',
   uFuncionario in 'uFuncionario.pas',
   uInter in 'uInter.pas',
   uMenuPrincipal in 'uMenuPrincipal.pas' {FormSorveteria},
@@ -79,7 +75,11 @@ uses
   uProdutos in 'uProdutos.pas',
   uCtrlPessoas in 'uCtrlPessoas.pas',
   uDAOPessoas in 'uDAOPessoas.pas',
-  uColPessoas in 'uColPessoas.pas';
+  uColPessoas in 'uColPessoas.pas',
+  uFornecedor in 'uFornecedor.pas',
+  uConsultaFornecedores in 'uConsultaFornecedores.pas' {FormConsultaFornecedores},
+  uCadastroFornecedores in 'uCadastroFornecedores.pas' {FormCadastroFornecedores},
+  uColForns in 'uColForns.pas';
 
 {$R *.res}
 
@@ -100,10 +100,8 @@ begin
   Application.CreateForm(TFormCadastroPessoas, FormCadastroPessoas);
   Application.CreateForm(TFormCadastroCidades, FormCadastroCidades);
   Application.CreateForm(TFormCadastroClientes, FormCadastroClientes);
-  Application.CreateForm(TFormCadastroFornecedores, FormCadastroFornecedores);
   Application.CreateForm(TFormCadastroFuncionarios, FormCadastroFuncionarios);
   Application.CreateForm(TFormConsultaClientes, FormConsultaClientes);
-  Application.CreateForm(TFormConsultaFornecedores, FormConsultaFornecedores);
   Application.CreateForm(TFormConsultaFuncionarios, FormConsultaFuncionarios);
   Application.CreateForm(TFormCadastroCaixa, FormCadastroCaixa);
   Application.CreateForm(TFormCadastroContaPgo, FormCadastroContaPgo);
@@ -138,5 +136,7 @@ begin
   Application.CreateForm(TFormConsultaProduto, FormConsultaProduto);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFormSorveteria, FormSorveteria);
+  Application.CreateForm(TFormConsultaFornecedores, FormConsultaFornecedores);
+  Application.CreateForm(TFormCadastroFornecedores, FormCadastroFornecedores);
   Application.Run;
 end.

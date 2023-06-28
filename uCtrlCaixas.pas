@@ -12,23 +12,18 @@ interface
       destructor Destrua_se;
       procedure setDM (pDM : TObject); override;
       function getDS: TDataSource;    override;
-      function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
-      function Pesquisar (pChave: string; pOBJ: TObject): integer; override;
+      function salvar(pObj : TObject): string;    override;
+      function Carregar(pObj : TObject): string;  override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string;
  end;
 implementation
 
 { CtrlCaixas }
 
-function CtrlCaixas.Carregar(pPos: integer): TObject;
+function CtrlCaixas.Carregar(pObj : TObject): string;
 begin
-   Result := aDaoCaixas.Carregar(pPos);
-end;
-
-function CtrlCaixas.CarregarColecao: TObject;
-begin
-   Result := aDAOCaixas.CarregarColecao;
+   Result := aDaoCaixas.Carregar(pObj);
 end;
 
 constructor CtrlCaixas.CrieObj;
@@ -41,26 +36,27 @@ begin
    aDaoCaixas.Destrua_se;
 end;
 
+function CtrlCaixas.Excluir(pObj: TOBject): string;
+begin
+   Result := aDaoCaixas.Excluir(pObj);
+end;
+
 function CtrlCaixas.getDS: TDataSource;
 begin
    Result := aDaoCaixas.getDS;
 end;
 
-function CtrlCaixas.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function CtrlCaixas.Pesquisar(pChave: string): string;
 var mQuero : boolean;
     mCaixa  : Caixas;
 begin
-   mCaixa := Caixas(pObj);
-   if mCaixa.getCodigo = 0 then
-      mQuero := false
-   else
-      mQuero := true;
+   Result := aDaoCaixas.Pesquisar(pChave);
 
 end;
 
 function CtrlCaixas.salvar(pObj: TObject): string;
 begin
-   aDaoCaixas.Salvar(pObj);
+   Result := aDaoCaixas.Salvar(pObj);
 end;
 
 procedure CtrlCaixas.setDM(pDM: TObject);

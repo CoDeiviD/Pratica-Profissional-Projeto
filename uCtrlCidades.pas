@@ -13,22 +13,17 @@ interface
       procedure setDM (pDM : TObject); override;
       function getDS: TDataSource;    override;
       function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
-      function Pesquisar (pChave: string; pOBJ: TObject): integer; override;
+      function Carregar(pOBJ: TObject): string;  override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string;
  end;
 implementation
 
 { CtrlCidades }
 
-function CtrlCidades.Carregar(pPos: integer): TObject;
+function CtrlCidades.Carregar(pOBJ: TObject): string;
 begin
-   Result := aDaoCidades.Carregar(pPos);
-end;
-
-function CtrlCidades.CarregarColecao: TObject;
-begin
-   Result := aDAOCidades.CarregarColecao;
+   Result := aDaoCidades.Carregar(pObj);
 end;
 
 constructor CtrlCidades.CrieObj;
@@ -41,26 +36,27 @@ begin
    aDaoCidades.Destrua_se;
 end;
 
+function CtrlCidades.Excluir(pObj: TOBject): string;
+begin
+   Result := aDaoCidades.Excluir(pObj);
+end;
+
 function CtrlCidades.getDS: TDataSource;
 begin
    Result := aDaoCidades.getDS;
 end;
 
-function CtrlCidades.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function CtrlCidades.Pesquisar(pChave: string): string;
 var mQuero : boolean;
     mCidade  : Cidades;
 begin
-   mCidade := Cidades(pObj);
-   if mCidade.getCodigo = 0 then
-      mQuero := false
-   else
-      mQuero := true;
+   Result := aDaoCidades.Pesquisar(pChave);
 
 end;
 
 function CtrlCidades.salvar(pObj: TObject): string;
 begin
-   aDaoCidades.Salvar(pObj);
+   Result := aDaoCidades.Salvar(pObj);
 end;
 
 procedure CtrlCidades.setDM(pDM: TObject);

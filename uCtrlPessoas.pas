@@ -1,7 +1,7 @@
 unit uCtrlPessoas;
 
 interface
- uses uController, uDaoPessoas;
+ uses uController, uPessoas, uDaoPessoas, Data.DB;
 
  type CtrlPessoas = class(controller)
    private
@@ -11,23 +11,20 @@ interface
       constructor CrieObj;
       destructor Destrua_se;
       procedure setDM (pDM : TObject); override;
-      function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
+      function getDS: TDataSource;    override;
+      function salvar(pObj : TObject): string;   override;
+//      function Carregar(pObj : TObject): string; override;
+      function Pesquisar (pChave: string): string; override;
+//      function Excluir (pObj : TOBject): string;   override;
  end;
 implementation
 
 { CtrlPessoas }
 
-function CtrlPessoas.Carregar(pPos: integer): TObject;
-begin
-   Result := aDaoPessoas.Carregar(pPos);
-end;
-
-function CtrlPessoas.CarregarColecao: TObject;
-begin
-   Result := aDaoPessoas;
-end;
+//function CtrlPessoas.Carregar(pPos: integer): TObject;
+//begin
+//   Result := aDaoPessoas.Carregar(pPos);
+//end;
 
 constructor CtrlPessoas.CrieObj;
 begin
@@ -37,6 +34,21 @@ end;
 destructor CtrlPessoas.Destrua_se;
 begin
    aDaoPessoas.Destrua_se;
+end;
+
+//function CtrlPessoas.Excluir(pObj: TOBject): boolean;
+//begin
+
+//end;
+
+function CtrlPessoas.getDS: TDataSource;
+begin
+   Result := aDaoPessoas.getDS;
+end;
+
+function CtrlPessoas.Pesquisar(pChave: string): string;
+begin
+
 end;
 
 function CtrlPessoas.salvar(pObj: TObject): string;

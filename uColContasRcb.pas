@@ -7,7 +7,6 @@ interface
   protected
   public
      function Pesquisar(pChave: double; pQuero: boolean): integer; overload;
-     function Pesquisar(pChave: integer; pQuero: boolean): integer; overload;
      procedure SalvarArq;
      procedure LerArq;
   end;
@@ -51,11 +50,6 @@ begin
               Result := k;
       end;
    end;
-end;
-
-function ColContasRcb.Pesquisar(pChave: integer; pQuero: boolean): integer;
-begin
-
 end;
 
 procedure ColContasRcb.SalvarArq;

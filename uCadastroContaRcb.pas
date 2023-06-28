@@ -94,22 +94,40 @@ begin
 end;
 
 procedure TFormCadastroContaRcb.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtValorRcbdo.Text) = 0 then
-  begin
-     showmessage('Campo Cidade é Obrigatório');
      self.edtValorRcbdo.Color := clYellow;
+     if ehObrigatorio(self.edtValorRcbdo.Text, '*') and (length(self.edtValorRcbdo.Text)= 0) then
+     begin
+     showmessage('Campo Cidade é Obrigatório');
      self.edtValorRcbdo.SetFocus;
-  end
-  else
-  begin
-     aContaRcb.setCodigo(strtoint(self.edtCodigo.Text));
-     aContaRcb.setValor(self.edtValorRcb.MaxLength);
-     aContaRcb.setDtVencimento(self.edtDtVencR.MaxLength);
-     aContaRcb.setDtPagamento(self.edtDtPgtoR.MaxLength);
-     aCtrlContaRcb.Salvar(aContaRcb.clone);
-  end;
+     end
+     else
+     begin
+        if self.btnSalvar.Caption = '&Salvar' then
+        begin
+           aContaRcb.setCodigo(strtoint(self.edtCodigo.Text));
+           aContaRcb.setValor(self.edtValorRcb.MaxLength);
+           aContaRcb.setDtVencimento(self.edtDtVencR.MaxLength);
+           aContaRcb.setDtPagamento(self.edtDtPgtoR.MaxLength);
+           msg := aCtrlContaRcb.Salvar(aContaRcb.clone);
+           if msg = '' then
+              showmessage('Conta a Receber Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlContaRcb.Excluir(aContaRcb.clone);
+           if msg = '' then
+              showmessage('Conta a Receber Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+        inherited;
+     end;
 end;
 
 end.

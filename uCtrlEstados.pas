@@ -12,24 +12,21 @@ interface
       constructor CrieObj;
       destructor Destrua_se;
       procedure setDM (pDM : TObject); override;
+      procedure setaCtrl(pCtrl: TObject);
+      function getaCtrlPais : Tobject;
       function getDS: TDataSource;    override;
       function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
-      function Pesquisar (pChave: string; pOBJ: TObject): integer; override;
+      function Carregar(pObj : TObject): string; override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string; override;
  end;
 implementation
 
 { CtrlEstados }
 
-function CtrlEstados.Carregar(pPos: integer): TObject;
+function CtrlEstados.Carregar(pObj : TObject): string;
 begin
-   Result := aDaoEstados.Carregar(pPos);
-end;
-
-function CtrlEstados.CarregarColecao: TObject;
-begin
-   Result := aDaoEstados.CarregarColecao;
+   Result := aDaoEstados.Carregar(pObj);
 end;
 
 constructor CtrlEstados.CrieObj;
@@ -42,26 +39,37 @@ begin
    aDaoEstados.Destrua_se;
 end;
 
+function CtrlEstados.Excluir(pObj: TOBject): string;
+begin
+   Result := aDaoEstados.Excluir(pObj);
+end;
+
+function CtrlEstados.getaCtrlPais: Tobject;
+begin
+
+end;
+
 function CtrlEstados.getDS: TDataSource;
 begin
    Result := aDaoEstados.getDS;
 end;
 
-function CtrlEstados.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function CtrlEstados.Pesquisar(pChave: string): string;
 var mQuero : boolean;
     mEstado  : Estados;
 begin
-   mEstado := Estados(pObj);
-   if mEstado.getCodigo = 0 then
-      mQuero := false
-   else
-      mQuero := true;
+   Result := aDaoEstados.Pesquisar(pChave);
 
 end;
 
 function CtrlEstados.salvar(pObj: TObject): string;
 begin
-   aDaoEstados.Salvar(pObj);
+   Result := aDaoEstados.Salvar(pObj);
+end;
+
+procedure CtrlEstados.setaCtrl(pCtrl: TObject);
+begin
+
 end;
 
 procedure CtrlEstados.setDM(pDM: TObject);

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPessoas, Vcl.StdCtrls,
-  uFuncionario,
+  uConsultaCidades, uFuncionario,
   uCtrlFuncs;
 
 type
@@ -14,11 +14,12 @@ type
     lbCargaH: TLabel;
     edtSalario: TEdit;
     edtCargaH: TEdit;
-    procedure btnSalvarExit(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
   private
     { Private declarations }
     oFunc : Funcionarios;
     aCtrlFuncs : CtrlFuncs;
+    umaConsultaCidades : TFormConsultaCidades;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject); override;
@@ -43,31 +44,40 @@ begin
   self.edtNome.Enabled := false;
   self.edtDtNasc.Enabled := false;
   self.edtCPF_CNPJ.Enabled := false;
+  self.edtCEP.Enabled := false;
+  self.edtRG.Enabled := false;
   self.edtEndereco.Enabled := false;
   self.edtEmail.Enabled := false;
   self.edtTelefone.Enabled := false;
+  self.edtMidia.Enabled := false;
   self.edtSalario.Enabled := false;
   self.edtCargaH.Enabled := false;
 end;
 
-procedure TFormCadastroFuncionarios.btnSalvarExit(Sender: TObject);
+procedure TFormCadastroFuncionarios.btnPesquisarClick(Sender: TObject);
+var aux : string;
 begin
   inherited;
-  if self.edtNome.Text <> '' then
-     self.edtNome.Color := clWindow;
-  self.Sair;
+  aux := umaConsultaCidades.btnSair.Caption;
+  umaConsultaCidades.btnSair.Caption := 'Selecionar';
+  umaConsultaCidades.ConhecaObj(oFunc.getaCidade, nil);
+  umaConsultaCidades.ShowModal;
+  umaConsultaCidades.btnSair.Caption := aux;
+  self.edtCidade.Text := oFunc.getaCidade.getCidade;
 end;
 
 procedure TFormCadastroFuncionarios.CarregaEdit;
 begin
   inherited;
-  self.edtCodigo.Text := inttostr(oFunc.getCodigo);
   self.edtNome.Text := oFunc.getNome;
   self.edtDtNasc.Text := datetostr(oFunc.getDtNasc);
   self.edtCPF_CNPJ.Text :=  oFunc.getCPF_CNPJ;
+  self.edtCEP.Text :=  oFunc.getCEP;
+  self.edtRG.Text :=  oFunc.getRG;
   self.edtEndereco.Text := oFunc.getEndereco;
   self.edtEmail.Text := oFunc.getEmail;
   self.edtTelefone.Text := oFunc.getTelefone;
+  self.edtMidia.Text := oFunc.getMidia;
   self.edtSalario.Text := floattostr(oFunc.getSalario);
   self.edtCargaH.Text := timetostr(oFunc.getCargaH);
 end;
@@ -85,9 +95,12 @@ begin
   self.edtNome.Enabled := true;
   self.edtDtNasc.Enabled := true;
   self.edtCPF_CNPJ.Enabled := true;
+  self.edtCEP.Enabled := true;
+  self.edtRG.Enabled := true;
   self.edtEndereco.Enabled := true;
   self.edtEmail.Enabled := true;
   self.edtTelefone.Enabled := true;
+  self.edtMidia.Enabled := true;
   self.edtSalario.Enabled := true;
   self.edtCargaH.Enabled := true;
 end;
@@ -99,9 +112,12 @@ begin
   edtNome.Clear;
   edtDtNasc.Clear;
   edtCPF_CNPJ.Clear;
+  edtCEP.Clear;
+  edtRG.Clear;
   edtEndereco.Clear;
   edtEmail.Clear;
   edtTelefone.Clear;
+  edtMidia.Clear;
   edtSalario.Clear;
   edtCargaH.Clear;
 end;
@@ -113,49 +129,71 @@ begin
 end;
 
 procedure TFormCadastroFuncionarios.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtNome.Text) = 0 then
-  begin
-     showmessage('Campo Nome é Obrigatório');
      self.edtNome.Color := clYellow;
-     self.edtNome.SetFocus;
-  end
-  else if (self.edtCPF_CNPJ.Text) = '' then
-  begin
-     showmessage('Campo CPF/CNPJ é Obrigatório');
-     self.edtCPF_CNPJ.Color := clYellow;
-     self.edtCPF_CNPJ.SetFocus;
-  end
-  else if (self.edtTelefone.Text) = '' then
-  begin
-     showmessage('Campo Telefone é Obrigatório');
+  if (self.edtCEP.Text) = '' then
+     self.edtCEP.Color := clYellow;
+  if (self.edtTelefone.Text) = '' then
      self.edtTelefone.Color := clYellow;
-     self.edtTelefone.SetFocus;
-  end
-  else if (self.edtSalario.Text) = '' then
-  begin
-     showmessage('Campo Salário (R$) é Obrigatório');
+  if (self.edtSalario.Text) = '' then
      self.edtSalario.Color := clYellow;
-     self.edtSalario.SetFocus;
-  end
-  else if (self.edtCargaH.Text) = '' then
-  begin
-     showmessage('Campo Carga Horária é Obrigatório');
+  if (self.edtCargaH.Text) = '' then
      self.edtCargaH.Color := clYellow;
+     if ehObrigatorio(self.edtNome.Text, '*') and (length(self.edtNome.Text)= 0) then
+     begin
+        showmessage('Campo Nome é Obrigatório');
+        self.edtNome.SetFocus;
+     end
+     else if ehObrigatorio(self.edtNome.Text, '*') and (self.edtCEP.Text = '') then
+     begin
+     showmessage('Campo CEP é Obrigatório');
+     self.edtCEP.SetFocus;
+     end
+     else if ehObrigatorio(self.edtNome.Text, '*') and (self.edtTelefone.Text = '') then
+     begin
+     showmessage('Campo Telefone é Obrigatório');
+     self.edtTelefone.SetFocus;
+     end
+     else if ehObrigatorio(self.edtNome.Text, '*') and (self.edtSalario.Text = '') then
+     begin
+     showmessage('Campo Salário (R$) é Obrigatório');
+     self.edtSalario.SetFocus;
+     end
+     else if ehObrigatorio(self.edtNome.Text, '*') and (self.edtCargaH.Text = '') then
+     begin
+     showmessage('Campo Carga Horária é Obrigatório');
      self.edtCargaH.SetFocus;
-  end
-  else
-  begin
-     oFunc.setCodigo(strtoint(self.edtCodigo.Text));
-     oFunc.setNome(self.edtNome.Text);
-     oFunc.setDtNasc(self.edtDtNasc.MaxLength);
-     oFunc.setCPF_CNPJ(self.edtCPF_CNPJ.Text);
-     oFunc.setTelefone(self.edtTelefone.Text);
-     oFunc.setSalario(self.edtSalario.MaxLength);
-     oFunc.setCargaH(self.edtCargaH.MaxLength);
-     aCtrlFuncs.Salvar(oFunc.clone);
-  end;
+     end
+     else
+     begin
+        if self.btnSalvar.Caption = '&Salvar' then
+        begin
+           oFunc.setCodigo(strtoint(self.edtCodigo.Text));
+           oFunc.setNome(self.edtNome.Text);
+           oFunc.setDtNasc(self.edtDtNasc.MaxLength);
+           oFunc.setCPF_CNPJ(self.edtCPF_CNPJ.Text);
+           oFunc.setTelefone(self.edtTelefone.Text);
+           oFunc.setSalario(self.edtSalario.MaxLength);
+           oFunc.setCargaH(self.edtCargaH.MaxLength);
+           msg := aCtrlFuncs.Salvar(oFunc.clone);
+           if msg = '' then
+              showmessage('Funcionario Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlFuncs.Excluir(oFunc.clone);
+           if msg = '' then
+              showmessage('Funcionario Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+        inherited;
+     end;
 end;
 
 end.

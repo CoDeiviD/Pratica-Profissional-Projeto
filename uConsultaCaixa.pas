@@ -5,15 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroCaixa, uCaixas, uCtrlCaixas, uColCaixas;
+  uCadastroCaixa, uCaixas, uCtrlCaixas, uColCaixas, Data.DB, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TFormConsultaCaixa = class(TFormConsultaPai)
-    procedure btnInserirClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
-    procedure btnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroCaixas : TFormCadastroCaixa;
@@ -28,7 +25,6 @@ type
     procedure Sair;                       override;
     procedure Pesquisar;                  override;
     procedure setCadastro(pObj: TObject); override;
-    procedure CarregaLV;                  override;
   end;
 
 var
@@ -46,105 +42,65 @@ begin
 
 end;
 
-procedure TFormConsultaCaixa.btnAlterarClick(Sender: TObject);
-begin
-  inherited;
-  self.Alterar;
-end;
-
-procedure TFormConsultaCaixa.btnExcluirClick(Sender: TObject);
-begin
-  inherited;
-  self.Excluir;
-end;
-
-procedure TFormConsultaCaixa.btnInserirClick(Sender: TObject);
-begin
-  inherited;
-  self.Inserir;
-end;
-
-procedure TFormConsultaCaixa.btnPesquisaClick(Sender: TObject);
-begin
-  inherited;
-  Pesquisar;
-end;
-
-procedure TFormConsultaCaixa.btnSairClick(Sender: TObject);
-begin
-  inherited;
-  self.Sair;
-end;
-
-procedure TFormConsultaCaixa.CarregaLV;
-var LVItem : TListItem;
-    tam, k : integer;
-    aCaixa  : Caixas;
-    aColCaixas : ColCaixas;
-begin
-  inherited;
-  aColCaixas := ColCaixas(aCtrlCaixa.CarregarColecao);
-  self.ListView1.Clear;
-  tam := aColCaixas.getTam;
-  for k  := 1 to tam do
-  begin
-     aCaixa := Caixas(aColCaixas.Carregar(k));
-     LVItem := ListView1.Items.Add;
-     LVItem.Caption := inttostr(aCaixa.getCodigo);
-     LVItem.Caption := datetostr(aCaixa.getData);
-     LVItem.SubItems.Add(aCaixa.getHistorico);
-     LVItem.Caption := floattostr(aCaixa.getEntrada);
-     LVItem.Caption := floattostr(aCaixa.getSaida);
-     LVItem.Caption := floattostr(aCaixa.getSaldo);
-     LVItem.Caption := floattostr(aCaixa.getSaldoTot);
-  end;
-end;
-
 procedure TFormConsultaCaixa.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
   aCaixa := Caixas(pObj);
   aCtrlCaixa := CtrlCaixas(pCtrl);
+  self.DBGrid1.DataSource := aCtrlCaixa.getDS;
+  aCtrlCaixa.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaCaixa.Excluir;
-var aux : string;
+var mMsg, mAux :string;
 begin
   inherited;
-  aux := umFormCadastroCaixas.btnSalvar.Caption;
-  umFormCadastroCaixas.btnSalvar.Caption := '&Excluir';
+  mMsg := aCtrlCaixa.Carregar(aCaixa);
   umFormCadastroCaixas.ConhecaObj(aCaixa, aCtrlCaixa);
+  mAux := umFormCadastroCaixas.btnSalvar.Caption;
+  umFormCadastroCaixas.btnSalvar.Caption := '&Excluir';
   umFormCadastroCaixas.LimpaEdit;
+
   umFormCadastroCaixas.CarregaEdit;
+  umFormCadastroCaixas.BloqueiaEdit;
   umFormCadastroCaixas.ShowModal;
-  umFormCadastroCaixas.btnSalvar.Caption := aux;
+  umFormCadastroCaixas.DesbloqueiaEdit;
+  umFormCadastroCaixas.btnSalvar.Caption := mAux;
+  self.Pesquisar;
+end;
+
+procedure TFormConsultaCaixa.FormCreate(Sender: TObject);
+begin
+  inherited;
+  umFormCadastroCaixas := TFormCadastroCaixa.Create(nil);
 end;
 
 procedure TFormConsultaCaixa.Inserir;
 begin
   inherited;
+  aCaixa.setCodigo(0);
   umFormCadastroCaixas.ConhecaObj(aCaixa, aCtrlCaixa);
   umFormCadastroCaixas.LimpaEdit;
   umFormCadastroCaixas.ShowModal;
-  self.CarregaLV;
+  self.Pesquisar;
 end;
 
 procedure TFormConsultaCaixa.Pesquisar;
 begin
   inherited;
-  aCtrlCaixa.Pesquisar(self.edtChave.Text, aCaixa);
+  aCtrlCaixa.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaCaixa.Sair;
 begin
   inherited;
-  Close;
+//  Close;
 end;
 
 procedure TFormConsultaCaixa.setCadastro(pObj: TObject);
 begin
   inherited;
-  umFormCadastroCaixas := TFormCadastroCaixa(pObj);
+//  umFormCadastroCaixas := TFormCadastroCaixa(pObj);
 end;
 
 end.

@@ -18,6 +18,7 @@ object FormConsultaPai: TFormConsultaPai
     Top = 24
     Width = 241
     Height = 21
+    CharCase = ecUpperCase
     TabOrder = 0
   end
   object btnInserir: TButton
@@ -59,13 +60,18 @@ object FormConsultaPai: TFormConsultaPai
     Height = 25
     Caption = '&Pesquisar'
     TabOrder = 5
+    OnClick = btnPesquisaClick
   end
-  object ListView1: TListView
-    Left = 17
+  object DBGrid1: TDBGrid
+    Left = 24
     Top = 55
-    Width = 625
-    Height = 273
-    Columns = <>
+    Width = 618
+    Height = 282
     TabOrder = 6
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
 end

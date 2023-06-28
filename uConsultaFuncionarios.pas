@@ -5,15 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroFuncionarios, uFuncionario, uCtrlFuncs, uColFuncs, uConsultaPessoas;
+  uCadastroFuncionarios, uFuncionario, uCtrlFuncs, uColFuncs, uConsultaPessoas,
+  Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TFormConsultaFuncionarios = class(TFormConsultaPessoas)
-    procedure btnInserirClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
-    procedure btnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroFuncionarios : TFormCadastroFuncionarios;
@@ -28,7 +25,6 @@ type
     procedure Sair;                       virtual;
     procedure Pesquisar;                  virtual;
     procedure setCadastro(pObj: TObject); virtual;
-    procedure CarregaLV;                  virtual;
   end;
 
 var
@@ -49,107 +45,66 @@ begin
   umFormCadastroFuncionarios.ShowModal;
 end;
 
-procedure TFormConsultaFuncionarios.btnAlterarClick(Sender: TObject);
-begin
-  inherited;
-  self.Alterar;
-end;
-
-procedure TFormConsultaFuncionarios.btnExcluirClick(Sender: TObject);
-begin
-  inherited;
-  self.Excluir;
-end;
-
-procedure TFormConsultaFuncionarios.btnInserirClick(Sender: TObject);
-begin
-   self.Inserir;
-end;
-
-procedure TFormConsultaFuncionarios.btnPesquisaClick(Sender: TObject);
-begin
-  inherited;
-  Pesquisar;
-end;
-
-procedure TFormConsultaFuncionarios.btnSairClick(Sender: TObject);
-begin
-  inherited;
-  self.Sair;
-end;
-
-procedure TFormConsultaFuncionarios.CarregaLV;
-var LVItem : TListItem;
-    tam, k : integer;
-    aFunc  : Funcionarios;
-    aColFuncs : ColFuncionarios;
-begin
-  inherited;
-  aColFuncs := ColFuncionarios(aCtrlFuncs.CarregarColecao);
-  self.ListView1.Clear;
-  tam := aColFuncs.getTam;
-  for k  := 1 to tam do
-  begin
-     aFunc := Funcionarios(aColFuncs.Carregar(k));
-     LVItem := ListView1.Items.Add;
-     LVItem.Caption := inttostr(aFunc.getCodigo);
-     LVItem.SubItems.Add(aFunc.getNome);
-     LVItem.Caption := datetostr(aFunc.getDtNasc);
-     LVItem.SubItems.Add(aFunc.getCPF_CNPJ);
-     LVItem.SubItems.Add(aFunc.getEndereco);
-     LVItem.SubItems.Add(aFunc.getEmail);
-     LVItem.SubItems.Add(aFunc.getTelefone);
-     LVItem.Caption := floattostr(aFunc.getSalario);
-     LVItem.Caption := timetostr(aFunc.getCargaH);
-  end;
-end;
-
 procedure TFormConsultaFuncionarios.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
   oFuncionario := Funcionarios(pObj);
   aCtrlFuncs := CtrlFuncs(pCtrl);
+  self.DBGrid1.DataSource := aCtrlFuncs.getDS;
+  aCtrlFuncs.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaFuncionarios.Excluir;
-var aux : string;
+var mMsg, mAux :string;
 begin
   inherited;
-  aux := umFormCadastroFuncionarios.btnSalvar.Caption;
-  umFormCadastroFuncionarios.btnSalvar.Caption := '&Excluir';
+  mMsg := aCtrlFuncs.Carregar(oFuncionario);
   umFormCadastroFuncionarios.ConhecaObj(oFuncionario, aCtrlFuncs);
+  mAux := umFormCadastroFuncionarios.btnSalvar.Caption;
+  umFormCadastroFuncionarios.btnSalvar.Caption := '&Excluir';
   umFormCadastroFuncionarios.LimpaEdit;
-  umFormCadastroFuncionarios.CarregaEdit;
-  umFormCadastroFuncionarios.ShowModal;
-  umFormCadastroFuncionarios.btnSalvar.Caption := aux;
 
+  umFormCadastroFuncionarios.CarregaEdit;
+  umFormCadastroFuncionarios.BloqueiaEdit;
+  umFormCadastroFuncionarios.ShowModal;
+  umFormCadastroFuncionarios.DesbloqueiaEdit;
+  umFormCadastroFuncionarios.btnSalvar.Caption := mAux;
+  self.Pesquisar;
+
+end;
+
+procedure TFormConsultaFuncionarios.FormCreate(Sender: TObject);
+begin
+  inherited;
+  umFormCadastroFuncionarios := TFormCadastroFuncionarios.Create(nil);
 end;
 
 procedure TFormConsultaFuncionarios.Inserir;
 begin
   inherited;
+  oFuncionario.setCodigo(0);
   umFormCadastroFuncionarios.ConhecaObj(oFuncionario, aCtrlFuncs);
   umFormCadastroFuncionarios.LimpaEdit;
   umFormCadastroFuncionarios.ShowModal;
-  self.CarregaLV;
+  self.Pesquisar;
 end;
 
 procedure TFormConsultaFuncionarios.Pesquisar;
 begin
   inherited;
-  aCtrlFuncs.Pesquisar(self.edtChave.Text, oFuncionario);
+  aCtrlFuncs.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaFuncionarios.Sair;
 begin
   inherited;
-  Close;
+//  Close;
 end;
 
 procedure TFormConsultaFuncionarios.setCadastro(pObj: TObject);
 begin
   inherited;
-  umFormCadastroFuncionarios := TFormCadastroFuncionarios(pObj);
+//  umFormCadastroFuncionarios := TFormCadastroFuncionarios(pObj);
 end;
 
 end.

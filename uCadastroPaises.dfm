@@ -30,9 +30,6 @@ inherited FormCadastroPaises: TFormCadastroPaises
     Height = 13
     Caption = 'Moeda *'
   end
-  inherited btnSalvar: TButton
-    OnExit = btnSalvarExit
-  end
   inherited edtDtCad: TEdit
     TabOrder = 6
   end

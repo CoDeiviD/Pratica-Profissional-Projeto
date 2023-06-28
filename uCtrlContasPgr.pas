@@ -13,22 +13,17 @@ interface
       procedure setDM (pDM : TObject); override;
       function getDS: TDataSource;    override;
       function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
-      function Pesquisar (pChave: string; pOBJ: TObject): integer; override;
+      function Carregar(pOBJ: TObject): string;    override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string;
  end;
 implementation
 
 { CtrlContasPgr }
 
-function CtrlContasPgr.Carregar(pPos: integer): TObject;
+function CtrlContasPgr.Carregar(pOBJ: TObject): string;
 begin
-   Result := aDaoContasPgr.Carregar(pPos);
-end;
-
-function CtrlContasPgr.CarregarColecao: TObject;
-begin
-   Result := aDAOContasPgr.CarregarColecao;
+   Result := aDaoContasPgr.Carregar(pObj);
 end;
 
 constructor CtrlContasPgr.CrieObj;
@@ -41,26 +36,27 @@ begin
    aDaoContasPgr.Destrua_se;
 end;
 
+function CtrlContasPgr.Excluir(pObj: TOBject): string;
+begin
+   Result := aDaoContasPgr.Excluir(pObj);
+end;
+
 function CtrlContasPgr.getDS: TDataSource;
 begin
    Result := aDaoContasPgr.getDS;
 end;
 
-function CtrlContasPgr.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function CtrlContasPgr.Pesquisar(pChave: string): string;
 var mQuero : boolean;
     mCPgr  : ContasPgr;
 begin
-   mCPgr := ContasPgr(pObj);
-   if mCPgr.getCodigo = 0 then
-      mQuero := false
-   else
-      mQuero := true;
+   Result := aDaoContasPgr.Pesquisar(pChave);
 
 end;
 
 function CtrlContasPgr.salvar(pObj: TObject): string;
 begin
-  aDaoContasPgr.Salvar(pObj);
+  Result := aDaoContasPgr.Salvar(pObj);
 end;
 
 procedure CtrlContasPgr.setDM(pDM: TObject);

@@ -59,7 +59,7 @@ begin
    Entrada := 0.00;
    Saida  := 0.00;
    Saldo  := 0.00;
-   SaldoTotal   := 0.00;
+   SaldoTotal  := 0.00;
 end;
 
 destructor Caixas.Destrua_se;
@@ -79,7 +79,7 @@ end;
 
 function Caixas.getHistorico: string;
 begin
- //  Result := Historico;
+   Result := Historico;
 end;
 
 function Caixas.getSaida: double;
@@ -109,7 +109,7 @@ end;
 
 procedure Caixas.setHistorico(pHistorico: string);
 begin
-//   Historico := pHistorico;
+   Historico := pHistorico;
 end;
 
 procedure Caixas.setSaida(pSaida: double);

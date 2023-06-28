@@ -10,21 +10,18 @@ interface
        DtVencimento : TDateTime;
        DtPagamento : TDateTime;
        VPago : double;
-       oForn   : Fornecedores;
     public
       constructor CrieObj;
-      constructor CrieInit(pCodigo : integer; pValor, pVPago: double; pDtVencimento, pDtPagamento: TDateTime; poForn: string);
+      constructor CrieInit(pCodigo : integer; pValor, pVPago: double; pDtVencimento, pDtPagamento: TDateTime);
       destructor Destrua_se;
       procedure setValor(pValor:double);
       procedure setDtVencimento(pDtVencimento:TDateTime);
       procedure setDtPagamento(pDtPagamento:TDateTime);
       procedure setVPago(pVPago:double);
-      procedure setoForn(poForn:Fornecedores);
       function getValor: double;
       function getDtVencimento: TDateTime;
       function getDtPagamento: TDateTime;
       function getVPago: double;
-      function getoForn : Fornecedores;
       function clone : ContasPgr;
 end;
 implementation
@@ -33,17 +30,16 @@ implementation
 
 function ContasPgr.clone: ContasPgr;
 begin
-   Result := ContasPgr.CrieInit(codigo,Valor,VPago,DtVencimento,DtPagamento,oForn.getNome);
+   Result := ContasPgr.CrieInit(codigo,Valor,VPago,DtVencimento,DtPagamento);
 end;
 
 constructor ContasPgr.CrieInit(pCodigo : integer; pValor, pVPago: double;
-  pDtVencimento, pDtPagamento: TDateTime; poForn: string);
+  pDtVencimento, pDtPagamento: TDateTime);
 begin
    Valor  := pValor;
    DtVencimento := pDtVencimento;
    DtPagamento := pDtPagamento;
    VPago  := pVPago;
-//   oForn   := Fornecedores.CrieInit(poForn,'','','','',00/00/00,0,0);
 end;
 
 constructor ContasPgr.CrieObj;
@@ -52,12 +48,10 @@ begin
    DtVencimento := 00/00/00;
    DtPagamento := 00/00/00;
    VPago := 0.00;
-   oForn := Fornecedores.CrieObj;
 end;
 
 destructor ContasPgr.Destrua_se;
 begin
-   oForn.Destrua_se;
 end;
 
 function ContasPgr.getDtPagamento: TDateTime;
@@ -68,11 +62,6 @@ end;
 function ContasPgr.getDtVencimento: TDateTime;
 begin
    Result := DtVencimento;
-end;
-
-function ContasPgr.getoForn: Fornecedores;
-begin
-   Result := oForn;
 end;
 
 function ContasPgr.getValor: double;
@@ -93,11 +82,6 @@ end;
 procedure ContasPgr.setDtVencimento(pDtVencimento: TDateTime);
 begin
    DtVencimento := pDtVencimento;
-end;
-
-procedure ContasPgr.setoForn(poForn: Fornecedores);
-begin
-   oForn := poForn;
 end;
 
 procedure ContasPgr.setValor(pValor: double);

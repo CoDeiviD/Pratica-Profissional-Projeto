@@ -7,18 +7,21 @@ interface
     protected
       umDM : TDM;
     public
-
+       constructor CrieObj;             virtual;
+       destructor Destrua_se;           virtual;
        procedure setDM (pDM : TObject); virtual;
        function getDS : TDataSource;   virtual;
-       function Salvar( pObj : TObject): string; virtual;
-       function CarregarColecao: TObject;        virtual;
-       function Carregar(pPos : integer): TObject;                virtual;
+       function Salvar( pObj : TObject): string;    virtual;
+       function CarregarColecao: TObject;           virtual;
+       function Carregar(pObj : TObject): string;   virtual;
+       function Pesquisar (pChave: string): string; virtual;
+       function Excluir (pObj : TOBject): string;  virtual;
 end;
 implementation
 
 { DAO }
 
-function DAO.Carregar(pPos: integer): TObject;
+function DAO.Carregar(pObj : TObject): string;
 begin
 
 end;
@@ -28,7 +31,27 @@ begin
 
 end;
 
+constructor DAO.CrieObj;
+begin
+
+end;
+
+destructor DAO.Destrua_se;
+begin
+
+end;
+
+function DAO.Excluir(pObj: TOBject): string;
+begin
+
+end;
+
 function DAO.getDS: TDataSource;
+begin
+
+end;
+
+function DAO.Pesquisar(pChave: string): string;
 begin
 
 end;

@@ -30,15 +30,12 @@ inherited FormCadastroCaixa: TFormCadastroCaixa
     Height = 13
     Caption = 'Sa'#237'da'
   end
-  object lbSaldoBase: TLabel [8]
-    Left = 264
+  object lbSaldoTot: TLabel [8]
+    Left = 296
     Top = 80
-    Width = 61
+    Width = 86
     Height = 13
-    Caption = 'Saldo Base *'
-  end
-  inherited btnSalvar: TButton
-    OnExit = btnSalvarExit
+    Caption = 'Saldo Total (R$) *'
   end
   object edtData: TEdit
     Left = 113
@@ -68,10 +65,10 @@ inherited FormCadastroCaixa: TFormCadastroCaixa
     Height = 21
     TabOrder = 8
   end
-  object edtSaldoBase: TEdit
-    Left = 264
+  object edtSaldoTot: TEdit
+    Left = 296
     Top = 99
-    Width = 105
+    Width = 121
     Height = 21
     TabOrder = 9
   end

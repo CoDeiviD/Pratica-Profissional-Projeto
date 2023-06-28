@@ -1,7 +1,7 @@
 unit uCliente;
 
 interface
-  uses uPai, uPessoas;
+  uses uPai, uPessoas, uCidades;
    type
          Clientes = class(Pai)
     private
@@ -9,31 +9,40 @@ interface
        Nome  : string[35];
        DtNasc : TDateTime;
        CPF_CNPJ : string[11];
+       RG : string[7];
+       CEP : string[9];
        Endereco : string[21];
        Email : string[22];
        Telefone : string[13];
-       QtdeGrupo : integer;
-       Pagou : Boolean;
+       Midia : string[30];
+       CFS : string[40];
+       aCidade : Cidades;
     public
       constructor CrieObj;
-      constructor CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail, pTelefone: string; pDtNasc : TDateTime; pQtdeGrupo: integer; pPagou: Boolean);
+      constructor CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pRG, pCEP, pEndereco, pEmail, pTelefone, pMidia, pCFS: string; pDtNasc : TDateTime; pCodCidade: integer);
       destructor Destrua_se;
       procedure setNome(pNome:string);
       procedure setDtNasc(pDtNasc:TDateTime);
       procedure setCPF_CNPJ(pCPF_CNPJ:string);
+      procedure setRG(pRG:string);
+      procedure setCEP(pCEP:string);
       procedure setEndereco(pEndereco:string);
       procedure setEmail(pEmail:string);
       procedure setTelefone(pTelefone:string);
-      procedure setQtdeGrupo(pQtdeGrupo:integer);
-      procedure setPagou(pPagou:Boolean);
+      procedure setMidia(pMidia:string);
+      procedure setCFS(pCFS:string);
+      procedure setaCidade(paCidade:Cidades);
       function getNome: string;
       function getDtNasc: TDateTime;
       function getCPF_CNPJ: string;
+      function getRG: string;
+      function getCEP: string;
       function getEndereco: string;
       function getEmail: string;
       function getTelefone: string;
-      function getQtdeGrupo: integer;
-      function getPagou: Boolean;
+      function getMidia: string;
+      function getCFS: string;
+      function getaCidade : Cidades;
       function clone : Clientes;
 end;
 implementation
@@ -42,21 +51,24 @@ implementation
 
 function Clientes.clone: Clientes;
 begin
-   Result := Clientes.CrieInit(codigo,Nome,CPF_CNPJ,Endereco,Email,Telefone,DTNasc,QtdeGrupo,Pagou);
+   Result := Clientes.CrieInit(codigo,Nome,CPF_CNPJ,RG,CEP,Endereco,Email,Telefone,Midia,CFS,DTNasc,aCidade.getCodigo);
 end;
 
-constructor Clientes.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pEndereco, pEmail,
-  pTelefone: string; pDtNasc: TDateTime; pQtdeGrupo: integer; pPagou: Boolean);
+constructor Clientes.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pRG, pCEP, pEndereco, pEmail,
+pTelefone, pMidia, pCFS: string; pDtNasc : TDateTime; pCodCidade: integer);
 begin
    Codigo := pCodigo;
    Nome  := pNome;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
+   RG := pRG;
+   CEP := pCEP;
    Endereco := pEndereco;
    Email := pEmail;
    Telefone := pTelefone;
-   QtdeGrupo := pQtdeGrupo;
-   Pagou := pPagou;
+   Midia := pMidia;
+   CFS := pCFS;
+   aCidade := Cidades.CrieInit(pCodCidade,'','',0);
 end;
 
 constructor Clientes.CrieObj;
@@ -64,18 +76,36 @@ begin
    codigo := 0;
    Nome  := '';
    DtNasc := 00/00/0000;
+   RG  := '';
+   CEP  := '';
    CPF_CNPJ := '';
    Endereco := '';
    Email := '';
    Telefone := '';
-   QtdeGrupo := 0;
-   Pagou := false;
+   Midia := '';
+   CFS :=  '';
+   aCidade := Cidades.CrieObj;
 end;
 
 destructor Clientes.Destrua_se;
 begin
 inherited;
+   aCidade.Destrua_se;
+end;
 
+function Clientes.getaCidade: Cidades;
+begin
+   Result := aCidade;
+end;
+
+function Clientes.getCEP: string;
+begin
+   Result := CEP;
+end;
+
+function Clientes.getCFS: string;
+begin
+   Result := CFS;
 end;
 
 function Clientes.getCPF_CNPJ: string;
@@ -98,24 +128,39 @@ begin
    Result := Endereco;
 end;
 
+function Clientes.getMidia: string;
+begin
+   Result := Midia;
+end;
+
 function Clientes.getNome: string;
 begin
    Result := Nome;
 end;
 
-function Clientes.getPagou: Boolean;
+function Clientes.getRG: string;
 begin
-   Result := Pagou;
-end;
-
-function Clientes.getQtdeGrupo: integer;
-begin
-   Result := QtdeGrupo;
+   Result := RG;
 end;
 
 function Clientes.getTelefone: string;
 begin
    Result := Telefone;
+end;
+
+procedure Clientes.setaCidade(paCidade: Cidades);
+begin
+   aCidade := paCidade;
+end;
+
+procedure Clientes.setCEP(pCEP: string);
+begin
+   CEP := pCEP;
+end;
+
+procedure Clientes.setCFS(pCFS: string);
+begin
+   CFS := pCFS;
 end;
 
 procedure Clientes.setCPF_CNPJ(pCPF_CNPJ: string);
@@ -138,19 +183,19 @@ begin
    Endereco := pEndereco;
 end;
 
+procedure Clientes.setMidia(pMidia: string);
+begin
+   Midia := pMidia;
+end;
+
 procedure Clientes.setNome(pNome: string);
 begin
    Nome := pNome;
 end;
 
-procedure Clientes.setPagou(pPagou: Boolean);
+procedure Clientes.setRG(pRG: string);
 begin
-   Pagou := pPagou;
-end;
-
-procedure Clientes.setQtdeGrupo(pQtdeGrupo: integer);
-begin
-   QtdeGrupo := pQtdeGrupo;
+   RG := pRG;
 end;
 
 procedure Clientes.setTelefone(pTelefone: string);

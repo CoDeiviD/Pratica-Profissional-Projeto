@@ -18,7 +18,6 @@ type
     lbDDI: TLabel;
     edtMoeda: TEdit;
     lbMoeda: TLabel;
-    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
      oPais : Paises;
@@ -48,27 +47,20 @@ implementation
 procedure TFormCadastroPaises.BloqueiaEdit;
 begin
   inherited;
-  self.edtPais.Enabled := false;
-  self.edtSigla.Enabled := false;
-  self.edtDDI.Enabled := false;
-  self.edtMoeda.Enabled := false;
-end;
-
-procedure TFormCadastroPaises.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtPais.Text <> '' then
-     self.edtPais.Color := clWindow;
+  edtPais.Enabled := false;
+  edtSigla.Enabled := false;
+  edtDDI.Enabled := false;
+  edtMoeda.Enabled := false;
 end;
 
 procedure TFormCadastroPaises.CarregaEdit;
 begin
   inherited;
-  self.edtCodigo.Text := inttostr(oPais.getCodigo);
-  self.edtPais.Text := oPais.getPais;
-  self.edtSigla.Text := oPais.getSigla;
-  self.edtDDI.Text := oPais.getDDI;
-  self.edtMoeda.Text := oPais.getMoeda;
+  edtCodigo.Text := inttostr(oPais.getCodigo);
+  edtPais.Text := oPais.getPais;
+  edtSigla.Text := oPais.getSigla;
+  edtDDI.Text := oPais.getDDI;
+  edtMoeda.Text := oPais.getMoeda;
 end;
 
 procedure TFormCadastroPaises.ConhecaObj(pObj, pCtrl: TObject);
@@ -81,10 +73,10 @@ end;
 procedure TFormCadastroPaises.DesbloqueiaEdit;
 begin
   inherited;
-  self.edtPais.Enabled := true;
-  self.edtSigla.Enabled := true;
-  self.edtDDI.Enabled := true;
-  self.edtMoeda.Enabled := true;
+  edtPais.Enabled := true;
+  edtSigla.Enabled := true;
+  edtDDI.Enabled := true;
+  edtMoeda.Enabled := true;
 end;
 
 procedure TFormCadastroPaises.LimpaEdit;
@@ -104,42 +96,52 @@ begin
 end;
 
 procedure TFormCadastroPaises.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtPais.Text) = 0 then
-  begin
-     showmessage('Campo Pais é Obrigatório');
      self.edtPais.Color := clYellow;
-     self.edtPais.SetFocus;
-  end
-  else if (self.edtSigla.Text) = '' then
-  begin
-     showmessage('Campo Sigla é Obrigatório');
+  if (self.edtSigla.Text) = '' then
      self.edtSigla.Color := clYellow;
-     self.edtSigla.SetFocus;
-  end
-  else if (self.edtDDI.Text) = '' then
-  begin
-     showmessage('Campo DDI é Obrigatório');
+  if (self.edtDDI.Text) = '' then
      self.edtDDI.Color := clYellow;
-     self.edtDDI.SetFocus;
-  end
-  else if (self.edtMoeda.Text) = '' then
-  begin
-     showmessage('Campo Moeda é Obrigatório');
+  if (self.edtMoeda.Text) = '' then
      self.edtMoeda.Color := clYellow;
-     self.edtMoeda.SetFocus;
-  end
-  else
-  begin
-     oPais.setCodigo(strtoint(self.edtCodigo.Text));
-     oPais.setPais(self.edtPais.Text);
-     oPais.setSigla(self.edtSigla.Text);
-     oPais.setDDI(self.edtDDI.Text);
-     oPais.setMoeda(self.edtMoeda.Text);
-     aCtrlPais.Salvar(oPais.clone);
-     inherited;
-  end;
+  if ehObrigatorio(self.edtPais.Text, '*') and (length(self.edtPais.Text)= 0) then
+     begin
+        showmessage(' Campo Pais é obrigatorio');
+        self.edtPais.SetFocus;
+     end
+   else if ehObrigatorio(self.edtPais.Text, '*') and (self.edtSigla.Text = '') then
+     begin
+        showmessage(' Campo Sigla é obrigatorio');
+        self.edtPais.SetFocus;
+     end
+     else
+     begin
+        if self.btnSalvar.Caption = '&Salvar' then
+        begin
+           oPais.setCodigo(strtoint(self.edtCodigo.Text));
+           oPais.setPais(self.edtPais.Text);
+           oPais.setSigla(self.edtSigla.Text);
+           oPais.setDDI(self.edtDDI.Text);
+           oPais.setMoeda(self.edtMoeda.Text);
+           msg := aCtrlPais.Salvar(oPais.clone);
+           if msg = '' then
+              showmessage('Pais Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlPais.Excluir(oPais.clone);
+           if msg = '' then
+              showmessage('Pais Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+        inherited;
+     end;
 end;
 
 procedure TFormCadastroPaises.setConsulta(pObj: TObject);

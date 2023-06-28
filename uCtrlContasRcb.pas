@@ -13,22 +13,17 @@ interface
       procedure setDM (pDM : TObject); override;
       function getDS: TDataSource;    override;
       function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
-      function Pesquisar (pChave: string; pOBJ: TObject): integer; override;
+      function Carregar(pOBJ: TObject): string;    override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string;
  end;
 implementation
 
 { CtrlContasRcb }
 
-function CtrlContasRcb.Carregar(pPos: integer): TObject;
+function CtrlContasRcb.Carregar(pOBJ: TObject): string;
 begin
-   Result := aDaoCOntasRcb.Carregar(pPos);
-end;
-
-function CtrlContasRcb.CarregarColecao: TObject;
-begin
-   Result := aDAOContasRcb.CarregarColecao;
+   Result := aDaoCOntasRcb.Carregar(pObj);
 end;
 
 constructor CtrlContasRcb.CrieObj;
@@ -41,26 +36,27 @@ begin
    aDaoContasRcb.Destrua_se;
 end;
 
+function CtrlContasRcb.Excluir(pObj: TOBject): string;
+begin
+   Result := aDaoContasRcb.Excluir(pObj);
+end;
+
 function CtrlContasRcb.getDS: TDataSource;
 begin
    Result := aDaoContasRcb.getDS;
 end;
 
-function CtrlContasRcb.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function CtrlContasRcb.Pesquisar(pChave: string): string;
 var mQuero : boolean;
     mCRcv  : ContasRcb;
 begin
-   mCRcv := ContasRcb(pObj);
-   if mCRcv.getCodigo = 0 then
-      mQuero := false
-   else
-      mQuero := true;
+   Result := aDaoContasRcb.Pesquisar(pChave);
 
 end;
 
 function CtrlContasRcb.salvar(pObj: TObject): string;
 begin
-   aDaoContasRcb.Salvar(pObj);
+   Result := aDaoContasRcb.Salvar(pObj);
 end;
 
 procedure CtrlContasRcb.setDM(pDM: TObject);

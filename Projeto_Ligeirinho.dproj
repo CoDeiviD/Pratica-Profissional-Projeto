@@ -122,10 +122,6 @@
             <Form>FormCadastroEstados</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uCadastroFornecedores.pas">
-            <Form>FormCadastroFornecedores</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="uCadastroFuncionarios.pas">
             <Form>FormCadastroFuncionarios</Form>
             <FormType>dfm</FormType>
@@ -160,7 +156,6 @@
         <DCCReference Include="uColContasRcb.pas"/>
         <DCCReference Include="uColecoes.pas"/>
         <DCCReference Include="uColEstados.pas"/>
-        <DCCReference Include="uColForns.pas"/>
         <DCCReference Include="uColFuncs.pas"/>
         <DCCReference Include="uColPaises.pas"/>
         <DCCReference Include="uColProdutos.pas"/>
@@ -186,10 +181,6 @@
         </DCCReference>
         <DCCReference Include="uConsultaEstados.pas">
             <Form>FormConsultaEstados</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uConsultaFornecedores.pas">
-            <Form>FormConsultaFornecedores</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uConsultaFuncionarios.pas">
@@ -242,7 +233,6 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="uEstados.pas"/>
-        <DCCReference Include="uFornecedor.pas"/>
         <DCCReference Include="uFuncionario.pas"/>
         <DCCReference Include="uInter.pas"/>
         <DCCReference Include="uMenuPrincipal.pas">
@@ -256,6 +246,16 @@
         <DCCReference Include="uCtrlPessoas.pas"/>
         <DCCReference Include="uDAOPessoas.pas"/>
         <DCCReference Include="uColPessoas.pas"/>
+        <DCCReference Include="uFornecedor.pas"/>
+        <DCCReference Include="uConsultaFornecedores.pas">
+            <Form>FormConsultaFornecedores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uCadastroFornecedores.pas">
+            <Form>FormCadastroFornecedores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uColForns.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

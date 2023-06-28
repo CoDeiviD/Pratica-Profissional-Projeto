@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroPessoas, uPessoas, uCtrlPessoas, uColPessoas;
+  uCadastroPessoas, uPessoas, uCtrlPessoas, uColPessoas, Data.DB, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TFormConsultaPessoas = class(TFormConsultaPai)
@@ -24,7 +25,6 @@ type
     procedure Sair;                       override;
     procedure Pesquisar;                  override;
     procedure setCadastro(pObj: TObject); override;
-    procedure CarregaLV;                  override;
   end;
 
 var
@@ -49,29 +49,6 @@ procedure TFormConsultaPessoas.btnInserirClick(Sender: TObject);
 begin
   inherited;
    self.Inserir;
-end;
-
-procedure TFormConsultaPessoas.CarregaLV;
-  var LVItem : TListItem;
-    tam, k : integer;
-    oEstado : Pessoas;
-    aColPessoas : ColPessoas;
-begin
-  inherited;
-  aColPessoas := ColPessoas(aCtrlPessoa.CarregarColecao);
-  self.ListView1.Clear;
-  tam := aColPessoas.getTam;
-  for k  := 1 to tam do
-  begin
-     oEstado := Pessoas(aColPessoas.Carregar(k));
-     LVItem := ListView1.Items.Add;
-     LVItem.SubItems.Add(aPessoa.getNome);
-     LVItem.Caption := datetostr(aPessoa.getDtNasc);
-     LVItem.SubItems.Add(aPessoa.getCPF_CNPJ);
-     LVItem.SubItems.Add(aPessoa.getEndereco);
-     LVItem.SubItems.Add(aPessoa.getEmail);
-     LVItem.SubItems.Add(aPessoa.getTelefone);
-  end;
 end;
 
 procedure TFormConsultaPessoas.ConhecaObj(pObj, pCtrl: TObject);
@@ -101,13 +78,12 @@ begin
   umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
   umFormCadastroPessoas.LimpaEdit;
   umFormCadastroPessoas.ShowModal;
-  self.CarregaLV;
 end;
 
 procedure TFormConsultaPessoas.Pesquisar;
 begin
   inherited;
-  aCtrlPessoa.Pesquisar(self.edtChave.Text, aPessoa);
+//  aCtrlPessoa.Pesquisar(self.edtChave.Text, aPessoa);
 end;
 
 procedure TFormConsultaPessoas.Sair;

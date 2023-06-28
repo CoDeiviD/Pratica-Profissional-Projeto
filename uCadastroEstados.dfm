@@ -32,9 +32,6 @@ inherited FormCadastroEstados: TFormCadastroEstados
     Height = 13
     Caption = 'Pais'
   end
-  inherited btnSalvar: TButton
-    OnExit = btnSalvarExit
-  end
   inherited edtDtCad: TEdit
     TabOrder = 8
   end

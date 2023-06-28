@@ -15,10 +15,10 @@ type
     lbDtVencP: TLabel;
     lbDtPgtoP: TLabel;
     lbValorPgo: TLabel;
-    lbCodForn: TLabel;
     edtDtVencP: TEdit;
     edtDtPgtoP: TEdit;
     edtValorPgo: TEdit;
+    lbCodForn: TLabel;
     edtCodForn: TEdit;
   private
     { Private declarations }
@@ -94,22 +94,40 @@ begin
 end;
 
 procedure TFormCadastroContaPgo.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtValorPgo.Text) = 0 then
-  begin
-     showmessage('Campo Cidade é Obrigatório');
      self.edtValorPgo.Color := clYellow;
+     if ehObrigatorio(self.edtValorPgo.Text, '*') and (length(self.edtValorPgo.Text)= 0) then
+     begin
+     showmessage('Campo Valor Pago é Obrigatório');
      self.edtValorPgo.SetFocus;
-  end
-  else
-  begin
-     aContaPgr.setCodigo(strtoint(self.edtCodigo.Text));
-     aContaPgr.setValor(self.edtValorPgr.MaxLength);
-     aContaPgr.setDtVencimento(self.edtDtVencP.MaxLength);
-     aContaPgr.setDtPagamento(self.edtDtPgtoP.MaxLength);
-     aCtrlContaPgr.Salvar(aContaPgr.clone);
-  end;
+     end
+     else
+     begin
+        if self.btnSalvar.Caption = '&Salvar' then
+        begin
+           aContaPgr.setCodigo(strtoint(self.edtCodigo.Text));
+           aContaPgr.setValor(self.edtValorPgr.MaxLength);
+           aContaPgr.setDtVencimento(self.edtDtVencP.MaxLength);
+           aContaPgr.setDtPagamento(self.edtDtPgtoP.MaxLength);
+           msg := aCtrlContaPgr.Salvar(aContaPgr.clone);
+           if msg = '' then
+              showmessage('Conta a Pagar Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlContaPgr.Excluir(aContaPgr.clone);
+           if msg = '' then
+              showmessage('Conta a Pagar Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+        inherited;
+     end;
 end;
 
 end.

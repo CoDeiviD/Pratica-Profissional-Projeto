@@ -12,15 +12,19 @@ interface
       destructor Destrua_se;
       function salvar(pObj : TObject): string; override;
       function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
+      function Carregar(pObj : TObject): string;                override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string;  override;
  end;
 implementation
 
+uses
+  System.SysUtils;
+
 { DAOPessoas }
 
-function DAOPessoas.Carregar(pPos: integer): TObject;
+function DAOPessoas.Carregar(pObj : TObject): string;
 begin
-   Result := aColPessoas.Carregar(pPos);
 end;
 
 function DAOPessoas.CarregarColecao: TObject;
@@ -30,20 +34,27 @@ end;
 
 constructor DAOPessoas.CrieObj;
 begin
-   aColPessoas := ColPessoas.CrieObj;
+
 end;
 
 destructor DAOPessoas.Destrua_se;
 begin
-   aColPessoas.Destrua_se;
+
+end;
+
+function DAOPessoas.Excluir(pObj: TOBject): string;
+begin
+
+end;
+
+function DAOPessoas.Pesquisar(pChave: string): string;
+begin
+
 end;
 
 function DAOPessoas.salvar(pObj: TObject): string;
-var aux: integer;
 begin
-   aux := aColPessoas.getTam + 1;
-   Pessoas(pObj).setCodigo(aux);
-   aColPessoas.InsereFim(pObj);
+
 end;
 
 end.

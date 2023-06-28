@@ -16,7 +16,6 @@ type
     edtNomeProd: TEdit;
     edtSabor: TEdit;
     edtPreco: TEdit;
-    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     oProd : Produtos;
@@ -45,14 +44,6 @@ begin
   self.edtNomeProd.Enabled := false;
   self.edtSabor.Enabled := false;
   self.edtPreco.Enabled := false;
-end;
-
-procedure TFormCadastroProduto.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtNomeProd.Text <> '' then
-     self.edtNomeProd.Color := clWindow;
-  self.Sair;
 end;
 
 procedure TFormCadastroProduto.CarregaEdit;
@@ -95,36 +86,47 @@ begin
 end;
 
 procedure TFormCadastroProduto.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtNomeProd.Text) = 0 then
-  begin
-     showmessage('Campo Pais é Obrigatório');
      self.edtNomeProd.Color := clYellow;
+  if length(self.edtPreco.Text) = 0 then
+     self.edtPreco.Color := clYellow;
+  if ehObrigatorio(self.edtNomeProd.Text, '*') and (length(self.edtNomeProd.Text)= 0) then
+  begin
+     showmessage('Campo TpProduto é Obrigatório');
      self.edtNomeProd.SetFocus;
   end
-  else if (self.edtSabor.Text) = '' then
+  else if ehObrigatorio(self.edtNomeProd.Text, '*') and (self.edtPreco.Text = '') then
   begin
-     showmessage('Campo Sigla é Obrigatório');
-     self.edtSabor.Color := clYellow;
-     self.edtSabor.SetFocus;
-  end
-  else if (self.edtPreco.Text) = '' then
-  begin
-     showmessage('Campo DDI é Obrigatório');
-     self.edtPreco.Color := clYellow;
+     showmessage('Campo Preço é Obrigatório');
      self.edtPreco.SetFocus;
   end
   else
   begin
-     oProd.setCodigo(strtoint(self.edtCodigo.Text));
-     oProd.setTpProduto(self.edtNomeProd.Text);
-     oProd.setSabor(self.edtSabor.Text);
-     oProd.setPreco(strtofloat(self.edtPreco.Text));
-     aCtrlProd.Salvar(oProd.clone);
+     if self.btnSalvar.Caption = '&Salvar' then
+     begin
+        oProd.setCodigo(strtoint(self.edtCodigo.Text));
+        oProd.setTpProduto(self.edtNomeProd.Text);
+        oProd.setSabor(self.edtSabor.Text);
+        oProd.setPreco(strtofloat(self.edtPreco.Text));
+        msg := aCtrlProd.Salvar(oProd.clone);
+        if msg = '' then
+              showmessage('Pais Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+     end
+     else
+        begin
+           msg := aCtrlProd.Excluir(oProd.clone);
+           if msg = '' then
+              showmessage('Pais Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
      inherited;
-  end;
+     end;
 
 end;
-
 end.

@@ -5,15 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroContaPgo, uContasPgr, uCtrlContasPgr, uColContasPgr;
+  uCadastroContaPgo, uContasPgr, uCtrlContasPgr, uColContasPgr, Data.DB,
+  Vcl.Grids, Vcl.DBGrids;
 
 type
   TFormConsultaContaPgo = class(TFormConsultaPai)
-    procedure btnInserirClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
-    procedure btnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroContaPgo : TFormCadastroContaPgo;
@@ -28,7 +25,6 @@ type
     procedure Sair;                       override;
     procedure Pesquisar;                  override;
     procedure setCadastro(pObj: TObject); override;
-    procedure CarregaLV;                  override;
   end;
 
 var
@@ -44,103 +40,65 @@ begin
 
 end;
 
-procedure TFormConsultaContaPgo.btnAlterarClick(Sender: TObject);
-begin
-  inherited;
-  self.Alterar;
-end;
-
-procedure TFormConsultaContaPgo.btnExcluirClick(Sender: TObject);
-begin
-  inherited;
-  self.Excluir;
-end;
-
-procedure TFormConsultaContaPgo.btnInserirClick(Sender: TObject);
-begin
-  inherited;
-  self.Inserir;
-end;
-
-procedure TFormConsultaContaPgo.btnPesquisaClick(Sender: TObject);
-begin
-  inherited;
-  Pesquisar;
-end;
-
-procedure TFormConsultaContaPgo.btnSairClick(Sender: TObject);
-begin
-  inherited;
-  self.Sair;
-end;
-
-procedure TFormConsultaContaPgo.CarregaLV;
-var LVItem : TListItem;
-    tam, k : integer;
-    aContaPgo  : ContasPgr;
-    aColContaPgo : ColContasPgr;
-begin
-  inherited;
-  aColContaPgo := ColContasPgr(aCtrlContaPgo.CarregarColecao);
-  self.ListView1.Clear;
-  tam := aColContaPgo.getTam;
-  for k  := 1 to tam do
-  begin
-     aContaPgo := ContasPgr(aColContaPgo.Carregar(k));
-     LVItem := ListView1.Items.Add;
-     LVItem.Caption := inttostr(aContaPgo.getCodigo);
-     LVItem.Caption := floattostr(aContaPgo.getValor);
-     LVItem.Caption := datetostr(aContaPgo.getDtVencimento);
-     LVItem.Caption := datetostr(aContaPgo.getDtPagamento);
-     LVItem.Caption := floattostr(aContaPgo.getVPago);
-  end;
-end;
-
 procedure TFormConsultaContaPgo.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
   aContaPgo := ContasPgr(pObj);
   aCtrlContaPgo := CtrlContasPgr(pCtrl);
+  self.DBGrid1.DataSource := aCtrlContaPgo.getDS;
+  aCtrlContaPgo.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaContaPgo.Excluir;
-var aux : string;
+var mMsg, mAux :string;
 begin
   inherited;
-  aux := umFormCadastroContaPgo.btnSalvar.Caption;
-  umFormCadastroContaPgo.btnSalvar.Caption := '&Excluir';
+  mMsg := aCtrlContaPgo.Carregar(aContaPgo);
   umFormCadastroContaPgo.ConhecaObj(aContaPgo, aCtrlContaPgo);
+  mAux := umFormCadastroContaPgo.btnSalvar.Caption;
+  umFormCadastroContaPgo.btnSalvar.Caption := '&Excluir';
   umFormCadastroContaPgo.LimpaEdit;
+
   umFormCadastroContaPgo.CarregaEdit;
+  umFormCadastroContaPgo.BloqueiaEdit;
   umFormCadastroContaPgo.ShowModal;
-  umFormCadastroContaPgo.btnSalvar.Caption := aux;
+  umFormCadastroContaPgo.DesbloqueiaEdit;
+  umFormCadastroContaPgo.btnSalvar.Caption := mAux;
+  self.Pesquisar;
+end;
+
+procedure TFormConsultaContaPgo.FormCreate(Sender: TObject);
+begin
+  inherited;
+  umFormCadastroContaPgo := TFormCadastroContaPgo.Create(nil);
 end;
 
 procedure TFormConsultaContaPgo.Inserir;
 begin
   inherited;
+  aContaPgo.setCodigo(0);
   umFormCadastroContaPgo.ConhecaObj(aContaPgo, aCtrlContaPgo);
   umFormCadastroContaPgo.LimpaEdit;
   umFormCadastroContaPgo.ShowModal;
-  self.CarregaLV;
+  self.Pesquisar;
 end;
 
 procedure TFormConsultaContaPgo.Pesquisar;
 begin
   inherited;
-  aCtrlContaPgo.Pesquisar(self.edtChave.Text, aContaPgo);
+  aCtrlContaPgo.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaContaPgo.Sair;
 begin
   inherited;
-  Close;
+//  Close;
 end;
 
 procedure TFormConsultaContaPgo.setCadastro(pObj: TObject);
 begin
   inherited;
-  umFormCadastroContaPgo := TFormCadastroContaPgo(pObj);
+//  umFormCadastroContaPgo := TFormCadastroContaPgo(pObj);
 end;
 
 end.

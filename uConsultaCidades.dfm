@@ -1,5 +1,6 @@
 inherited FormConsultaCidades: TFormConsultaCidades
   Caption = 'Ver Cidades'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited btnInserir: TButton
@@ -15,24 +16,5 @@ inherited FormConsultaCidades: TFormConsultaCidades
   end
   inherited btnSair: TButton
     OnClick = btnSairClick
-  end
-  inherited btnPesquisa: TButton
-    OnClick = btnPesquisaClick
-  end
-  inherited ListView1: TListView
-    Columns = <
-      item
-        Caption = 'C'#243'digo'
-      end
-      item
-        Caption = 'Cidade'
-      end
-      item
-        Caption = 'DDI'
-      end
-      item
-        Caption = 'Estado'
-      end>
-    ViewStyle = vsReport
   end
 end

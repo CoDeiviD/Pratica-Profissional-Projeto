@@ -31,6 +31,7 @@ type
      procedure Salvar;                                    virtual;
      procedure Sair;                                      virtual;
      procedure setConsulta(pObj: TObject);                virtual;
+     function ehObrigatorio(pTexto: string; pLetra: char): boolean; virtual;
   end;
 
 var
@@ -49,12 +50,13 @@ end;
 
 procedure TFormCadastroPai.btnSairClick(Sender: TObject);
 begin
-   Close;
+   Sair;
 end;
 
 procedure TFormCadastroPai.btnSalvarClick(Sender: TObject);
 begin
    Salvar;
+   Sair;
 end;
 
 procedure TFormCadastroPai.CarregaEdit;
@@ -68,6 +70,11 @@ begin
 end;
 
 procedure TFormCadastroPai.DesbloqueiaEdit;
+begin
+
+end;
+
+function TFormCadastroPai.ehObrigatorio(pTexto: string; pLetra: char): boolean;
 begin
 
 end;

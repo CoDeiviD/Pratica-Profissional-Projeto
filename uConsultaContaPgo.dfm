@@ -1,5 +1,6 @@
 inherited FormConsultaContaPgo: TFormConsultaContaPgo
   Caption = 'Ver Contas a Pagar'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited btnInserir: TButton
@@ -13,8 +14,5 @@ inherited FormConsultaContaPgo: TFormConsultaContaPgo
   end
   inherited btnSair: TButton
     OnClick = btnSairClick
-  end
-  inherited btnPesquisa: TButton
-    OnClick = btnPesquisaClick
   end
 end

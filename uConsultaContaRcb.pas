@@ -5,15 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uCadastroContaRcb, uContasRcb, uCtrlContasRcb, uColContasRcb;
+  uCadastroContaRcb, uContasRcb, uCtrlContasRcb, uColContasRcb, Data.DB,
+  Vcl.Grids, Vcl.DBGrids;
 
 type
   TFormConsultaContaRcb = class(TFormConsultaPai)
-    procedure btnInserirClick(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
-    procedure btnPesquisaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroContaRcb : TFormCadastroContaRcb;
@@ -28,7 +25,6 @@ type
     procedure Sair;                       override;
     procedure Pesquisar;                  override;
     procedure setCadastro(pObj: TObject); override;
-    procedure CarregaLV;                  override;
   end;
 
 var
@@ -46,102 +42,65 @@ begin
 
 end;
 
-procedure TFormConsultaContaRcb.btnAlterarClick(Sender: TObject);
-begin
-  inherited;
-  self.Alterar;
-end;
-
-procedure TFormConsultaContaRcb.btnExcluirClick(Sender: TObject);
-begin
-  inherited;
-  self.Excluir;
-end;
-
-procedure TFormConsultaContaRcb.btnInserirClick(Sender: TObject);
-begin
-   self.Inserir;
-end;
-
-procedure TFormConsultaContaRcb.btnPesquisaClick(Sender: TObject);
-begin
-  inherited;
-  Pesquisar;
-end;
-
-procedure TFormConsultaContaRcb.btnSairClick(Sender: TObject);
-begin
-  inherited;
-  self.Sair;
-end;
-
-procedure TFormConsultaContaRcb.CarregaLV;
-var LVItem : TListItem;
-    tam, k : integer;
-    aContaRcb  : ContasRcb;
-    aColContaRcb : ColContasRcb;
-begin
-  inherited;
-  aColContaRcb := ColContasRcb(aCtrlContaRcb.CarregarColecao);
-  self.ListView1.Clear;
-  tam := aColContaRcb.getTam;
-  for k  := 1 to tam do
-  begin
-     aContaRcb := ContasRcb(aColContaRcb.Carregar(k));
-     LVItem := ListView1.Items.Add;
-     LVItem.Caption := inttostr(aContaRcb.getCodigo);
-     LVItem.Caption := floattostr(aContaRcb.getValor);
-     LVItem.Caption := datetostr(aContaRcb.getDtVencimento);
-     LVItem.Caption := datetostr(aContaRcb.getDtPagamento);
-     LVItem.Caption := floattostr(aContaRcb.getVReceb);
-  end;
-end;
-
 procedure TFormConsultaContaRcb.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
   aContaRcb := ContasRcb(pObj);
   aCtrlContaRcb := CtrlContasRcb(pCtrl);
+  self.DBGrid1.DataSource := aCtrlContaRcb.getDS;
+  aCtrlContaRcb.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaContaRcb.Excluir;
-var aux : string;
+var mMsg, mAux :string;
 begin
   inherited;
-  aux := umFormCadastroContaRcb.btnSalvar.Caption;
-  umFormCadastroContaRcb.btnSalvar.Caption := '&Excluir';
+  mMsg := aCtrlContaRcb.Carregar(aContaRcb);
   umFormCadastroContaRcb.ConhecaObj(aContaRcb, aCtrlContaRcb);
+  mAux := umFormCadastroContaRcb.btnSalvar.Caption;
+  umFormCadastroContaRcb.btnSalvar.Caption := '&Excluir';
   umFormCadastroContaRcb.LimpaEdit;
+
   umFormCadastroContaRcb.CarregaEdit;
+  umFormCadastroContaRcb.BloqueiaEdit;
   umFormCadastroContaRcb.ShowModal;
-  umFormCadastroContaRcb.btnSalvar.Caption := aux;
+  umFormCadastroContaRcb.DesbloqueiaEdit;
+  umFormCadastroContaRcb.btnSalvar.Caption := mAux;
+  self.Pesquisar;
+end;
+
+procedure TFormConsultaContaRcb.FormCreate(Sender: TObject);
+begin
+  inherited;
+  umFormCadastroContaRcb := TFormCadastroContaRcb.Create(nil);
 end;
 
 procedure TFormConsultaContaRcb.Inserir;
 begin
   inherited;
+  aContaRcb.setCodigo(0);
   umFormCadastroContaRcb.ConhecaObj(aContaRcb, aCtrlContaRcb);
   umFormCadastroContaRcb.LimpaEdit;
   umFormCadastroContaRcb.ShowModal;
-  self.CarregaLV;
+  self.Pesquisar;
 end;
 
 procedure TFormConsultaContaRcb.Pesquisar;
 begin
   inherited;
-  aCtrlContaRcb.Pesquisar(self.edtChave.Text, aContaRcb);
+  aCtrlContaRcb.Pesquisar(self.edtChave.Text);
 end;
 
 procedure TFormConsultaContaRcb.Sair;
 begin
   inherited;
-  Close;
+//  Close;
 end;
 
 procedure TFormConsultaContaRcb.setCadastro(pObj: TObject);
 begin
   inherited;
-  umFormCadastroContaRcb := TFormCadastroContaRcb(pObj);
+//  umFormCadastroContaRcb := TFormCadastroContaRcb(pObj);
 end;
 
 end.

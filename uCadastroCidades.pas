@@ -20,7 +20,6 @@ type
     edtEstado: TEdit;
     btnPesquisar: TButton;
     procedure btnPesquisarClick(Sender: TObject);
-    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     aCidade : Cidades;
@@ -53,20 +52,15 @@ begin
 end;
 
 procedure TFormCadastroCidades.btnPesquisarClick(Sender: TObject);
+var aux : string;
 begin
   inherited;
+  aux := umaConsultaEstados.btnSair.Caption;
+  umaConsultaEstados.btnSair.Caption := 'Selecionar';
   umaConsultaEstados.ConhecaObj(aCidade.getoEstado, nil);
   umaConsultaEstados.ShowModal;
-  self.edtCodEstado.Text := inttostr(aCidade.getoEstado.getCodigo);
+  umaConsultaEstados.btnSair.Caption := aux;
   self.edtEstado.Text := aCidade.getoEstado.getEstado;
-end;
-
-procedure TFormCadastroCidades.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtCidade.Text <> '' then
-     self.edtCidade.Color := clWindow;
-  self.Sair;
 end;
 
 procedure TFormCadastroCidades.CarregaEdit;
@@ -106,33 +100,50 @@ begin
 end;
 
 procedure TFormCadastroCidades.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtCidade.Text) = 0 then
-  begin
-     showmessage('Campo Cidade é Obrigatório');
      self.edtCidade.Color := clYellow;
-     self.edtCidade.SetFocus;
-  end
-  else if (self.edtDDD.Text) = '' then
-  begin
-     showmessage('Campo DDD é Obrigatório');
+  if (self.edtDDD.Text) = '' then
      self.edtDDD.Color := clYellow;
-     self.edtDDD.SetFocus;
-  end
-  else
-  begin
-     aCidade.setCodigo(strtoint(self.edtCodigo.Text));
-     aCidade.setCidade(self.edtCidade.Text);
-     aCidade.setDDD(self.edtDDD.Text);
-     aCtrlCidade.Salvar(aCidade.clone);
-  end;
+  if ehObrigatorio(self.edtCidade.Text, '*') and (length(self.edtCidade.Text)= 0) then
+     begin
+        showmessage(' Campo Cidade é obrigatorio');
+        self.edtEstado.SetFocus;
+     end
+  else if ehObrigatorio(self.edtCidade.Text, '*') and (self.edtDDD.Text = '') then
+     begin
+        showmessage('Campo DDD é Obrigatório');
+        self.edtDDD.SetFocus;
+     end
+     else
+     begin
+        if self.btnSalvar.Caption = '&Salvar' then
+        begin
+           aCidade.setCodigo(strtoint(self.edtCodigo.Text));
+           aCidade.setCidade(self.edtCidade.Text);
+           aCidade.setDDD(self.edtDDD.Text);
+           msg := aCtrlCidade.Salvar(aCidade.clone);
+           if msg = '' then
+              showmessage('Cidade Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlCidade.Excluir(aCidade.clone);
+           if msg = '' then
+              showmessage('Cidade Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+        inherited;
+     end;
 end;
-
 procedure TFormCadastroCidades.setConsulta(pObj: TObject);
 begin
   inherited;
   umaConsultaEstados := TFormConsultaEstados(pObj);
 end;
-
 end.

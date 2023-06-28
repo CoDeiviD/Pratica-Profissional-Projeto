@@ -24,33 +24,58 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
   object lbCPF_CNPJ: TLabel [6]
     Left = 560
     Top = 21
-    Width = 63
+    Width = 57
     Height = 13
-    Caption = 'CPF / CNPJ *'
+    Caption = 'CPF / CNPJ '
   end
   object lbEndereco: TLabel [7]
-    Left = 18
-    Top = 96
+    Left = 299
+    Top = 93
     Width = 45
     Height = 13
     Caption = 'Endere'#231'o'
   end
   object lbEmail: TLabel [8]
-    Left = 313
-    Top = 96
+    Left = 18
+    Top = 189
     Width = 28
     Height = 13
     Caption = 'E-mail'
   end
   object lbTelefone: TLabel [9]
-    Left = 581
-    Top = 96
+    Left = 278
+    Top = 189
     Width = 51
     Height = 13
     Caption = 'Telefone *'
   end
-  inherited btnSalvar: TButton
-    OnExit = btnSalvarExit
+  object lbRG: TLabel [10]
+    Left = 18
+    Top = 93
+    Width = 14
+    Height = 13
+    Caption = 'RG'
+  end
+  object lbCEP: TLabel [11]
+    Left = 160
+    Top = 93
+    Width = 28
+    Height = 13
+    Caption = 'CEP *'
+  end
+  object lbMidia: TLabel [12]
+    Left = 598
+    Top = 93
+    Width = 24
+    Height = 13
+    Caption = 'Midia'
+  end
+  object lbCidade: TLabel [13]
+    Left = 512
+    Top = 189
+    Width = 33
+    Height = 13
+    Caption = 'Cidade'
   end
   object edtNome: TEdit
     Left = 120
@@ -74,32 +99,60 @@ inherited FormCadastroPessoas: TFormCadastroPessoas
     TabOrder = 7
   end
   object edtEndereco: TEdit
-    Left = 18
-    Top = 120
+    Left = 299
+    Top = 112
     Width = 281
     Height = 21
     TabOrder = 8
   end
   object edtEmail: TEdit
-    Left = 313
-    Top = 120
+    Left = 18
+    Top = 208
     Width = 240
     Height = 21
     TabOrder = 9
   end
   object edtTelefone: TEdit
-    Left = 573
-    Top = 120
+    Left = 278
+    Top = 208
     Width = 204
     Height = 21
     TabOrder = 10
   end
   object btnPesquisar: TButton
     Left = 729
-    Top = 38
+    Top = 206
     Width = 75
     Height = 25
     Caption = 'P&esquisar'
     TabOrder = 11
+  end
+  object edtRG: TEdit
+    Left = 18
+    Top = 112
+    Width = 121
+    Height = 21
+    TabOrder = 12
+  end
+  object edtCEP: TEdit
+    Left = 160
+    Top = 112
+    Width = 121
+    Height = 21
+    TabOrder = 13
+  end
+  object edtMidia: TEdit
+    Left = 598
+    Top = 112
+    Width = 121
+    Height = 21
+    TabOrder = 14
+  end
+  object edtCidade: TEdit
+    Left = 512
+    Top = 208
+    Width = 207
+    Height = 21
+    TabOrder = 15
   end
 end

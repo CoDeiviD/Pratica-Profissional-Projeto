@@ -15,7 +15,7 @@ type
     btnExcluir: TButton;
     btnSair: TButton;
     btnPesquisa: TButton;
-    ListView1: TListView;
+    DBGrid1: TDBGrid;
     procedure btnInserirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -32,7 +32,6 @@ type
     procedure Sair;                       virtual;
     procedure Pesquisar;                  virtual;
     procedure setCadastro(pCad: TObject); virtual;
-    procedure CarregaLV;                  virtual;
   end;
 
 var
@@ -51,32 +50,27 @@ end;
 
 procedure TFormConsultaPai.btnAlterarClick(Sender: TObject);
 begin
-   self.Alterar;
+   Alterar;
 end;
 
 procedure TFormConsultaPai.btnExcluirClick(Sender: TObject);
 begin
-   self.Excluir;
+   Excluir;
 end;
 
 procedure TFormConsultaPai.btnInserirClick(Sender: TObject);
 begin
-   self.Inserir;
+   Inserir;
 end;
 
 procedure TFormConsultaPai.btnPesquisaClick(Sender: TObject);
 begin
-   self.Pesquisar;
+   Pesquisar;
 end;
 
 procedure TFormConsultaPai.btnSairClick(Sender: TObject);
 begin
    Sair;
-end;
-
-procedure TFormConsultaPai.CarregaLV;
-begin
-
 end;
 
 procedure TFormConsultaPai.ConhecaObj(pObj: TObject; pCtrl: TObject);
@@ -96,7 +90,8 @@ end;
 
 procedure TFormConsultaPai.Pesquisar;
 begin
-
+   self.edtChave.Clear;
+   self.edtChave.SetFocus;
 end;
 
 procedure TFormConsultaPai.Sair;

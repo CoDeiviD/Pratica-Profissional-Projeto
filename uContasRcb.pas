@@ -10,21 +10,18 @@ interface
        DtVencimento : TDateTime;
        DtPagamento : TDateTime;
        VReceb : double;
-       oCliente   : Clientes;
     public
       constructor CrieObj;
-      constructor CrieInit(pCodigo : integer; pValor, pVReceb: double; pDtVencimento, pDtPagamento: TDateTime; poCliente: string);
+      constructor CrieInit(pCodigo : integer; pValor, pVReceb: double; pDtVencimento, pDtPagamento: TDateTime);
       destructor Destrua_se;
       procedure setValor(pValor:double);
       procedure setDtVencimento(pDtVencimento:TDateTime);
       procedure setDtPagamento(pDtPagamento:TDateTime);
       procedure setVReceb(pVReceb:double);
-      procedure setoCliente(poCliente:Clientes);
       function getValor: double;
       function getDtVencimento: TDateTime;
       function getDtPagamento: TDateTime;
       function getVReceb: double;
-      function getoCliente : Clientes;
       function clone : ContasRcb;
 end;
 implementation
@@ -33,17 +30,16 @@ implementation
 
 function ContasRcb.clone: ContasRcb;
 begin
-   Result := ContasRcb.CrieInit(codigo,Valor,DtVencimento,DtPagamento,VReceb,oCliente.getNome);
+   Result := ContasRcb.CrieInit(codigo,Valor,DtVencimento,DtPagamento,VReceb);
 end;
 
 constructor ContasRcb.CrieInit(pCodigo : integer; pValor, pVReceb: double;
-  pDtVencimento, pDtPagamento: TDateTime; poCliente: string);
+  pDtVencimento, pDtPagamento: TDateTime);
 begin
    Valor  := pValor;
    DtVencimento := pDtVencimento;
    DtPagamento := pDtPagamento;
    VReceb  := pVReceb;
-//   oCliente := Clientes.CrieInit(poCliente,'','','','',00/00/00,0,False);
 end;
 
 constructor ContasRcb.CrieObj;
@@ -52,12 +48,10 @@ begin
    DtVencimento := 00/00/00;
    DtPagamento := 00/00/00;
    VReceb := 0.00;
-   oCliente := Clientes.CrieObj;
 end;
 
 destructor ContasRcb.Destrua_se;
 begin
-   oCliente.Destrua_se;
 end;
 
 function ContasRcb.getDtPagamento: TDateTime;
@@ -68,11 +62,6 @@ end;
 function ContasRcb.getDtVencimento: TDateTime;
 begin
    Result := DtVencimento;
-end;
-
-function ContasRcb.getoCliente: Clientes;
-begin
-   Result := oCliente;
 end;
 
 function ContasRcb.getValor: double;
@@ -93,11 +82,6 @@ end;
 procedure ContasRcb.setDtVencimento(pDtVencimento: TDateTime);
 begin
    DtVencimento := pDtVencimento;
-end;
-
-procedure ContasRcb.setoCliente(poCliente: Clientes);
-begin
-   oCliente := poCliente;
 end;
 
 procedure ContasRcb.setValor(pValor: double);

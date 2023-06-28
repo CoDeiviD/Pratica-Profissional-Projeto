@@ -13,22 +13,17 @@ interface
       procedure setDM (pDM : TObject); override;
       function getDS: TDataSource;    override;
       function salvar(pObj : TObject): string; override;
-      function CarregarColecao: TObject;        override;
-      function Carregar(pPos : integer): TObject;                override;
-      function Pesquisar (pChave: string; pOBJ: TObject): integer; override;
+      function Carregar(pObj : TObject): string;   override;
+      function Pesquisar (pChave: string): string; override;
+      function Excluir (pObj : TOBject): string;
  end;
 implementation
 
 { CtrlForns }
 
-function CtrlForns.Carregar(pPos: integer): TObject;
+function CtrlForns.Carregar(pObj: TObject): string;
 begin
-   Result := aDaoFornecedor.Carregar(pPos);
-end;
-
-function CtrlForns.CarregarColecao: TObject;
-begin
-   Result := aDAOFornecedor.CarregarColecao;
+   Result := aDaoFornecedor.Carregar(pObj);
 end;
 
 constructor CtrlForns.CrieObj;
@@ -41,26 +36,27 @@ begin
    aDaoFornecedor.Destrua_se;
 end;
 
+function CtrlForns.Excluir(pObj: TOBject): string;
+begin
+   Result := aDaoFornecedor.Excluir(pObj);
+end;
+
 function CtrlForns.getDS: TDataSource;
 begin
    Result := aDaoFornecedor.getDS;
 end;
 
-function CtrlForns.Pesquisar(pChave: string; pOBJ: TObject): integer;
+function CtrlForns.Pesquisar(pChave: string): string;
 var mQuero : boolean;
     mForn  : Fornecedores;
 begin
-   mForn := Fornecedores(pObj);
-   if mForn.getCodigo = 0 then
-      mQuero := false
-   else
-      mQuero := true;
+   Result := aDaoFornecedor.Pesquisar(pChave);
 
 end;
 
 function CtrlForns.salvar(pObj: TObject): string;
 begin
-   aDaoFornecedor.Salvar(pObj);
+   Result := aDaoFornecedor.Salvar(pObj);
 end;
 
 procedure CtrlForns.setDM(pDM: TObject);

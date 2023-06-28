@@ -20,7 +20,6 @@ type
     lbCodPais: TLabel;
     lbPais: TLabel;
     procedure btnPesquisarClick(Sender: TObject);
-    procedure btnSalvarExit(Sender: TObject);
   private
     { Private declarations }
     oEstado : Estados;
@@ -67,14 +66,6 @@ begin
   self.edtPais.Text := oEstado.getoPais.getPais;
 end;
 
-procedure TFormCadastroEstados.btnSalvarExit(Sender: TObject);
-begin
-  inherited;
-  if self.edtEstado.Text <> '' then
-     self.edtEstado.Color := clWindow;
-  self.Sair;
-end;
-
 procedure TFormCadastroEstados.CarregaEdit;
 begin
   inherited;
@@ -112,27 +103,46 @@ begin
 end;
 
 procedure TFormCadastroEstados.Salvar;
+var msg : string;
 begin
   inherited;
   if length(self.edtEstado.Text) = 0 then
-  begin
-     showmessage('Campo Estado é Obrigatório');
      self.edtEstado.Color := clYellow;
-     self.edtEstado.SetFocus;
-  end
-  else if (self.edtUF.Text) = '' then
-  begin
-     showmessage('Campo UF é Obrigatório');
+  if (self.edtUF.Text) = '' then
      self.edtUF.Color := clYellow;
-     self.edtUF.SetFocus;
-  end
-  else
-  begin
-     oEstado.setCodigo(strtoint(self.edtCodigo.Text));
-     oEstado.setEstado(self.edtEstado.Text);
-     oEstado.setUF(self.edtUF.Text);
-     aCtrlEstado.Salvar(oEstado.clone);
-  end;
+  if ehObrigatorio(self.edtEstado.Text, '*') and (length(self.edtEstado.Text)= 0) then
+     begin
+        showmessage(' Campo Estado é obrigatorio');
+        self.edtEstado.SetFocus;
+     end
+  else if ehObrigatorio(self.edtEstado.Text, '*') and (self.edtUF.Text = '') then
+     begin
+        showmessage('Campo UF é Obrigatório');
+        self.edtUF.SetFocus;
+     end
+     else
+     begin
+        if self.btnSalvar.Caption = '&Salvar' then
+        begin
+           oEstado.setCodigo(strtoint(self.edtCodigo.Text));
+           oEstado.setEstado(self.edtEstado.Text);
+           oEstado.setUF(self.edtUF.Text);
+           msg := aCtrlEstado.Salvar(oEstado.clone);
+           if msg = '' then
+              showmessage('Estado Salvo com sucesso!')
+           else
+              showmessage('Problemas ao salvar: '+ msg);
+        end
+        else
+        begin
+           msg := aCtrlEstado.Excluir(oEstado.clone);
+           if msg = '' then
+              showmessage('Estado Excluido com sucesso!')
+           else
+              showmessage('Problemas na exclusao: '+ msg);
+        end;
+        inherited;
+     end;
 end;
 
 procedure TFormCadastroEstados.setConsulta(pObj: TObject);
