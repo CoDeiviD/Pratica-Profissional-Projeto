@@ -30,6 +30,9 @@ inherited FormCadastroCidades: TFormCadastroCidades
     Height = 13
     Caption = 'Estado'
   end
+  inherited btnSalvar: TButton
+    Caption = '&Salvar'
+  end
   object edtCidade: TEdit [11]
     Left = 104
     Top = 40

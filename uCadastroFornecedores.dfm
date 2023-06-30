@@ -72,6 +72,9 @@ inherited FormCadastroFornecedores: TFormCadastroFornecedores
     Height = 13
     Caption = 'CNPJ *'
   end
+  inherited btnSalvar: TButton
+    Caption = '&Salvar'
+  end
   object edtNomeFant: TEdit
     Left = 112
     Top = 40

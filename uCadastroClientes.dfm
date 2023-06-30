@@ -14,6 +14,9 @@ inherited FormCadastroClientes: TFormCadastroClientes
     Height = 13
     Caption = 'Como Ficou Sabendo da Sorveteria ?'
   end
+  inherited btnSalvar: TButton
+    Caption = '&Salvar'
+  end
   object edtCFS: TEdit [26]
     Left = 18
     Top = 291
@@ -32,7 +35,9 @@ inherited FormCadastroClientes: TFormCadastroClientes
     TabOrder = 14
   end
   inherited edtMidia: TEdit
+    Width = 206
     TabOrder = 15
+    ExplicitWidth = 206
   end
   inherited edtCidade: TEdit
     TabOrder = 16

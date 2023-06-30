@@ -98,6 +98,7 @@ end;
 procedure TFormConsultaEstados.Sair;
 begin
   inherited;
+
 //  Close;
 end;
 

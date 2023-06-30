@@ -37,6 +37,9 @@ inherited FormCadastroCaixa: TFormCadastroCaixa
     Height = 13
     Caption = 'Saldo Total (R$) *'
   end
+  inherited btnSalvar: TButton
+    Caption = '&Salvar'
+  end
   object edtData: TEdit
     Left = 113
     Top = 40

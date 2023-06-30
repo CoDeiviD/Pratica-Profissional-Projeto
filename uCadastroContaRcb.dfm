@@ -41,6 +41,9 @@ inherited FormCadastroContaRcb: TFormCadastroContaRcb
     Left = 18
     ExplicitLeft = 18
   end
+  inherited btnSalvar: TButton
+    Caption = '&Salvar'
+  end
   object edtValorRcb: TEdit
     Left = 128
     Top = 40

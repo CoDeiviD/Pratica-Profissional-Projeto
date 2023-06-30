@@ -3,9 +3,6 @@ inherited FormConsultaPaises: TFormConsultaPaises
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  inherited btnInserir: TButton
-    OnClick = btnInserirClick
-  end
   inherited btnAlterar: TButton
     OnClick = btnAlterarClick
   end
@@ -21,5 +18,31 @@ inherited FormConsultaPaises: TFormConsultaPaises
   inherited DBGrid1: TDBGrid
     DataSource = DM.DsPaises
     ReadOnly = True
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'CODPAIS'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PAIS'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SIGLA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DDI'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MOEDA'
+        Visible = True
+      end>
   end
 end

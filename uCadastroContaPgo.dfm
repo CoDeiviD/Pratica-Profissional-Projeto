@@ -37,6 +37,9 @@ inherited FormCadastroContaPgo: TFormCadastroContaPgo
     Height = 13
     Caption = 'CodFornecedor'
   end
+  inherited btnSalvar: TButton
+    Caption = '&Salvar'
+  end
   object edtValorPgr: TEdit
     Left = 136
     Top = 40

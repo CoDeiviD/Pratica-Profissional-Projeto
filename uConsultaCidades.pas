@@ -36,8 +36,10 @@ implementation
 { TFormConsultaCidades }
 
 procedure TFormConsultaCidades.Alterar;
+var mMsg: string;
 begin
   inherited;
+  mMsg := aCtrlCidade.Carregar(aCidade);
   umFormCadastroCidades.ConhecaObj(aCidade, aCtrlCidade);
   umFormCadastroCidades.LimpaEdit;
   umFormCadastroCidades.CarregaEdit;

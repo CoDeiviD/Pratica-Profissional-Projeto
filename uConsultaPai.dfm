@@ -28,6 +28,7 @@ object FormConsultaPai: TFormConsultaPai
     Height = 25
     Caption = '&Inserir'
     TabOrder = 1
+    OnClick = btnInserirClick
   end
   object btnAlterar: TButton
     Left = 400

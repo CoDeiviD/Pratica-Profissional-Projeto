@@ -11,6 +11,11 @@ uses
 type
   TFormConsultaFornecedores = class(TFormConsultaPai)
     procedure FormCreate(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -50,6 +55,36 @@ begin
   umFormCadastroFornecedores.ShowModal;
 end;
 
+procedure TFormConsultaFornecedores.btnAlterarClick(Sender: TObject);
+begin
+  inherited;
+  Alterar;
+end;
+
+procedure TFormConsultaFornecedores.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+  Excluir;
+end;
+
+procedure TFormConsultaFornecedores.btnInserirClick(Sender: TObject);
+begin
+  inherited;
+  Inserir;
+end;
+
+procedure TFormConsultaFornecedores.btnPesquisaClick(Sender: TObject);
+begin
+  inherited;
+  Pesquisar;
+end;
+
+procedure TFormConsultaFornecedores.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  Sair;
+end;
+
 procedure TFormConsultaFornecedores.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
@@ -80,7 +115,7 @@ end;
 procedure TFormConsultaFornecedores.FormCreate(Sender: TObject);
 begin
   inherited;
-//  umFormCadastroFornecedores := umFormCadastroFornecedores.Create(nil);
+  umFormCadastroFornecedores := TFormCadastroFornecedores.Create(nil);
 end;
 
 procedure TFormConsultaFornecedores.Inserir;

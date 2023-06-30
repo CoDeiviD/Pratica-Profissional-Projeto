@@ -58,7 +58,7 @@ procedure TFormCadastroFuncionarios.btnPesquisarClick(Sender: TObject);
 var aux : string;
 begin
   inherited;
-  aux := umaConsultaCidades.btnSair.Caption;
+//  aux := umaConsultaCidades.btnSair.Caption;
   umaConsultaCidades.btnSair.Caption := 'Selecionar';
   umaConsultaCidades.ConhecaObj(oFunc.getaCidade, nil);
   umaConsultaCidades.ShowModal;

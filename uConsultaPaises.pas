@@ -35,8 +35,6 @@ implementation
 
 {$R *.dfm}
 
-uses uDM;
-
 { TFormConsultaPaises }
 
 procedure TFormConsultaPaises.Alterar;
@@ -48,9 +46,6 @@ begin
   umFormCadastroPaises.LimpaEdit;
   umFormCadastroPaises.CarregaEdit;
   umFormCadastroPaises.ShowModal;
-  self.Pesquisar;
-//  self.Excluir;
-//  self.Inserir;
 end;
 
 procedure TFormConsultaPaises.ConhecaObj(pObj, pCtrl: TObject);

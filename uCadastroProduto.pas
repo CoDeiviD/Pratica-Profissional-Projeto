@@ -113,7 +113,7 @@ begin
         oProd.setPreco(strtofloat(self.edtPreco.Text));
         msg := aCtrlProd.Salvar(oProd.clone);
         if msg = '' then
-              showmessage('Pais Salvo com sucesso!')
+              showmessage('Produto Salvo com sucesso!')
            else
               showmessage('Problemas ao salvar: '+ msg);
      end
@@ -121,7 +121,7 @@ begin
         begin
            msg := aCtrlProd.Excluir(oProd.clone);
            if msg = '' then
-              showmessage('Pais Excluido com sucesso!')
+              showmessage('Produto Excluido com sucesso!')
            else
               showmessage('Problemas na exclusao: '+ msg);
         end;
