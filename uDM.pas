@@ -47,15 +47,6 @@ type
     qCidadesCIDADE: TStringField;
     qCidadesDDD: TStringField;
     qCidadesCODESTADO: TIntegerField;
-    qClientesCODIGO: TIntegerField;
-    qClientesNOME: TStringField;
-    qClientesDTNASC: TDateField;
-    qClientesCPF_CNPJ: TStringField;
-    qClientesENDERECO: TStringField;
-    qClientesEMAIL: TStringField;
-    qClientesTELEFONE: TStringField;
-    qClientesQTDEGRUPO: TIntegerField;
-    qClientesPAGOU: TBooleanField;
     qContPgrVALOR: TCurrencyField;
     qContPgrDTVENCIMENTO: TDateField;
     qContPgrDTPAGAMENTO: TDateField;
@@ -76,6 +67,29 @@ type
     qCaixasSALDO: TCurrencyField;
     qCaixasSALDOTOTAL: TCurrencyField;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    qClientesNOME: TStringField;
+    qClientesDTNASC: TDateField;
+    qClientesCPF_CNPJ: TStringField;
+    qClientesRG: TStringField;
+    qClientesCEP: TStringField;
+    qClientesENDERECO: TStringField;
+    qClientesEMAIL: TStringField;
+    qClientesTELEFONE: TStringField;
+    qClientesMIDIA: TStringField;
+    qClientesCFS: TStringField;
+    qClientesCODCLIENTE: TIntegerField;
+    qClientesCODCIDADE: TIntegerField;
+    qFornsNOME: TStringField;
+    qFornsRAZAOSOCIAL: TStringField;
+    qFornsINSCRESTADUAL: TStringField;
+    qFornsCNPJ: TStringField;
+    qFornsCEP: TStringField;
+    qFornsENDERECO: TStringField;
+    qFornsEMAIL: TStringField;
+    qFornsTELEFONE: TStringField;
+    qFornsCODFORNECEDOR: TIntegerField;
+    qFornsCODCIDADE: TIntegerField;
+    qFornsCODPRODUTO: TIntegerField;
   private
     { Private declarations }
   public

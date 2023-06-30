@@ -74,6 +74,9 @@ type
     aCtrlCaixa: CtrlCaixas;
 
     oConsultaPais : TFormConsultaPaises;
+    oConsultaCidades : TFormConsultaCidades;
+    oConsultaEstados : TFormConsultaEstados;
+    oConsultaForns : TFormConsultaFornecedores;
   public
     { Public declarations }
   end;
@@ -122,8 +125,10 @@ begin
    oEstado := Estados.CrieObj;
    aCidade := Cidades.CrieObj;
    oCliente := Clientes.CrieObj;
-   oForn := Fornecedores.Create;
-   oFunc := Funcionarios.Create;
+//   oForn := Fornecedores.Create;
+//   oFunc := Funcionarios.Create;
+   oForn := Fornecedores.CrieObj;
+   oFunc := Funcionarios.CrieObj;
    aContaPgr:= ContasPgr.CrieObj;
    aContaRcb:= ContasRcb.CrieObj;
    oProd:= Produtos.CrieObj;
@@ -154,6 +159,10 @@ begin
    aCtrlCaixa.setDM(umDM);
 
    oConsultaPais := TFormConsultaPaises.Create(nil);
+   oConsultaEstados:= TFormConsultaEstados.Create(nil);
+   oConsultaCidades:= TFormConsultaCidades.Create(nil);
+   oConsultaForns:= TFormConsultaFornecedores.create(nil);
+
 end;
 
 procedure TFormSorveteria.Fornecedores1Click(Sender: TObject);

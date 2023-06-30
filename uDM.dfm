@@ -148,15 +148,9 @@ object DM: TDM
       'select * from Clientes')
     Left = 264
     Top = 168
-    object qClientesCODIGO: TIntegerField
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      Required = True
-    end
     object qClientesNOME: TStringField
       FieldName = 'NOME'
       Origin = 'NOME'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 35
     end
@@ -167,8 +161,18 @@ object DM: TDM
     object qClientesCPF_CNPJ: TStringField
       FieldName = 'CPF_CNPJ'
       Origin = 'CPF_CNPJ'
-      Required = True
       Size = 11
+    end
+    object qClientesRG: TStringField
+      FieldName = 'RG'
+      Origin = 'RG'
+      Required = True
+      Size = 7
+    end
+    object qClientesCEP: TStringField
+      FieldName = 'CEP'
+      Origin = 'CEP'
+      Size = 9
     end
     object qClientesENDERECO: TStringField
       FieldName = 'ENDERECO'
@@ -183,17 +187,28 @@ object DM: TDM
     object qClientesTELEFONE: TStringField
       FieldName = 'TELEFONE'
       Origin = 'TELEFONE'
+      Required = True
       Size = 13
     end
-    object qClientesQTDEGRUPO: TIntegerField
-      FieldName = 'QTDEGRUPO'
-      Origin = 'QTDEGRUPO'
+    object qClientesMIDIA: TStringField
+      FieldName = 'MIDIA'
+      Origin = 'MIDIA'
+      Size = 30
+    end
+    object qClientesCFS: TStringField
+      FieldName = 'CFS'
+      Origin = 'CFS'
+      Size = 40
+    end
+    object qClientesCODCLIENTE: TIntegerField
+      FieldName = 'CODCLIENTE'
+      Origin = 'CODCLIENTE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object qClientesPAGOU: TBooleanField
-      FieldName = 'PAGOU'
-      Origin = 'PAGOU'
-      Required = True
+    object qClientesCODCIDADE: TIntegerField
+      FieldName = 'CODCIDADE'
+      Origin = 'CODCIDADE'
     end
   end
   object qForns: TFDQuery
@@ -203,6 +218,66 @@ object DM: TDM
       'select * from Fornecedores')
     Left = 264
     Top = 216
+    object qFornsNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
+      Size = 35
+    end
+    object qFornsRAZAOSOCIAL: TStringField
+      FieldName = 'RAZAOSOCIAL'
+      Origin = 'RAZAOSOCIAL'
+      Required = True
+      Size = 21
+    end
+    object qFornsINSCRESTADUAL: TStringField
+      FieldName = 'INSCRESTADUAL'
+      Origin = 'INSCRESTADUAL'
+      Required = True
+      Size = 21
+    end
+    object qFornsCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Origin = 'CNPJ'
+      Required = True
+      Size = 11
+    end
+    object qFornsCEP: TStringField
+      FieldName = 'CEP'
+      Origin = 'CEP'
+      Required = True
+      Size = 9
+    end
+    object qFornsENDERECO: TStringField
+      FieldName = 'ENDERECO'
+      Origin = 'ENDERECO'
+      Size = 21
+    end
+    object qFornsEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      Size = 22
+    end
+    object qFornsTELEFONE: TStringField
+      FieldName = 'TELEFONE'
+      Origin = 'TELEFONE'
+      Required = True
+      Size = 13
+    end
+    object qFornsCODFORNECEDOR: TIntegerField
+      FieldName = 'CODFORNECEDOR'
+      Origin = 'CODFORNECEDOR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qFornsCODCIDADE: TIntegerField
+      FieldName = 'CODCIDADE'
+      Origin = 'CODCIDADE'
+    end
+    object qFornsCODPRODUTO: TIntegerField
+      FieldName = 'CODPRODUTO'
+      Origin = 'CODPRODUTO'
+    end
   end
   object qFuncs: TFDQuery
     Connection = FDBanco

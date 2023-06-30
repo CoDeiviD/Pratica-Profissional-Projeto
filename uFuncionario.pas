@@ -61,6 +61,7 @@ constructor Funcionarios.CrieInit(pCodigo : integer; pNome, pCPF_CNPJ, pRG, pCEP
 pTelefone, pMidia: string; pDtNasc, pCargaH: TDateTime; pSalario: Double; pCodCidade: integer);
 begin
    codigo := pCodigo;
+   nome := pNome;
    DtNasc := pDtNasc;
    CPF_CNPJ := pCPF_CNPJ;
    RG  := pRG;
@@ -71,7 +72,7 @@ begin
    Midia := pMidia;
    Salario := pSalario;
    CargaH  := pCargaH;
-   aCidade := Cidades.CrieInit(pCodCidade,'','',0);
+   aCidade := Cidades.CrieInit(pcodcidade,'','', 0);
 end;
 
 constructor Funcionarios.CrieObj;
@@ -87,7 +88,7 @@ begin
    Telefone := '';
    Midia := '';
    Salario := 0;
-   CargaH := 00/00;
+   CargaH := 0;
    aCidade := Cidades.CrieObj;
 end;
 

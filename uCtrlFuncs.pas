@@ -1,12 +1,13 @@
 unit uCtrlFuncs;
 
 interface
- uses uController, uFuncionario, uDaoFuncs, Data.DB;
+ uses uController, uFuncionario, uCtrlCidades, uDaoFuncs, Data.DB;
 
  type CtrlFuncs = class(controller)
    private
    protected
       aDaoFuncionario : DaoFuncs;
+      aCtrlCidade : CtrlCidades;
    public
       constructor CrieObj;
       destructor Destrua_se;

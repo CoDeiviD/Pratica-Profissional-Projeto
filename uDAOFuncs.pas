@@ -13,7 +13,7 @@ interface
       function getDS : TDataSource;   override;
       function salvar(pObj : TObject): string; override;
       function CarregarColecao: TObject;        override;
-      function Carregar(pObj : TObject): string;                override;
+      function Carregar(pObj : TObject): string;  override;
       function Pesquisar (pChave: string): string; override;
       function Excluir (pObj : TOBject): string;  override;
  end;
@@ -32,7 +32,7 @@ begin
         mFunc := Funcionarios(pObj);
         with umDM.qFuncs do
         begin
-           mFunc.setCodigo(FieldByName('CODCLIENTE').Value);
+           mFunc.setCodigo(FieldByName('CODFUNC').Value);
            mFunc.setNome(FieldByName('NOME').AsString);
            mFunc.setDtNasc(FieldByName('DTNASC').Value);
            mFunc.setCPF_CNPJ(FieldByName('CPF_CNPJ').AsString);
@@ -74,7 +74,7 @@ var mSql : string;
 begin
    try
       mFunc := Funcionarios(pObj);
-      mSql := 'delete from funcionario where codFuncionario =' +quotedstr(inttostr(mFunc.getCodigo));
+      mSql := 'delete from funcionario where codFunc =' +quotedstr(inttostr(mFunc.getCodigo));
       umDM.FDTrans.StartTransaction;
       umDM.qFuncs.Active := false;
       umDM.qFuncs.SQL.Clear;

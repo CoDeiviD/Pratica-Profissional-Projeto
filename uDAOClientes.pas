@@ -13,7 +13,7 @@ interface
       function getDS : TDataSource;   override;
       function salvar(pObj : TObject): string; override;
       function CarregarColecao: TObject;        override;
-      function Carregar(pObj : TObject): string;                override;
+      function Carregar(pObj : TObject): string;  override;
       function Pesquisar (pChave: string): string; override;
       function Excluir (pObj : TOBject): string;  override;
  end;

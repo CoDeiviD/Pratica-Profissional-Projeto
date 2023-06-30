@@ -18,7 +18,8 @@ interface
        aCidade : Cidades;
     public
       constructor CrieObj;
-      constructor CrieInit(pCodigo : integer; pNomeFantasia, pRazaoSocial, pInscrEstadual, pCNPJ, pCEP, pEndereco, pEmail, pTelefone: string; pCodProduto, pCodCidade: integer);
+//      constructor CrieInit(pCodigo : integer; pNomeFantasia, pRazaoSocial, pInscrEstadual, pCNPJ, pCEP, pEndereco, pEmail, pTelefone: string; pCodProduto, pCodCidade: integer);
+      constructor CrieInit(pCodigo : integer; pNomeFantasia, pRazaoSocial, pInscrEstadual, pCNPJ, pCEP, pEndereco, pEmail,  pTelefone: string; pCodProduto, pCodCidade: integer);
       destructor Destrua_se;
       procedure setNomeFantasia(pNomeFantasia:string);
       procedure setRazaoSocial(pRazaoSocial:string);
@@ -78,6 +79,7 @@ begin
    Email := '';
    Telefone := '';
    aCidade := Cidades.CrieObj;
+   oProduto := Produtos.CrieObj;
 end;
 
 destructor Fornecedores.Destrua_se;

@@ -1,12 +1,14 @@
 unit uCtrlForns;
 
 interface
- uses uController, uFornecedor, uDaoForns, Data.DB;
+ uses uController, uFornecedor, uCtrlCidades, uCtrlProdutos, uDaoForns, Data.DB;
 
  type CtrlForns = class(controller)
    private
    protected
       aDaoFornecedor : DaoForns;
+      aCtrlCidade : CtrlCidades;
+      aCtrlProduto : CtrlProdutos;
    public
       constructor CrieObj;
       destructor Destrua_se;

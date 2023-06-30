@@ -33,9 +33,9 @@ begin
         with umDM.qForns do
         begin
            mForn.setCodigo(FieldByName('CODFORNECEDOR').Value);
-           mForn.setNomeFantasia(FieldByName('NOMEFANTASIA').AsString);
+           mForn.setNomeFantasia(FieldByName('NOME').AsString);
            mForn.setRazaoSocial(FieldByName('RAZAOSOCIAL').AsString);
-           mForn.setInscrEstadual(FieldByName('INSCTICAOESTADUAL').AsString);
+           mForn.setInscrEstadual(FieldByName('INSCRESTADUAL').AsString);
            mForn.setCNPJ(FieldByName('CNPJ').AsString);
            mForn.setCEP(FieldByName('CEP').AsString);
            mForn.setEndereco(FieldByName('ENDERECO').AsString);
@@ -101,7 +101,7 @@ var mSql : string;
 begin
    mSql := 'select * from fornecedores';
    if pChave <> '' then
-      mSql := 'select * from fornecedores where NomeFantasia like' +quotedstr('%'+pChave+'%')+ 'order by NomeFantasia;';
+      mSql := 'select * from fornecedores where Nome like' +quotedstr('%'+pChave+'%')+ 'order by Nome;';
    umDM.qForns.Active := false;
    umDM.qForns.SQL.Clear;
    umDM.qForns.SQL.Add(mSql);
@@ -118,17 +118,17 @@ begin
      with umDM.qForns do
      begin
         if mForn.getCodigo = 0 then
-           mSql := 'insert into fornecedores(Nomefantasia, razsoc, inscrestad, cnpj, cep, endereco, email, telefone, codcidade) values (:Nomefantasia, :razsoc, :inscrestad, :cnpj, :cep, :endereco, :email, :telefone, :codproduto, :codcidade)'
+           mSql := 'insert into fornecedores(Nome, razaosocial, inscrestadual, cnpj, cep, endereco, email, telefone, codcidade, codproduto)  values   (:Nome, :razsoc, :inscrestadual, :cnpj, :cep, :endereco, :email, :telefone, :codcidade, :codproduto)'
         else
         begin
-           mSql := 'update Fornecedores set Nomefantasia = :Nomefantasia, razsoc = :razsoc, inscrestad = :inscrestad, cnpj = :cnpj, cep = :cep, endereco = :endereco, email = :email, telefone = :telefone, codproduto = :codproduto, codcidade = :codcidade';
+           mSql := 'update Fornecedores set Nome = :Nome, razsoc = :razsoc, inscrestadual = :inscrestadual, cnpj = :cnpj, cep = :cep, endereco = :endereco, email = :email, telefone = :telefone, codproduto = :codproduto, codcidade = :codcidade';
            mSql := mSql + ' where codFornecedor = :CodFornecedor;';
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        UMDM.qForns.ParamByName('NOMEFANTASIA').Value := mForn.getNomeFantasia;
+        UMDM.qForns.ParamByName('NOME').Value := mForn.getNomeFantasia;
         UMDM.qForns.ParamByName('RAZAOSOCIAL').Value := mForn.getRazaoSocial;
-        UMDM.qForns.ParamByName('INSCTICAOESTADUAL').Value := mForn.getInscrEstadual;
+        UMDM.qForns.ParamByName('INSCRESTADUAL').Value := mForn.getInscrEstadual;
         UMDM.qForns.ParamByName('CNPJ').Value := mForn.getCNPJ;
         UMDM.qForns.ParamByName('CEP').Value := mForn.getCEP;
         UMDM.qForns.ParamByName('ENDERECO').Value := mForn.getEndereco;

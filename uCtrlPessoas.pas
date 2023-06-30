@@ -28,12 +28,12 @@ implementation
 
 constructor CtrlPessoas.CrieObj;
 begin
-   aDaoPessoas := DaoPessoas.CrieObj;
+//   aDaoPessoas := DaoPessoas.CrieObj;
 end;
 
 destructor CtrlPessoas.Destrua_se;
 begin
-   aDaoPessoas.Destrua_se;
+//   aDaoPessoas.Destrua_se;
 end;
 
 //function CtrlPessoas.Excluir(pObj: TOBject): boolean;
@@ -43,7 +43,7 @@ end;
 
 function CtrlPessoas.getDS: TDataSource;
 begin
-   Result := aDaoPessoas.getDS;
+//   Result := aDaoPessoas.getDS;
 end;
 
 function CtrlPessoas.Pesquisar(pChave: string): string;
@@ -53,13 +53,13 @@ end;
 
 function CtrlPessoas.salvar(pObj: TObject): string;
 begin
-   aDaoPessoas.Salvar(pObj);
+//   aDaoPessoas.Salvar(pObj);
 end;
 
 procedure CtrlPessoas.setDM(pDM: TObject);
 begin
   inherited;
-   aDaoPessoas.setDM(pDm);
+//   aDaoPessoas.setDM(pDm);
 end;
 
 end.

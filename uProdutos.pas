@@ -30,8 +30,7 @@ begin
    Result := Produtos.CrieInit(codigo,TpProduto,Sabor,Preco);
 end;
 
-constructor Produtos.CrieInit(pCodigo: integer; pTpProduto, pSabor: String;
-  pPreco: double);
+constructor Produtos.CrieInit(pCodigo: integer; pTpProduto, pSabor: String; pPreco: double);
 begin
    codigo := pCodigo;
    TpProduto := pTpProduto;

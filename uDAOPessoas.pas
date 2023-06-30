@@ -29,7 +29,7 @@ end;
 
 function DAOPessoas.CarregarColecao: TObject;
 begin
-   Result := aColPessoas;
+//   Result := aColPessoas;
 end;
 
 constructor DAOPessoas.CrieObj;

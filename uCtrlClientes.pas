@@ -1,12 +1,13 @@
 unit uCtrlClientes;
 
 interface
- uses uController, uCliente, uDaoClientes, Data.DB;
+ uses uController, uCliente, uCtrlCidades, uDaoClientes, Data.DB;
 
  type CtrlClientes = class(controller)
    private
    protected
       aDaoClientes : DaoClientes;
+      aCtrlCidade : CtrlCidades;
    public
       constructor CrieObj;
       destructor Destrua_se;
