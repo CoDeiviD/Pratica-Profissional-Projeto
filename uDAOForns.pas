@@ -118,10 +118,10 @@ begin
      with umDM.qForns do
      begin
         if mForn.getCodigo = 0 then
-           mSql := 'insert into fornecedores(Nome, razaosocial, inscrestadual, cnpj, cep, endereco, email, telefone, codcidade, codproduto)  values   (:Nome, :razsoc, :inscrestadual, :cnpj, :cep, :endereco, :email, :telefone, :codcidade, :codproduto)'
+           mSql := 'insert into fornecedores(Nome, razaosocial, inscrestadual, cnpj, cep, endereco, email, telefone, codcidade, codproduto)  values   (:Nome, :razaosocial, :inscrestadual, :cnpj, :cep, :endereco, :email, :telefone, :codcidade, :codproduto)'
         else
         begin
-           mSql := 'update Fornecedores set Nome = :Nome, razsoc = :razsoc, inscrestadual = :inscrestadual, cnpj = :cnpj, cep = :cep, endereco = :endereco, email = :email, telefone = :telefone, codproduto = :codproduto, codcidade = :codcidade';
+           mSql := 'update Fornecedores set Nome = :Nome, razaosocial = :razaosocial, inscrestadual = :inscrestadual, cnpj = :cnpj, cep = :cep, endereco = :endereco, email = :email, telefone = :telefone, codproduto = :codproduto, codcidade = :codcidade';
            mSql := mSql + ' where codFornecedor = :CodFornecedor;';
         end;
         SQL.Clear;
