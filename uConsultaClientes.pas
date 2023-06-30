@@ -37,8 +37,10 @@ implementation
 { TFormConsultaClientes }
 
 procedure TFormConsultaClientes.Alterar;
+var mMsg : string;
 begin
   inherited;
+  mMsg := aCtrlCliente.Carregar(oCliente);
   umFormCadastroClientes.ConhecaObj(oCliente, aCtrlCliente);
   umFormCadastroClientes.LimpaEdit;
   umFormCadastroClientes.CarregaEdit;
@@ -70,7 +72,6 @@ begin
   umFormCadastroClientes.DesbloqueiaEdit;
   umFormCadastroClientes.btnSalvar.Caption := mAux;
   self.Pesquisar;
-
 end;
 
 procedure TFormConsultaClientes.FormCreate(Sender: TObject);

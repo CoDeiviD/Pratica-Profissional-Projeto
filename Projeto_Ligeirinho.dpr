@@ -90,7 +90,7 @@ begin
   Application.CreateForm(TFormConsultaPai, FormConsultaPai);
   Application.CreateForm(TFormConsultaPaises, FormConsultaPaises);
   Application.CreateForm(TFormConsultaEstados, FormConsultaEstados);
-  Application.CreateForm(TFormConsultaEstados, FormConsultaEstados);
+//  Application.CreateForm(TFormConsultaEstados, FormConsultaEstados);
   Application.CreateForm(TFormCadastroPai, FormCadastroPai);
   Application.CreateForm(TFormCadastroPaises, FormCadastroPaises);
   Application.CreateForm(TFormCadastroEstados, FormCadastroEstados);

@@ -10,12 +10,11 @@ uses
 
 type
   TFormConsultaPessoas = class(TFormConsultaPai)
-    procedure btnInserirClick(Sender: TObject);
   private
     { Private declarations }
-    umFormCadastroPessoas : TFormCadastroPessoas;
-    aPessoa : Pessoas;
-    aCtrlPessoa : CtrlPessoas;
+//    umFormCadastroPessoas : TFormCadastroPessoas;
+//    aPessoa : Pessoas;
+//    aCtrlPessoa : CtrlPessoas;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject);  override;
@@ -39,45 +38,39 @@ implementation
 procedure TFormConsultaPessoas.Alterar;
 begin
   inherited;
-  umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
-  umFormCadastroPessoas.LimpaEdit;
-  umFormCadastroPessoas.CarregaEdit;
-  umFormCadastroPessoas.ShowModal;
-end;
-
-procedure TFormConsultaPessoas.btnInserirClick(Sender: TObject);
-begin
-  inherited;
-   self.Inserir;
+//  umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
+//  umFormCadastroPessoas.LimpaEdit;
+//  umFormCadastroPessoas.CarregaEdit;
+//  umFormCadastroPessoas.ShowModal;
 end;
 
 procedure TFormConsultaPessoas.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
-  aPessoa := Pessoas(pObj);
-  aCtrlPessoa := CtrlPessoas(pCtrl);
+//  aPessoa := Pessoas(pObj);
+//  aCtrlPessoa := CtrlPessoas(pCtrl);
 end;
 
 procedure TFormConsultaPessoas.Excluir;
-var aux : string;
+//var aux : string;
 begin
-  inherited;
-  aux := umFormCadastroPessoas.btnSalvar.Caption;
-  umFormCadastroPessoas.btnSalvar.Caption := '&Excluir';
-  umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
-
-  umFormCadastroPessoas.LimpaEdit;
-  umFormCadastroPessoas.CarregaEdit;
-  umFormCadastroPessoas.ShowModal;
-  umFormCadastroPessoas.btnSalvar.Caption := aux;
+//  inherited;
+//  aux := umFormCadastroPessoas.btnSalvar.Caption;
+//  umFormCadastroPessoas.btnSalvar.Caption := '&Excluir';
+//  umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
+//
+//  umFormCadastroPessoas.LimpaEdit;
+//  umFormCadastroPessoas.CarregaEdit;
+//  umFormCadastroPessoas.ShowModal;
+//  umFormCadastroPessoas.btnSalvar.Caption := aux;
 end;
 
 procedure TFormConsultaPessoas.Inserir;
 begin
   inherited;
-  umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
-  umFormCadastroPessoas.LimpaEdit;
-  umFormCadastroPessoas.ShowModal;
+////  umFormCadastroPessoas.ConhecaObj(aPessoa, aCtrlPessoa);
+////  umFormCadastroPessoas.LimpaEdit;
+////  umFormCadastroPessoas.ShowModal;
 end;
 
 procedure TFormConsultaPessoas.Pesquisar;
@@ -95,7 +88,7 @@ end;
 procedure TFormConsultaPessoas.setCadastro(pObj: TObject);
 begin
   inherited;
-  umFormCadastroPessoas := TFormCadastroPessoas(pObj);
+//  umFormCadastroPessoas := TFormCadastroPessoas(pObj);
 end;
 
 end.

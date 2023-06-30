@@ -11,6 +11,10 @@ uses
 type
   TFormConsultaFuncionarios = class(TFormConsultaPessoas)
     procedure FormCreate(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroFuncionarios : TFormCadastroFuncionarios;
@@ -37,12 +41,38 @@ implementation
 { TFormConsultaFuncionarios }
 
 procedure TFormConsultaFuncionarios.Alterar;
+var mMsg : string;
 begin
   inherited;
+  mMsg := aCtrlFuncs.Carregar(oFuncionario);
   umFormCadastroFuncionarios.ConhecaObj(oFuncionario, aCtrlFuncs);
   umFormCadastroFuncionarios.LimpaEdit;
   umFormCadastroFuncionarios.CarregaEdit;
   umFormCadastroFuncionarios.ShowModal;
+end;
+
+procedure TFormConsultaFuncionarios.btnAlterarClick(Sender: TObject);
+begin
+  inherited;
+  self.Alterar;
+end;
+
+procedure TFormConsultaFuncionarios.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+  self.Excluir;
+end;
+
+procedure TFormConsultaFuncionarios.btnInserirClick(Sender: TObject);
+begin
+  inherited;
+  self.Inserir;
+end;
+
+procedure TFormConsultaFuncionarios.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  self.Sair;
 end;
 
 procedure TFormConsultaFuncionarios.ConhecaObj(pObj, pCtrl: TObject);
@@ -70,7 +100,6 @@ begin
   umFormCadastroFuncionarios.DesbloqueiaEdit;
   umFormCadastroFuncionarios.btnSalvar.Caption := mAux;
   self.Pesquisar;
-
 end;
 
 procedure TFormConsultaFuncionarios.FormCreate(Sender: TObject);

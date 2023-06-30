@@ -58,7 +58,7 @@ procedure TFormCadastroFuncionarios.btnPesquisarClick(Sender: TObject);
 var aux : string;
 begin
   inherited;
-//  aux := umaConsultaCidades.btnSair.Caption;
+  aux := umaConsultaCidades.btnSair.Caption;
   umaConsultaCidades.btnSair.Caption := 'Selecionar';
   umaConsultaCidades.ConhecaObj(oFunc.getaCidade, nil);
   umaConsultaCidades.ShowModal;
@@ -69,6 +69,7 @@ end;
 procedure TFormCadastroFuncionarios.CarregaEdit;
 begin
   inherited;
+  self.edtCodigo.Text := inttostr(oFunc.getCodigo);
   self.edtNome.Text := oFunc.getNome;
   self.edtDtNasc.Text := datetostr(oFunc.getDtNasc);
   self.edtCPF_CNPJ.Text :=  oFunc.getCPF_CNPJ;
