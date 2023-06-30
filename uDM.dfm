@@ -6,12 +6,13 @@ object DM: TDM
     Params.Strings = (
       'User_Name=SYSDBA'
       'Password=masterkey'
-      'CharacterSet=UTF8'
-      'Database=C:\DB\LIGEIRINHO.FDB'
-      'Protocol=TCPIP'
+      'CharacterSet=WIN1250'
       'Server=localhost'
       'Port=3050'
+      'Database=C:\DB\LIGEIRINHO.FDB'
+      'Protocol=TCPIP'
       'DriverID=FB')
+    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 48
@@ -364,6 +365,7 @@ object DM: TDM
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
     DriverID = 'FB'
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_4_0\fbclient.dll'
+    Embedded = True
     Left = 96
     Top = 184
   end

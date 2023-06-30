@@ -72,7 +72,7 @@ begin
       umDM.qCidades.Active := false;
       umDM.qCidades.SQL.Clear;
       umDM.qCidades.SQL.Add(mSql);
-      umDM.qCidades.Open;
+      umDM.qCidades.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -119,14 +119,17 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('CIDADE').Value := mCidade.getCidade;
-        ParamByName('DDD').Value := mCidade.getDDD;
-        ParamByName('CODESTADO').Value := mCidade.getoEstado.getCodigo;
+        umDM.qCidades.ParamByName('CIDADE').Value := mCidade.getCidade;
+        umDM.qCidades.ParamByName('DDD').Value := mCidade.getDDD;
+        umDM.qCidades.ParamByName('CODESTADO').Value := mCidade.getoEstado.getCodigo;
         if mCidade.getCodigo > 0 then   // <>0
-           ParamByName('CODCIDADE').Value := mCidade.getCodigo;
+           umDM.qCidades.ParamByName('CODCIDADE').Value := mCidade.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qCidades.SQL.Clear;
+     umDM.qCidades.SQL.Add('select * from cidades;');
+     umDM.qCidades.Open;
    except
      umDM.FDTrans.Rollback;
    end;

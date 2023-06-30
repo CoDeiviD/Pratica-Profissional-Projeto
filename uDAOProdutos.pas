@@ -72,7 +72,7 @@ begin
       umDM.qProdutos.Active := false;
       umDM.qProdutos.SQL.Clear;
       umDM.qProdutos.SQL.Add(mSql);
-      umDM.qProdutos.Open;
+      umDM.qProdutos.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -111,7 +111,7 @@ begin
      with umDM.qProdutos do
      begin
         if mProduto.getCodigo = 0 then
-           mSql := 'insert into produtos(TpProduto, sabor, preco) values (:TpProduto, :sabor, :preco)'
+           mSql := 'insert into produtos(codproduto, TpProduto, sabor, preco) values (:codproduto, :TpProduto, :sabor, :preco)'
         else
         begin
            mSql := 'update Produtos set TpProduto = :TpProduto, sabor = :sabor, preco = :preco';
@@ -119,16 +119,19 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('TPPRODUTO').Value := mProduto.getTpProduto;
-        ParamByName('SABOR').Value := mProduto.getSabor;
-        ParamByName('PRECO').Value := mProduto.getPreco;
+        umDM.qProdutos.ParamByName('TPPRODUTO').Value := mProduto.getTpProduto;
+        umDM.qProdutos.ParamByName('SABOR').Value := mProduto.getSabor;
+        umDM.qProdutos.ParamByName('PRECO').Value := mProduto.getPreco;
         if mProduto.getCodigo > 0 then   // <>0
-           ParamByName('CODPRODUTO').Value := mProduto.getCodigo;
+           umDM.qProdutos.ParamByName('CODPRODUTO').Value := mProduto.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
    except
      umDM.FDTrans.Rollback;
+     umDM.qProdutos.sql.Clear;
+     umDM.qProdutos.sql.add('select * from produtos;');
+     UMDM.qProdutos.Open;
    end;
 end;
 

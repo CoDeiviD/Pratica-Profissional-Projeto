@@ -74,12 +74,12 @@ var mSql : string;
 begin
    try
       mFunc := Funcionarios(pObj);
-      mSql := 'delete from funcionarios where codFuncionario =' +quotedstr(inttostr(mFunc.getCodigo));
+      mSql := 'delete from funcionario where codFuncionario =' +quotedstr(inttostr(mFunc.getCodigo));
       umDM.FDTrans.StartTransaction;
       umDM.qFuncs.Active := false;
       umDM.qFuncs.SQL.Clear;
       umDM.qFuncs.SQL.Add(mSql);
-      umDM.qFuncs.Open;
+      umDM.qFuncs.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -99,9 +99,9 @@ end;
 function DAOFuncs.Pesquisar(pChave: string): string;
 var mSql : string;
 begin
-   mSql := 'select * from funcionarios';
+   mSql := 'select * from funcionario';
    if pChave <> '' then
-      mSql := 'select * from funcionarios where Nome like' +quotedstr('%'+pChave+'%')+ 'order by Nome;';
+      mSql := 'select * from funcionario where Nome like' +quotedstr('%'+pChave+'%')+ 'order by Nome;';
    umDM.qFuncs.Active := false;
    umDM.qFuncs.SQL.Clear;
    umDM.qFuncs.SQL.Add(mSql);
@@ -118,31 +118,34 @@ begin
      with umDM.qFuncs do
      begin
         if mFunc.getCodigo = 0 then
-           mSql := 'insert into funcionarios(Nome, dtnasc, cpf_cnpj, rg, cep, endereco, email, telefone, midia, salario, cargah, codcidade) values (:Nome, :dtnasc, :cpf_cnpj, :rg, :cep, :endereco, :email, :telefone, :midia, :salario, :cargah, :codcidade)'
+           mSql := 'insert into funcionario(Nome, dtnasc, cpf_cnpj, rg, cep, endereco, email, telefone, midia, salario, cargah, codcidade) values (:Nome, :dtnasc, :cpf_cnpj, :rg, :cep, :endereco, :email, :telefone, :midia, :salario, :cargah, :codcidade)'
         else
         begin
-           mSql := 'update Funcionarios set Nome = :Nome, dtnasc = :dtnasc, cpf_cnpj = :cpf_cnpj, rg = :rg, cep = :cep, endereco = :endereco, email = :email, telefone = :telefone, midia = :midia, salario = :salario, cargah = :cargah, codcidade = :codcidade';
+           mSql := 'update Funcionario set Nome = :Nome, dtnasc = :dtnasc, cpf_cnpj = :cpf_cnpj, rg = :rg, cep = :cep, endereco = :endereco, email = :email, telefone = :telefone, midia = :midia, salario = :salario, cargah = :cargah, codcidade = :codcidade';
            mSql := mSql + ' where codFunc = :CodFunc;';
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('NOME').Value := mFunc.getNome;
-        ParamByName('DTNASC').Value := mFunc.getDtNasc;
-        ParamByName('CPF_CNPJ').Value := mFunc.getCPF_CNPJ;
-        ParamByName('RG').Value := mFunc.getRG;
-        ParamByName('CEP').Value := mFunc.getCEP;
-        ParamByName('ENDERECO').Value := mFunc.getEndereco;
-        ParamByName('EMAIL').Value := mFunc.getEmail;
-        ParamByName('TELEFONE').Value := mFunc.getTelefone;
-        ParamByName('MIDIA').Value := mFunc.getMidia;
-        ParamByName('SALARIO').Value := mFunc.getSalario;
-        ParamByName('CARGAH').Value := mFunc.getCargaH;
-        ParamByName('CODCIDADE').Value := mFunc.getaCidade.getCodigo;
+        UMDM.qFuncs.ParamByName('NOME').Value := mFunc.getNome;
+        UMDM.qFuncs.ParamByName('DTNASC').Value := mFunc.getDtNasc;
+        UMDM.qFuncs.ParamByName('CPF_CNPJ').Value := mFunc.getCPF_CNPJ;
+        UMDM.qFuncs.ParamByName('RG').Value := mFunc.getRG;
+        UMDM.qFuncs.ParamByName('CEP').Value := mFunc.getCEP;
+        UMDM.qFuncs.ParamByName('ENDERECO').Value := mFunc.getEndereco;
+        UMDM.qFuncs.ParamByName('EMAIL').Value := mFunc.getEmail;
+        UMDM.qFuncs.ParamByName('TELEFONE').Value := mFunc.getTelefone;
+        UMDM.qFuncs.ParamByName('MIDIA').Value := mFunc.getMidia;
+        UMDM.qFuncs.ParamByName('SALARIO').Value := mFunc.getSalario;
+        UMDM.qFuncs.ParamByName('CARGAH').Value := mFunc.getCargaH;
+        UMDM.qFuncs.ParamByName('CODCIDADE').Value := mFunc.getaCidade.getCodigo;
         if mFunc.getCodigo > 0 then   // <>0
-           ParamByName('CODFUNC').Value := mFunc.getCodigo;
+           UMDM.qFuncs.ParamByName('CODFUNC').Value := mFunc.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qFuncs.sql.Clear;
+     umDM.qFuncs.sql.add('select * from funcionario;');
+     UMDM.qFuncs.Open;
    except
      umDM.FDTrans.Rollback;
    end;

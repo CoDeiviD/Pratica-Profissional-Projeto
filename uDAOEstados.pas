@@ -22,7 +22,7 @@ implementation
 uses
   System.SysUtils;
 
-{ DAOPaises }
+  { DAOEstados }
 
 function DAOEstados.Carregar(pObj : TObject): string;
 var mEstado : Estados;
@@ -72,7 +72,7 @@ begin
       umDM.qEstados.Active := false;
       umDM.qEstados.SQL.Clear;
       umDM.qEstados.SQL.Add(mSql);
-      umDM.qEstados.Open;
+      umDM.qEstados.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -119,14 +119,18 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('ESTADO').Value := mEstados.getEstado;
-        ParamByName('UF').Value := mEstados.getUF;
-        ParamByName('CODPAIS').Value := mEstados.getoPais.getCodigo;
+        umDM.qEstados.ParamByName('ESTADO').Value := mEstados.getEstado;
+        umDM.qEstados.ParamByName('UF').Value := mEstados.getUF;
+        umDM.qEstados.ParamByName('CODPAIS').Value := mEstados.getoPais.getCodigo;
         if mEstados.getCodigo > 0 then   // <>0
-           ParamByName('CODESTADO').Value := mEstados.getCodigo;
+           umDM.qEstados.ParamByName('CODESTADO').Value := mEstados.getCodigo;
         ExecSQL;
+
      end;
      umDM.FDTrans.Commit;
+     umDM.qEstados.sql.Clear;
+     umDM.qEstados.sql.add('select * from estados;');
+     UMDM.qEstados.Open;
    except
      umDM.FDTrans.Rollback;
    end;

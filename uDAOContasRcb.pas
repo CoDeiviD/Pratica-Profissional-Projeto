@@ -73,7 +73,7 @@ begin
       umDM.qContRcb.Active := false;
       umDM.qContRcb.SQL.Clear;
       umDM.qContRcb.SQL.Add(mSql);
-      umDM.qContRcb.Open;
+      umDM.qContRcb.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -120,15 +120,18 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('VALOR').Value := mContasRcb.getValor;
-        ParamByName('DTVENCIMENTO').Value := mContasRcb.getDtVencimento;
-        ParamByName('DTPAGAMENTO').Value := mContasRcb.getDtPagamento;
-        ParamByName('VRECEB').Value := mContasRcb.getVReceb;
+        umDM.qContRcb.ParamByName('VALOR').Value := mContasRcb.getValor;
+        umDM.qContRcb.ParamByName('DTVENCIMENTO').Value := mContasRcb.getDtVencimento;
+        umDM.qContRcb.ParamByName('DTPAGAMENTO').Value := mContasRcb.getDtPagamento;
+        umDM.qContRcb.ParamByName('VRECEB').Value := mContasRcb.getVReceb;
         if mContasRcb.getCodigo > 0 then   // <>0
-           ParamByName('CODCONTARCB').Value := mContasRcb.getCodigo;
+           umDM.qContRcb.ParamByName('CODCONTARCB').Value := mContasRcb.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qContRcb.sql.Clear;
+     umDM.qContRcb.sql.add('select * from contasrcb;');
+     UMDM.qContRcb.Open;
    except
      umDM.FDTrans.Rollback;
    end;

@@ -75,7 +75,7 @@ begin
       umDM.qCaixas.Active := false;
       umDM.qCaixas.SQL.Clear;
       umDM.qCaixas.SQL.Add(mSql);
-      umDM.qCaixas.Open;
+      umDM.qCaixas.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -122,17 +122,20 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('DATA').Value := mCaixa.getData;
-        ParamByName('HISTORICO').Value := mCaixa.getHistorico;
-        ParamByName('ENTRADA').Value := mCaixa.getEntrada;
-        ParamByName('SAIDA').Value := mCaixa.getSaida;
-        ParamByName('SALDO').Value := mCaixa.getSaldo;
-        ParamByName('SALDOTOT').Value := mCaixa.getSaldoTot;
+        umDM.qCaixas.ParamByName('DATA').Value := mCaixa.getData;
+        umDM.qCaixas.ParamByName('HISTORICO').Value := mCaixa.getHistorico;
+        umDM.qCaixas.ParamByName('ENTRADA').Value := mCaixa.getEntrada;
+        umDM.qCaixas.ParamByName('SAIDA').Value := mCaixa.getSaida;
+        umDM.qCaixas.ParamByName('SALDO').Value := mCaixa.getSaldo;
+        umDM.qCaixas.ParamByName('SALDOTOT').Value := mCaixa.getSaldoTot;
         if mCaixa.getCodigo > 0 then   // <>0
-           ParamByName('CODCAIXA').Value := mCaixa.getCodigo;
+           umDM.qCaixas.ParamByName('CODCAIXA').Value := mCaixa.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qCaixas.sql.Clear;
+     umDM.qCaixas.sql.add('select * from caixas;');
+     UMDM.qCaixas.Open;
    except
      umDM.FDTrans.Rollback;
    end;

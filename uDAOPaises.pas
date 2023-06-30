@@ -73,7 +73,7 @@ begin
       umDM.qPaises.Active := false;
       umDM.qPaises.SQL.Clear;
       umDM.qPaises.SQL.Add(mSql);
-      umDM.qPaises.Open;
+      umDM.qPaises.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -121,15 +121,18 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('PAIS').Value := mPaises.getPais;
-        ParamByName('DDI').Value := mPaises.getDDI;
-        ParamByName('SIGLA').Value := mPaises.getSigla;
-        ParamByName('MOEDA').Value := mPaises.getMoeda;
+        UMDM.qPaises.ParamByName('PAIS').Value := mPaises.getPais;
+        UMDM.qPaises.ParamByName('DDI').Value := mPaises.getDDI;
+        UMDM.qPaises.ParamByName('SIGLA').Value := mPaises.getSigla;
+        UMDM.qPaises.ParamByName('MOEDA').Value := mPaises.getMoeda;
         if mPaises.getCodigo > 0 then   // <>0
-           ParamByName('CODPAIS').Value := mPaises.getCodigo;
+           UMDM.qPaises.ParamByName('CODPAIS').Value := mPaises.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qPaises.sql.Clear;
+     umDM.qPaises.sql.add('select * from paises;');
+     UMDM.qPaises.Open;
    except
      umDM.FDTrans.Rollback;
    end;

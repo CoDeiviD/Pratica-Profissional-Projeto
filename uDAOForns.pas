@@ -79,7 +79,7 @@ begin
       umDM.qForns.Active := false;
       umDM.qForns.SQL.Clear;
       umDM.qForns.SQL.Add(mSql);
-      umDM.qForns.Open;
+      umDM.qForns.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -126,21 +126,24 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('NOMEFANTASIA').Value := mForn.getNomeFantasia;
-        ParamByName('RAZAOSOCIAL').Value := mForn.getRazaoSocial;
-        ParamByName('INSCTICAOESTADUAL').Value := mForn.getInscrEstadual;
-        ParamByName('CNPJ').Value := mForn.getCNPJ;
-        ParamByName('CEP').Value := mForn.getCEP;
-        ParamByName('ENDERECO').Value := mForn.getEndereco;
-        ParamByName('EMAIL').Value := mForn.getEmail;
-        ParamByName('TELEFONE').Value := mForn.getTelefone;
-        ParamByName('CODPRODUTO').Value := mForn.getoProduto.getCodigo;
-        ParamByName('CODCIDADE').Value := mForn.getaCidade.getCodigo;
+        UMDM.qForns.ParamByName('NOMEFANTASIA').Value := mForn.getNomeFantasia;
+        UMDM.qForns.ParamByName('RAZAOSOCIAL').Value := mForn.getRazaoSocial;
+        UMDM.qForns.ParamByName('INSCTICAOESTADUAL').Value := mForn.getInscrEstadual;
+        UMDM.qForns.ParamByName('CNPJ').Value := mForn.getCNPJ;
+        UMDM.qForns.ParamByName('CEP').Value := mForn.getCEP;
+        UMDM.qForns.ParamByName('ENDERECO').Value := mForn.getEndereco;
+        UMDM.qForns.ParamByName('EMAIL').Value := mForn.getEmail;
+        UMDM.qForns.ParamByName('TELEFONE').Value := mForn.getTelefone;
+        UMDM.qForns.ParamByName('CODPRODUTO').Value := mForn.getoProduto.getCodigo;
+        UMDM.qForns.ParamByName('CODCIDADE').Value := mForn.getaCidade.getCodigo;
         if mForn.getCodigo > 0 then   // <>0
-           ParamByName('CODFORNECEDOR').Value := mForn.getCodigo;
+           UMDM.qForns.ParamByName('CODFORNECEDOR').Value := mForn.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qForns.sql.Clear;
+     umDM.qForns.sql.add('select * from fornecedores;');
+     UMDM.qForns.Open;
    except
      umDM.FDTrans.Rollback;
    end;

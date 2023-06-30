@@ -79,7 +79,7 @@ begin
       umDM.qClientes.Active := false;
       umDM.qClientes.SQL.Clear;
       umDM.qClientes.SQL.Add(mSql);
-      umDM.qClientes.Open;
+      umDM.qClientes.ExecSQL;
       umDM.FDTrans.Commit;
       Result := '';
     except on e:Exception do
@@ -126,21 +126,24 @@ begin
         end;
         SQL.Clear;
         SQL.Add(mSql);
-        ParamByName('NOME').Value := mCliente.getNome;
-        ParamByName('DTNASC').Value := mCliente.getDtNasc;
-        ParamByName('CPF_CNPJ').Value := mCliente.getCPF_CNPJ;
-        ParamByName('RG').Value := mCliente.getRG;
-        ParamByName('CEP').Value := mCliente.getCEP;
-        ParamByName('ENDERECO').Value := mCliente.getEndereco;
-        ParamByName('EMAIL').Value := mCliente.getEmail;
-        ParamByName('TELEFONE').Value := mCliente.getTelefone;
-        ParamByName('MIDIA').Value := mCliente.getMidia;
-        ParamByName('CODCIDADE').Value := mCliente.getaCidade.getCodigo;
+        umDM.qClientes.ParamByName('NOME').Value := mCliente.getNome;
+        umDM.qClientes.ParamByName('DTNASC').Value := mCliente.getDtNasc;
+        umDM.qClientes.ParamByName('CPF_CNPJ').Value := mCliente.getCPF_CNPJ;
+        umDM.qClientes.ParamByName('RG').Value := mCliente.getRG;
+        umDM.qClientes.ParamByName('CEP').Value := mCliente.getCEP;
+        umDM.qClientes.ParamByName('ENDERECO').Value := mCliente.getEndereco;
+        umDM.qClientes.ParamByName('EMAIL').Value := mCliente.getEmail;
+        umDM.qClientes.ParamByName('TELEFONE').Value := mCliente.getTelefone;
+        umDM.qClientes.ParamByName('MIDIA').Value := mCliente.getMidia;
+        umDM.qClientes.ParamByName('CODCIDADE').Value := mCliente.getaCidade.getCodigo;
         if mCliente.getCodigo > 0 then   // <>0
-           ParamByName('CODCLIENTE').Value := mCliente.getCodigo;
+           umDM.qClientes.ParamByName('CODCLIENTE').Value := mCliente.getCodigo;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;
+     umDM.qClientes.sql.Clear;
+     umDM.qClientes.sql.add('select * from clientes;');
+     UMDM.qClientes.Open;
    except
      umDM.FDTrans.Rollback;
    end;

@@ -34,7 +34,6 @@ type
     DSProdutos: TDataSource;
     DSCaixas: TDataSource;
     DSContRcb: TDataSource;
-    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     qPaisesCODPAIS: TIntegerField;
     qPaisesPAIS: TStringField;
     qPaisesSIGLA: TStringField;
@@ -76,6 +75,7 @@ type
     qCaixasSAIDA: TCurrencyField;
     qCaixasSALDO: TCurrencyField;
     qCaixasSALDOTOTAL: TCurrencyField;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
   private
     { Private declarations }
   public
