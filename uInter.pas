@@ -6,7 +6,8 @@ interface
         uConsultaClientes, uConsultaFornecedores, uConsultaFuncionarios,
         uCadastroClientes, uCadastroFornecedores, uCadastroFuncionarios,
         uConsultaContaPgo, uConsultaContaRcb, uConsultaProduto, uConsultaCaixa,
-        uCadastroContaPgo, uCadastroContaRcb, uCadastroProduto, uCadastroCaixa;
+        uCadastroContaPgo, uCadastroContaRcb, uCadastroProduto, uCadastroCaixa,
+        uCadastroCompra, uConsultaCompra;
    type Interfaces = class
      private
      protected
@@ -30,6 +31,8 @@ interface
         umFormCadastroContaRcb : TFormCadastroContaRcb;
         umFormCadastroProdutos : TFormCadastroProduto;
         umFormCadastroCaixas : TFormCadastroCaixa;
+        umFormConsultaCompra : TfrmConsultaCompra;
+        umFormCadastroCompra : TfrmCadastroCompra;
 
      public
         constructor CrieObj;
@@ -44,6 +47,7 @@ interface
         procedure PDContasRcb(pObj, pCtrl : TObject);
         procedure PDProdutos(pObj, pCtrl : TObject);
         procedure PDCaixas(pObj, pCtrl : TObject);
+        procedure PDCompras(pObj, pCtrl : TObject);
    end;
 implementation
 
@@ -61,6 +65,7 @@ begin
    umFormConsultaContaRcb := TFormConsultaContaRcb.Create(nil);
    umFormConsultaProdutos := TFormConsultaProduto.Create(nil);
    umFormConsultaCaixas := TFormConsultaCaixa.Create(nil);
+   umFormConsultaCompra := TFrmConsultaCompra.Create(nil);
 
    umFormCadastroPaises := TFormCadastroPaises.Create(nil);
    umFormCadastroEstados := TFormCadastroEstados.Create(nil);
@@ -72,6 +77,7 @@ begin
    umFormCadastroContaRcb := TFormCadastroContaRcb.Create(nil);
    umFormCadastroProdutos := TFormCadastroProduto.Create(nil);
    umFormCadastroCaixas := TFormCadastroCaixa.Create(nil);
+   umFormCadastroCompra := TFrmCadastroCompra.Create(nil);
 
    umFormConsultaPaises.setCadastro(umFormCadastroPaises);
    umFormConsultaEstados.setCadastro(umFormCadastroEstados);
@@ -83,6 +89,7 @@ begin
    umFormConsultaContaRcb.setCadastro(umFormCadastroContaRcb);
    umFormConsultaProdutos.setCadastro(umFormCadastroProdutos);
    umFormConsultaCaixas.setCadastro(umFormCadastroCaixas);
+   umFormConsultaCompra.setCadastro(umFormCadastroCompra);
 
    umFormCadastroCidades.setConsulta(umFormConsultaCidades);
    umFormCadastroEstados.setConsulta(umFormConsultaEstados);
@@ -94,6 +101,7 @@ begin
    umFormCadastroContaRcb.setConsulta(umFormConsultaContaRcb);
    umFormCadastroProdutos.setConsulta(umFormConsultaProdutos);
    umFormCadastroCaixas.setConsulta(umFormConsultaCaixas);
+   umFormCadastroCompra.setConsulta(umFormConsultaCompra);
 end;
 
 destructor Interfaces.Destrua_se;
@@ -118,11 +126,13 @@ begin
    umFormConsultaContaRcb.FreeInstance;
    umFormConsultaProdutos.FreeInstance;
    umFormConsultaCaixas.FreeInstance;
+   umFormConsultaCompra.FreeInstance;
 
    umFormCadastroContaPgo.FreeInstance;
    umFormCadastroContaRcb.FreeInstance;
    umFormCadastroProdutos.FreeInstance;
    umFormCadastroCaixas.FreeInstance;
+   umFormCadastroCompra.FreeInstance;
 end;
 
 procedure Interfaces.PDCaixas(pObj, pCtrl: TObject);
@@ -141,6 +151,12 @@ procedure Interfaces.PDClientes(pObj, pCtrl: TObject);
 begin
    umFormConsultaClientes.ConhecaObj(pObj, pCtrl);
    umFormConsultaClientes.ShowModal;
+end;
+
+procedure Interfaces.PDCompras(pObj, pCtrl: TObject);
+begin
+   umFormConsultaCompra.ConhecaObj(pObj, pCtrl);
+   umFormConsultaCompra.ShowModal;
 end;
 
 procedure Interfaces.PDContasPgo(pObj, pCtrl: TObject);

@@ -1,7 +1,7 @@
 object DM: TDM
-  OldCreateOrder = False
-  Height = 530
-  Width = 581
+  Height = 927
+  Width = 726
+  PixelsPerInch = 120
   object FDBanco: TFDConnection
     Params.Strings = (
       'User_Name=SYSDBA'
@@ -12,23 +12,22 @@ object DM: TDM
       'Database=C:\DB\LIGEIRINHO.FDB'
       'Protocol=TCPIP'
       'DriverID=FB')
-    Connected = True
     LoginPrompt = False
-    Left = 24
-    Top = 48
+    Left = 30
+    Top = 60
   end
   object FDTrans: TFDTransaction
     Connection = FDBanco
-    Left = 112
-    Top = 64
+    Left = 140
+    Top = 80
   end
   object qPaises: TFDQuery
     Connection = FDBanco
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Paises')
-    Left = 264
-    Top = 8
+    Left = 330
+    Top = 10
     object qPaisesCODPAIS: TIntegerField
       DisplayLabel = 'C'#211'DIGO'
       FieldName = 'CODPAIS'
@@ -60,16 +59,16 @@ object DM: TDM
   end
   object DsPaises: TDataSource
     DataSet = qPaises
-    Left = 344
-    Top = 8
+    Left = 430
+    Top = 10
   end
   object qEstados: TFDQuery
     Connection = FDBanco
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Estados')
-    Left = 264
-    Top = 64
+    Left = 330
+    Top = 80
     object qEstadosCODESTADO: TIntegerField
       FieldName = 'CODESTADO'
       Origin = 'CODESTADO'
@@ -94,16 +93,16 @@ object DM: TDM
   end
   object DsEstados: TDataSource
     DataSet = qEstados
-    Left = 344
-    Top = 64
+    Left = 430
+    Top = 80
   end
   object qCidades: TFDQuery
     Connection = FDBanco
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Cidades')
-    Left = 264
-    Top = 120
+    Left = 330
+    Top = 150
     object qCidadesCODCIDADE: TIntegerField
       FieldName = 'CODCIDADE'
       Origin = 'CODCIDADE'
@@ -128,26 +127,26 @@ object DM: TDM
   end
   object DsCidades: TDataSource
     DataSet = qCidades
-    Left = 344
-    Top = 120
+    Left = 430
+    Top = 150
   end
   object DsClientes: TDataSource
     DataSet = qClientes
-    Left = 344
-    Top = 168
+    Left = 430
+    Top = 210
   end
   object DsForns: TDataSource
     DataSet = qForns
-    Left = 344
-    Top = 216
+    Left = 430
+    Top = 270
   end
   object qClientes: TFDQuery
     Connection = FDBanco
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Clientes')
-    Left = 264
-    Top = 168
+    Left = 330
+    Top = 210
     object qClientesNOME: TStringField
       FieldName = 'NOME'
       Origin = 'NOME'
@@ -216,8 +215,8 @@ object DM: TDM
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Fornecedores')
-    Left = 264
-    Top = 216
+    Left = 330
+    Top = 270
     object qFornsNOME: TStringField
       FieldName = 'NOME'
       Origin = 'NOME'
@@ -284,21 +283,21 @@ object DM: TDM
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Funcionario')
-    Left = 264
-    Top = 272
+    Left = 330
+    Top = 340
   end
   object DSFuncs: TDataSource
     DataSet = qFuncs
-    Left = 344
-    Top = 272
+    Left = 430
+    Top = 340
   end
   object qContPgr: TFDQuery
     Connection = FDBanco
     Transaction = FDTrans
     SQL.Strings = (
       'select * from ContasPgr')
-    Left = 264
-    Top = 328
+    Left = 330
+    Top = 410
     object qContPgrVALOR: TCurrencyField
       FieldName = 'VALOR'
       Origin = 'VALOR'
@@ -329,8 +328,8 @@ object DM: TDM
     Transaction = FDTrans
     SQL.Strings = (
       'select * from ContasRcb')
-    Left = 264
-    Top = 384
+    Left = 330
+    Top = 480
     object qContRcbVALOR: TCurrencyField
       FieldName = 'VALOR'
       Origin = 'VALOR'
@@ -361,8 +360,8 @@ object DM: TDM
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Produtos')
-    Left = 264
-    Top = 432
+    Left = 330
+    Top = 540
     object qProdutosTPPRODUTO: TStringField
       FieldName = 'TPPRODUTO'
       Origin = 'TPPRODUTO'
@@ -386,8 +385,8 @@ object DM: TDM
     Transaction = FDTrans
     SQL.Strings = (
       'select * from Caixas')
-    Left = 264
-    Top = 480
+    Left = 330
+    Top = 600
     object qCaixasDATA: TDateField
       FieldName = 'DATA'
       Origin = '"DATA"'
@@ -419,29 +418,66 @@ object DM: TDM
   end
   object DSContPgr: TDataSource
     DataSet = qContPgr
-    Left = 344
-    Top = 328
+    Left = 430
+    Top = 410
   end
   object DSContRcb: TDataSource
     DataSet = qContRcb
-    Left = 344
-    Top = 384
+    Left = 430
+    Top = 480
   end
   object DSProdutos: TDataSource
     DataSet = qProdutos
-    Left = 344
-    Top = 432
+    Left = 430
+    Top = 540
   end
   object DSCaixas: TDataSource
     DataSet = qCaixas
-    Left = 344
-    Top = 480
+    Left = 430
+    Top = 600
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
     DriverID = 'FB'
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_4_0\fbclient.dll'
     Embedded = True
-    Left = 96
-    Top = 184
+    Left = 120
+    Top = 230
+  end
+  object FDIBValidate1: TFDIBValidate
+    Left = 80
+    Top = 410
+  end
+  object qCompras: TFDQuery
+    Connection = FDBanco
+    Transaction = FDTrans
+    Left = 328
+    Top = 680
+  end
+  object qCondsPgto: TFDQuery
+    Connection = FDBanco
+    Transaction = FDTrans
+    Left = 328
+    Top = 752
+  end
+  object DSCompras: TDataSource
+    DataSet = qCompras
+    Left = 432
+    Top = 680
+  end
+  object DSCondsPgto: TDataSource
+    DataSet = qCondsPgto
+    Left = 432
+    Top = 752
+  end
+  object DSVendas: TDataSource
+    DataSet = qVendas
+    Left = 432
+    Top = 840
+  end
+  object qVendas: TFDQuery
+    Connection = FDBanco
+    Transaction = FDTrans
+    Left = 328
+    Top = 840
   end
 end
