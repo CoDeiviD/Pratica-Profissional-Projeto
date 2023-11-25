@@ -1,6 +1,6 @@
 inherited FormCadastroCaixa: TFormCadastroCaixa
   Caption = 'Cadastro de Caixa'
-  PixelsPerInch = 96
+  ClientWidth = 827
   TextHeight = 13
   object lbData: TLabel [4]
     Left = 113

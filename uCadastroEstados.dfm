@@ -1,8 +1,8 @@
 inherited FormCadastroEstados: TFormCadastroEstados
   Caption = 'Cadastro de Estados'
   ClientWidth = 828
-  ExplicitWidth = 844
-  PixelsPerInch = 96
+  ExplicitWidth = 840
+  ExplicitHeight = 449
   TextHeight = 13
   object lbEstado: TLabel [1]
     Left = 112
