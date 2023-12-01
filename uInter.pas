@@ -7,7 +7,8 @@ interface
         uCadastroClientes, uCadastroFornecedores, uCadastroFuncionarios,
         uConsultaContaPgo, uConsultaContaRcb, uConsultaProduto, uConsultaCaixa,
         uCadastroContaPgo, uCadastroContaRcb, uCadastroProduto, uCadastroCaixa,
-        uCadastroCompra, uConsultaCompra;
+        uCadastroCompra, uConsultaCompra, uCadastroCondPgto, uConsultaCondPgto,
+        uCadastroVenda, uConsultaVenda;
    type Interfaces = class
      private
      protected
@@ -33,6 +34,10 @@ interface
         umFormCadastroCaixas : TFormCadastroCaixa;
         umFormConsultaCompra : TfrmConsultaCompra;
         umFormCadastroCompra : TfrmCadastroCompra;
+        umFormConsultaCondPgto : TfrmConsultaCondPgto;
+        umFormCadastroCondPgto : TfrmCadastroCondPgto;
+        umFormConsultaVenda : TfrmConsultaVenda;
+        umFormCadastroVenda : TfrmCadastroVenda;
 
      public
         constructor CrieObj;
@@ -48,6 +53,8 @@ interface
         procedure PDProdutos(pObj, pCtrl : TObject);
         procedure PDCaixas(pObj, pCtrl : TObject);
         procedure PDCompras(pObj, pCtrl : TObject);
+        procedure PDCondPgto(pObj, pCtrl : TObject);
+        procedure PDVendas(pObj, pCtrl : TObject);
    end;
 implementation
 
@@ -66,6 +73,8 @@ begin
    umFormConsultaProdutos := TFormConsultaProduto.Create(nil);
    umFormConsultaCaixas := TFormConsultaCaixa.Create(nil);
    umFormConsultaCompra := TFrmConsultaCompra.Create(nil);
+   umFormConsultaCondPgto := TFrmConsultaCondPgto.Create(nil);
+   umFormConsultaVenda := TFrmConsultaVenda.Create(nil);
 
    umFormCadastroPaises := TFormCadastroPaises.Create(nil);
    umFormCadastroEstados := TFormCadastroEstados.Create(nil);
@@ -78,6 +87,8 @@ begin
    umFormCadastroProdutos := TFormCadastroProduto.Create(nil);
    umFormCadastroCaixas := TFormCadastroCaixa.Create(nil);
    umFormCadastroCompra := TFrmCadastroCompra.Create(nil);
+   umFormCadastroCondPgto := TFrmCadastroCondPgto.Create(nil);
+   umFormCadastroVenda := TFrmCadastroVenda.Create(nil);
 
    umFormConsultaPaises.setCadastro(umFormCadastroPaises);
    umFormConsultaEstados.setCadastro(umFormCadastroEstados);
@@ -90,6 +101,8 @@ begin
    umFormConsultaProdutos.setCadastro(umFormCadastroProdutos);
    umFormConsultaCaixas.setCadastro(umFormCadastroCaixas);
    umFormConsultaCompra.setCadastro(umFormCadastroCompra);
+   umFormConsultaCondPgto.setCadastro(umFormCadastroCondPgto);
+   umFormConsultaVenda.setCadastro(umFormCadastroVenda);
 
    umFormCadastroCidades.setConsulta(umFormConsultaCidades);
    umFormCadastroEstados.setConsulta(umFormConsultaEstados);
@@ -102,6 +115,8 @@ begin
    umFormCadastroProdutos.setConsulta(umFormConsultaProdutos);
    umFormCadastroCaixas.setConsulta(umFormConsultaCaixas);
    umFormCadastroCompra.setConsulta(umFormConsultaCompra);
+   umFormCadastroCondPgto.setConsulta(umFormConsultaCondPgto);
+   umFormCadastroVenda.setConsulta(umFormConsultaVenda);
 end;
 
 destructor Interfaces.Destrua_se;
@@ -126,13 +141,19 @@ begin
    umFormConsultaContaRcb.FreeInstance;
    umFormConsultaProdutos.FreeInstance;
    umFormConsultaCaixas.FreeInstance;
+
    umFormConsultaCompra.FreeInstance;
+   umFormConsultaCondPgto.FreeInstance;
+   umFormConsultaVenda.FreeInstance;
 
    umFormCadastroContaPgo.FreeInstance;
    umFormCadastroContaRcb.FreeInstance;
    umFormCadastroProdutos.FreeInstance;
    umFormCadastroCaixas.FreeInstance;
+
    umFormCadastroCompra.FreeInstance;
+   umFormCadastroCondPgto.FreeInstance;
+   umFormCadastroVenda.FreeInstance;
 end;
 
 procedure Interfaces.PDCaixas(pObj, pCtrl: TObject);
@@ -157,6 +178,12 @@ procedure Interfaces.PDCompras(pObj, pCtrl: TObject);
 begin
    umFormConsultaCompra.ConhecaObj(pObj, pCtrl);
    umFormConsultaCompra.ShowModal;
+end;
+
+procedure Interfaces.PDCondPgto(pObj, pCtrl: TObject);
+begin
+   umFormConsultaCondPgto.ConhecaObj(pObj, pCtrl);
+   umFormConsultaCondPgto.ShowModal;
 end;
 
 procedure Interfaces.PDContasPgo(pObj, pCtrl: TObject);
@@ -199,6 +226,12 @@ procedure Interfaces.PDProdutos(pObj, pCtrl: TObject);
 begin
    umFormConsultaProdutos.ConhecaObj(pObj, pCtrl);
    umFormConsultaProdutos.ShowModal;
+end;
+
+procedure Interfaces.PDVendas(pObj, pCtrl: TObject);
+begin
+   umFormConsultaVenda.ConhecaObj(pObj, pCtrl);
+   umFormConsultaVenda.ShowModal;
 end;
 
 end.

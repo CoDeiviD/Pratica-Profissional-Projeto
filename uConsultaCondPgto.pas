@@ -48,8 +48,8 @@ procedure TfrmConsultaCondPgto.ConhecaObj(pObj, pCtrl: TObject);
 begin
   inherited;
   aCond := CondPgto(pObj);
-  //aCtrlCompra := CtrlCompras(pCtrl);
-  //self.DBGrid1.DataSource := aCtrlCompra.getDS;
+  aCtrlCondPgto := CtrlCondPgto(pCtrl);
+  self.DBGrid1.DataSource := aCtrlCondPgto.getDS;
   aCtrlCondPgto.Pesquisar(self.edtChave.Text);
 end;
 

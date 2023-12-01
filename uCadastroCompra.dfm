@@ -2,8 +2,8 @@ object frmCadastroCompra: TfrmCadastroCompra
   Left = 0
   Top = 0
   Caption = 'Cadastro de Compra'
-  ClientHeight = 722
-  ClientWidth = 843
+  ClientHeight = 715
+  ClientWidth = 708
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -96,11 +96,32 @@ object frmCadastroCompra: TfrmCadastroCompra
     Caption = 'C'#243'digo'
   end
   object lbCondPgto: TLabel
-    Left = 24
-    Top = 432
+    Left = 8
+    Top = 437
     Width = 116
     Height = 13
     Caption = 'Condi'#231#227'o de Pagamento'
+  end
+  object lbDtCad: TLabel
+    Left = 203
+    Top = 656
+    Width = 85
+    Height = 13
+    Caption = 'Data de Cadastro'
+  end
+  object lbDtUltAlt: TLabel
+    Left = 331
+    Top = 656
+    Width = 78
+    Height = 13
+    Caption = #218'ltima Altera'#231#227'o'
+  end
+  object lbObrigadtorio: TLabel
+    Left = 8
+    Top = 678
+    Width = 99
+    Height = 13
+    Caption = '* Campo Obrigat'#243'rio'
   end
   object edtModelo: TEdit
     Left = 8
@@ -184,7 +205,7 @@ object frmCadastroCompra: TfrmCadastroCompra
   object LVProdCompra: TListView
     Left = 8
     Top = 203
-    Width = 689
+    Width = 673
     Height = 209
     Columns = <
       item
@@ -213,7 +234,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     TabOrder = 12
   end
   object btnSalvar: TButton
-    Left = 641
+    Left = 521
     Top = 681
     Width = 75
     Height = 25
@@ -222,7 +243,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     OnClick = btnSalvarClick
   end
   object btnSair: TButton
-    Left = 745
+    Left = 625
     Top = 681
     Width = 75
     Height = 25
@@ -253,15 +274,15 @@ object frmCadastroCompra: TfrmCadastroCompra
     TabOrder = 17
   end
   object edtCondPgto: TEdit
-    Left = 24
+    Left = 8
     Top = 456
     Width = 121
     Height = 21
     TabOrder = 18
   end
   object LVCondPgto: TListView
-    Left = 24
-    Top = 496
+    Left = 8
+    Top = 500
     Width = 673
     Height = 150
     Columns = <
@@ -281,11 +302,26 @@ object frmCadastroCompra: TfrmCadastroCompra
     ViewStyle = vsReport
   end
   object btnGerar: TButton
-    Left = 168
+    Left = 161
     Top = 454
     Width = 75
     Height = 25
     Caption = '&Gerar'
     TabOrder = 20
+    OnClick = btnGerarClick
+  end
+  object edtDtCad: TEdit
+    Left = 211
+    Top = 675
+    Width = 65
+    Height = 21
+    TabOrder = 21
+  end
+  object edtDtUltAlt: TEdit
+    Left = 339
+    Top = 675
+    Width = 70
+    Height = 21
+    TabOrder = 22
   end
 end

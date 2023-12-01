@@ -22,7 +22,7 @@ implementation
 uses
   System.SysUtils;
 
-{ DAOProdutos }
+{ DAOCompras }
 
 function DAOCompras.Carregar(pObj : TObject): string;
 var mCompra : Compras;
@@ -32,15 +32,15 @@ begin
         mCompra := Compras(pObj);
         with umDM.qCompras do
         begin
-           mCompra.setCodigo(FieldByName('CODPRODUTO').Value);
-           mCompra.setModelo(FieldByName('TPPRODUTO').AsString);
-           mCompra.setSerie(FieldByName('TPPRODUTO').AsString);
-           mCompra.setNumero(FieldByName('TPPRODUTO').Value);
-           mCompra.setDtEmissao(FieldByName('SABOR').Value);
-           mCompra.setDtChegada(FieldByName('SABOR').Value);
-           mCompra.setQtde(FieldByName('SABOR').Value);
-           mCompra.setVCusto(FieldByName('PRECO').Value);
-           mCompra.setDesconto(FieldByName('SABOR').Value);
+           mCompra.setCodigo(FieldByName('CODCOMPRA').Value);
+           mCompra.setModelo(FieldByName('MODELO').AsString);
+           mCompra.setSerie(FieldByName('SERIE').AsString);
+           mCompra.setNumero(FieldByName('NUMERO').Value);
+           mCompra.setDtEmissao(FieldByName('DTEMISSAO').Value);
+           mCompra.setDtChegada(FieldByName('DTCHEGADA').Value);
+           mCompra.setQtde(FieldByName('QTDE').Value);
+           mCompra.setVCusto(FieldByName('VCUSTO').Value);
+           mCompra.setDesconto(FieldByName('DESCONTO').Value);
            result := '';
         end;
      except on e:exception do
@@ -72,7 +72,7 @@ var mSql : string;
 begin
    try
       mCompra := Compras(pObj);
-      mSql := 'delete from produtos where codProduto =' +quotedstr(inttostr(mCompra.getCodigo));
+      mSql := 'delete from compras where codCompra =' +quotedstr(inttostr(mCompra.getCodigo));
       umDM.FDTrans.StartTransaction;
       umDM.qCompras.Active := false;
       umDM.qCompras.SQL.Clear;
@@ -116,11 +116,11 @@ begin
      with umDM.qCompras do
      begin
         if mCompra.getCodigo = 0 then
-           mSql := 'insert into compras(codproduto, TpProduto, sabor, preco) values (:codproduto, :TpProduto, :sabor, :preco)'
+           mSql := 'insert into compras(codcompra, modelo, serie, numero, dtemissao, dtchegada, qtde, vcusto, desconto) values (:codcompra, :modelo, :serie, :numero, :dtemissao, :dtchegada, :qtde, :vcusto, :desconto)'
         else
         begin
-           mSql := 'update Compras set TpProduto = :TpProduto, sabor = :sabor, preco = :preco';
-           mSql := mSql + ' where codProduto = :CodProduto;';
+           mSql := 'update Compras set modelo = :modelo, serie = :serie, numero = :numero, dtemissao = :dtemissao, dtchegada = :dtchegada, qtde = :qtde, vcusto = :vcusto, desconto = :desconto';
+           mSql := mSql + ' where codCompra = :CodCompra;';
         end;
         SQL.Clear;
         SQL.Add(mSql);

@@ -19,7 +19,7 @@ interface
  end;
 implementation
 
-{ CtrlProdutos }
+{ CtrlCompras }
 
 function CtrlCompras.Carregar(pObj : TObject): string;
 begin

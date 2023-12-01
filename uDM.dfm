@@ -1,6 +1,6 @@
 object DM: TDM
   Height = 927
-  Width = 726
+  Width = 609
   PixelsPerInch = 120
   object FDBanco: TFDConnection
     Params.Strings = (

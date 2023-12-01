@@ -9,12 +9,15 @@ uses
   uPaises, uEstados, uCidades,
   uCliente, uFornecedor, uFuncionario,
   uContasPgr, uContasRcb, uProdutos, uCaixas,
+  uCompras, uCondPgto, uVendas,
   uCtrlPaises, uCtrlEstados, uCtrlCidades,
   uCtrlClientes, uCtrlForns, uCtrlFuncs,
   uCtrlContasPgr, uCtrlContasRcb, uCtrlProdutos, uCtrlCaixas,
+  uCtrlCompras, uCtrlCondPgto, uCtrlVendas,
   uConsultaPaises, uConsultaEstados, uConsultaCidades,
   uConsultaClientes, uConsultaFornecedores, uConsultaFuncionarios,
-  uConsultaContaPgo, uConsultaContaRcb, uConsultaProduto, uConsultaCaixa;
+  uConsultaContaPgo, uConsultaContaRcb, uConsultaProduto, uConsultaCaixa,
+  uConsultaCompra, uConsultaCondPgto, uConsultaVenda;
 
 type
   TFormSorveteria = class(TForm)
@@ -34,6 +37,8 @@ type
     ContasRecebidas1: TMenuItem;
     Caixa1: TMenuItem;
     Produto1: TMenuItem;
+    Compras1: TMenuItem;
+    Vendas1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure Pases1Click(Sender: TObject);
     procedure Estados1Click(Sender: TObject);
@@ -46,6 +51,8 @@ type
     procedure ContasRecebidas1Click(Sender: TObject);
     procedure Caixa1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
+    procedure Compras1Click(Sender: TObject);
+    procedure Vendas1Click(Sender: TObject);
   private
     { Private declarations }
     aInter : Interfaces;
@@ -59,6 +66,9 @@ type
     aContaRcb: ContasRcb;
     oProd: Produtos;
     aCaixa: Caixas;
+    aCompra: Compras;
+    aCond: CondPgto;
+    aVenda: Vendas;
 
     umDM: TDM;
 
@@ -72,11 +82,17 @@ type
     aCtrlContaRcb: CtrlContasRcb;
     aCtrlProduto: CtrlProdutos;
     aCtrlCaixa: CtrlCaixas;
+    aCtrlCompra: CtrlCompras;
+    aCtrlCond: CtrlCondPgto;
+    aCtrlVenda: CtrlVendas;
 
     oConsultaPais : TFormConsultaPaises;
     oConsultaCidades : TFormConsultaCidades;
     oConsultaEstados : TFormConsultaEstados;
     oConsultaForns : TFormConsultaFornecedores;
+    oConsultaCompras : TfrmConsultaCompra;
+    oConsultaCondsPgto : TfrmConsultaCondPgto;
+    oConsultaVendas : TfrmConsultaVenda;
   public
     { Public declarations }
   end;
@@ -101,6 +117,11 @@ end;
 procedure TFormSorveteria.Clientes1Click(Sender: TObject);
 begin
    aInter.PDClientes(oCliente, aCtrlCliente);
+end;
+
+procedure TFormSorveteria.Compras1Click(Sender: TObject);
+begin
+   oConsultaCompras.ShowModal;
 end;
 
 procedure TFormSorveteria.ContasPagas1Click(Sender: TObject);
@@ -133,6 +154,9 @@ begin
    aContaRcb:= ContasRcb.CrieObj;
    oProd:= Produtos.CrieObj;
    aCaixa:= Caixas.CrieObj;
+   aCompra := Compras.CrieObj;
+   aCond := CondPgto.CrieObj;
+   aVenda := Vendas.CrieObj;
 
    umDM := TDM.Create(nil);
 
@@ -146,6 +170,9 @@ begin
    aCtrlContaRcb:= CtrlContasRcb.CrieObj;
    aCtrlProduto:= CtrlProdutos.CrieObj;
    aCtrlCaixa:= CtrlCaixas.CrieObj;
+   aCtrlCompra := CtrlCompras.CrieObj;
+   aCtrlCond := CtrlCondPgto.CrieObj;
+   aCtrlVenda := CtrlVendas.CrieObj;
 
    aCtrlPais.setDM(umDM);
    aCtrlEstado.setDM(umDM);
@@ -157,11 +184,17 @@ begin
    aCtrlContaRcb.setDM(umDM);
    aCtrlProduto.setDM(umDM);
    aCtrlCaixa.setDM(umDM);
+   aCtrlCompra.setDM(umDM);
+   aCtrlCond.setDM(umDM);
+   aCtrlVenda.setDM(umDM);
 
    oConsultaPais := TFormConsultaPaises.Create(nil);
    oConsultaEstados:= TFormConsultaEstados.Create(nil);
    oConsultaCidades:= TFormConsultaCidades.Create(nil);
    oConsultaForns:= TFormConsultaFornecedores.create(nil);
+   oConsultaCompras := TfrmConsultaCompra.Create(nil);
+   oConsultaCondsPgto:= TfrmConsultaCondPgto.Create(nil);
+   oConsultaVendas:= TfrmConsultaVenda.Create(nil);
 
 end;
 
@@ -189,6 +222,11 @@ end;
 procedure TFormSorveteria.Sair1Click(Sender: TObject);
 begin
    Close;
+end;
+
+procedure TFormSorveteria.Vendas1Click(Sender: TObject);
+begin
+   oConsultaVendas.ShowModal;
 end;
 
 end.

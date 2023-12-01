@@ -11,9 +11,7 @@ object FormSorveteria: TFormSorveteria
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = MainMenu1
-  OldCreateOrder = False
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object MainMenu1: TMainMenu
     Left = 232
@@ -68,6 +66,14 @@ object FormSorveteria: TFormSorveteria
       object Produto1: TMenuItem
         Caption = 'Produto'
         OnClick = Produto1Click
+      end
+      object Compras1: TMenuItem
+        Caption = 'Compras'
+        OnClick = Compras1Click
+      end
+      object Vendas1: TMenuItem
+        Caption = 'Vendas'
+        OnClick = Vendas1Click
       end
     end
     object Sair1: TMenuItem

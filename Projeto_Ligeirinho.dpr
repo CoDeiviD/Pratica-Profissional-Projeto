@@ -46,7 +46,6 @@ uses
   uCtrlCaixas in 'uCtrlCaixas.pas',
   uCtrlCidades in 'uCtrlCidades.pas',
   uCtrlClientes in 'uCtrlClientes.pas',
-  uCtrlContasPgr in 'uCtrlContasPgr.pas',
   uCtrlContasRcb in 'uCtrlContasRcb.pas',
   uCtrlEstados in 'uCtrlEstados.pas',
   uCtrlForns in 'uCtrlForns.pas',
@@ -79,7 +78,27 @@ uses
   uFornecedor in 'uFornecedor.pas',
   uConsultaFornecedores in 'uConsultaFornecedores.pas' {FormConsultaFornecedores},
   uCadastroFornecedores in 'uCadastroFornecedores.pas' {FormCadastroFornecedores},
-  uColForns in 'uColForns.pas';
+  uColForns in 'uColForns.pas',
+  uCompras in 'uCompras.pas',
+  uCadastroCompra in 'uCadastroCompra.pas' {Form1},
+  uFormaPgto in 'uFormaPgto.pas',
+  uColCompras in 'uColCompras.pas',
+  uDAOCondPgto in 'uDAOCondPgto.pas',
+  uConsultaCondPgto in 'uConsultaCondPgto.pas' {frmConsultaCondPgto},
+  uCadastroCondPgto in 'uCadastroCondPgto.pas' {frmCadastroCondPgto},
+  uConsultaCompra in 'uConsultaCompra.pas' {frmConsultaCompra},
+  uCondPgto in 'uCondPgto.pas',
+  uDAOCompras in 'uDAOCompras.pas',
+  uCtrlCompras in 'uCtrlCompras.pas',
+  uColCondPgto in 'uColCondPgto.pas',
+  uCtrlContasPgr in 'uCtrlContasPgr.pas',
+  uCadastroVenda in 'uCadastroVenda.pas' {FormCadastroPai1},
+  uVendas in 'uVendas.pas',
+  uCtrlCondPgto in 'uCtrlCondPgto.pas',
+  uColVendas in 'uColVendas.pas',
+  uCtrlVendas in 'uCtrlVendas.pas',
+  uDAOVendas in 'uDAOVendas.pas',
+  uConsultaVenda in 'uConsultaVenda.pas' {frmConsultaVenda};
 
 {$R *.res}
 
@@ -90,7 +109,11 @@ begin
   Application.CreateForm(TFormConsultaPai, FormConsultaPai);
   Application.CreateForm(TFormConsultaPaises, FormConsultaPaises);
   Application.CreateForm(TFormConsultaEstados, FormConsultaEstados);
-//  Application.CreateForm(TFormConsultaEstados, FormConsultaEstados);
+  Application.CreateForm(TfrmConsultaCondPgto, frmConsultaCondPgto);
+  Application.CreateForm(TfrmCadastroCondPgto, frmCadastroCondPgto);
+  Application.CreateForm(TfrmConsultaCompra, frmConsultaCompra);
+  Application.CreateForm(TfrmConsultaVenda, frmConsultaVenda);
+  //  Application.CreateForm(TFormConsultaEstados, FormConsultaEstados);
   Application.CreateForm(TFormCadastroPai, FormCadastroPai);
   Application.CreateForm(TFormCadastroPaises, FormCadastroPaises);
   Application.CreateForm(TFormCadastroEstados, FormCadastroEstados);

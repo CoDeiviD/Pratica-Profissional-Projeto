@@ -1,8 +1,8 @@
-unit uColCompras;
+unit uColVendas;
 
 interface
- uses uColecoes, uCompras;
-  type ColCompras = class(colecoes)
+ uses uColecoes, uVendas;
+  type ColVendas = class(colecoes)
   private
   protected
   public
@@ -12,14 +12,14 @@ interface
   end;
 implementation
 
-{ ColCompras }
+{ ColVendas }
 
-procedure ColCompras.LerArq;
+procedure ColVendas.LerArq;
 begin
 
 end;
 
-function ColCompras.Pesquisar(pChave: string; pQuero: boolean): integer;
+function ColVendas.Pesquisar(pChave: string; pQuero: boolean): integer;
 var k: integer;
 begin
    if self.VerVazia then
@@ -27,14 +27,14 @@ begin
    else
    begin
       k := 1;
-      while (k <= tam) and (pChave > Compras(item[k]).getModelo) do
+      while (k <= tam) and (pChave > Vendas(item[k]).getObs) do
          k := k + 1;
       if pQuero then
       begin
          if k > tam then
             Result := 0
          else
-            if pChave = Compras(item[k]).getModelo then
+            if pChave = Vendas(item[k]).getObs then
                Result := k
             else
                Result := 0
@@ -44,7 +44,7 @@ begin
          if k > tam then
             Result := k
          else
-           if pChave = Compras(item[k]).getModelo then
+           if pChave = Vendas(item[k]).getObs then
               Result := 0
            else
               Result := k;
@@ -52,7 +52,7 @@ begin
    end;
 end;
 
-procedure ColCompras.SalvarArq;
+procedure ColVendas.SalvarArq;
 begin
 
 end;

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uCadastroPai, uPai,
-  uCompras,uCtrlCompras;
+  uCompras,uCtrlCompras, uConsultaCondPgto;
 
 type
   TfrmCadastroCompra = class(TForm)
@@ -43,12 +43,19 @@ type
     lbCondPgto: TLabel;
     LVCondPgto: TListView;
     btnGerar: TButton;
+    lbDtCad: TLabel;
+    lbDtUltAlt: TLabel;
+    lbObrigadtorio: TLabel;
+    edtDtCad: TEdit;
+    edtDtUltAlt: TEdit;
     procedure btnSalvarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnGerarClick(Sender: TObject);
   private
     { Private declarations }
     aCompra : Compras;
     aCtrlCompra : CtrlCompras;
+    umFormConsultaCondPgto : TfrmConsultaCondPgto;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject); virtual;
@@ -84,6 +91,11 @@ begin
   self.edtVCusto.Enabled := false;
   self.edtDesc.Enabled := false;
   self.edtProduto.Enabled := false;
+end;
+
+procedure TfrmCadastroCompra.btnGerarClick(Sender: TObject);
+begin
+   umFormConsultaCondPgto.ShowModal;
 end;
 
 procedure TfrmCadastroCompra.btnSairClick(Sender: TObject);

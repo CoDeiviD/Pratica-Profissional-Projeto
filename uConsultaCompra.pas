@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, Data.DB, Vcl.Grids,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPai, uPai, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.StdCtrls,
   uCadastroCompra, uCompras, uCtrlCompras, uColCompras;
 
@@ -37,8 +37,10 @@ implementation
 { TfrmConsultaCompra }
 
 procedure TfrmConsultaCompra.Alterar;
+var mMsg:  string;
 begin
   inherited;
+  mMsg := aCtrlCompra.Carregar(aCompra);
   umFormCadastroCompras.ConhecaObj(aCompra, aCtrlCompra);
   umFormCadastroCompras.LimpaEdit;
   umFormCadastroCompras.CarregaEdit;
@@ -74,6 +76,7 @@ end;
 
 procedure TfrmConsultaCompra.FormCreate(Sender: TObject);
 begin
+   inherited;
    umFormCadastroCompras := TfrmCadastroCompra.Create(nil);
 end;
 
