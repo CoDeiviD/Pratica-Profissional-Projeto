@@ -53,27 +53,6 @@ object frmCadastroCompra: TfrmCadastroCompra
     Height = 13
     Caption = 'Data de Chegada'
   end
-  object Label1: TLabel
-    Left = 339
-    Top = 141
-    Width = 56
-    Height = 13
-    Caption = 'Quantidade'
-  end
-  object Label2: TLabel
-    Left = 427
-    Top = 141
-    Width = 70
-    Height = 13
-    Caption = 'Valor de Custo'
-  end
-  object Label3: TLabel
-    Left = 535
-    Top = 141
-    Width = 45
-    Height = 13
-    Caption = 'Desconto'
-  end
   object lbProduto: TLabel
     Left = 64
     Top = 141
@@ -158,6 +137,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     Height = 25
     Caption = '&Pesquisar'
     TabOrder = 4
+    OnClick = btnPesquisarClick
   end
   object edtDtEmis: TEdit
     Left = 8
@@ -172,35 +152,6 @@ object frmCadastroCompra: TfrmCadastroCompra
     Width = 121
     Height = 21
     TabOrder = 6
-  end
-  object edtQtde: TEdit
-    Left = 339
-    Top = 160
-    Width = 70
-    Height = 21
-    TabOrder = 7
-  end
-  object edtVCusto: TEdit
-    Left = 427
-    Top = 160
-    Width = 81
-    Height = 21
-    TabOrder = 8
-  end
-  object edtDesc: TEdit
-    Left = 531
-    Top = 160
-    Width = 81
-    Height = 21
-    TabOrder = 9
-  end
-  object btnAdd: TButton
-    Left = 622
-    Top = 158
-    Width = 75
-    Height = 25
-    Caption = '&Adicionar'
-    TabOrder = 10
   end
   object LVProdCompra: TListView
     Left = 8
@@ -223,7 +174,7 @@ object frmCadastroCompra: TfrmCadastroCompra
       item
         Caption = 'Desconto'
       end>
-    TabOrder = 11
+    TabOrder = 7
     ViewStyle = vsReport
   end
   object edtCodProduto: TEdit
@@ -231,7 +182,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     Top = 160
     Width = 50
     Height = 21
-    TabOrder = 12
+    TabOrder = 8
   end
   object btnSalvar: TButton
     Left = 521
@@ -239,7 +190,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     Width = 75
     Height = 25
     Caption = '&Salvar'
-    TabOrder = 13
+    TabOrder = 9
     OnClick = btnSalvarClick
   end
   object btnSair: TButton
@@ -248,7 +199,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     Width = 75
     Height = 25
     Caption = '&Sair'
-    TabOrder = 14
+    TabOrder = 10
     OnClick = btnSairClick
   end
   object btnBuscar: TButton
@@ -257,28 +208,29 @@ object frmCadastroCompra: TfrmCadastroCompra
     Width = 75
     Height = 25
     Caption = '&Buscar'
-    TabOrder = 15
+    TabOrder = 11
+    OnClick = btnBuscarClick
   end
   object edtForn: TEdit
     Left = 479
     Top = 35
     Width = 133
     Height = 21
-    TabOrder = 16
+    TabOrder = 12
   end
   object edtProduto: TEdit
     Left = 64
     Top = 160
     Width = 121
     Height = 21
-    TabOrder = 17
+    TabOrder = 13
   end
   object edtCondPgto: TEdit
     Left = 8
     Top = 456
     Width = 121
     Height = 21
-    TabOrder = 18
+    TabOrder = 14
   end
   object LVCondPgto: TListView
     Left = 8
@@ -298,7 +250,7 @@ object frmCadastroCompra: TfrmCadastroCompra
       item
         Caption = 'Valor Total do Produto'
       end>
-    TabOrder = 19
+    TabOrder = 15
     ViewStyle = vsReport
   end
   object btnGerar: TButton
@@ -307,7 +259,7 @@ object frmCadastroCompra: TfrmCadastroCompra
     Width = 75
     Height = 25
     Caption = '&Gerar'
-    TabOrder = 20
+    TabOrder = 16
     OnClick = btnGerarClick
   end
   object edtDtCad: TEdit
@@ -315,13 +267,13 @@ object frmCadastroCompra: TfrmCadastroCompra
     Top = 675
     Width = 65
     Height = 21
-    TabOrder = 21
+    TabOrder = 17
   end
   object edtDtUltAlt: TEdit
     Left = 339
     Top = 675
     Width = 70
     Height = 21
-    TabOrder = 22
+    TabOrder = 18
   end
 end

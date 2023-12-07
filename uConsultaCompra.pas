@@ -11,6 +11,10 @@ uses
 type
   TfrmConsultaCompra = class(TFormConsultaPai)
   procedure FormCreate(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
     umFormCadastroCompras : TfrmCadastroCompra;
@@ -45,6 +49,30 @@ begin
   umFormCadastroCompras.LimpaEdit;
   umFormCadastroCompras.CarregaEdit;
   umFormCadastroCompras.ShowModal;
+end;
+
+procedure TfrmConsultaCompra.btnAlterarClick(Sender: TObject);
+begin
+  inherited;
+  Alterar;
+end;
+
+procedure TfrmConsultaCompra.btnExcluirClick(Sender: TObject);
+begin
+  inherited;
+  Excluir;
+end;
+
+procedure TfrmConsultaCompra.btnInserirClick(Sender: TObject);
+begin
+  inherited;
+  Inserir;
+end;
+
+procedure TfrmConsultaCompra.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  Sair;
 end;
 
 procedure TfrmConsultaCompra.ConhecaObj(pObj, pCtrl: TObject);
@@ -83,7 +111,9 @@ end;
 procedure TfrmConsultaCompra.Inserir;
 begin
   inherited;
-  aCompra.setCodigo(0);
+  aCompra.setModelo(' XXX ');
+  aCompra.setSerie(' XXX ');
+  aCompra.setNumero(0);
   umFormCadastroCompras.ConhecaObj(aCompra, aCtrlCompra);
   umFormCadastroCompras.LimpaEdit;
   umFormCadastroCompras.ShowModal;

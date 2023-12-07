@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, uCadastroPai, uPai,
-  uCompras,uCtrlCompras, uConsultaCondPgto;
+  uCompras,uCtrlCompras, uConsultaCondPgto, uConsultaProduto, uConsultaFornecedores;
 
 type
   TfrmCadastroCompra = class(TForm)
@@ -22,13 +22,6 @@ type
     edtDtCheg: TEdit;
     lbDtEmis: TLabel;
     lbDtCheg: TLabel;
-    edtQtde: TEdit;
-    edtVCusto: TEdit;
-    edtDesc: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    btnAdd: TButton;
     LVProdCompra: TListView;
     edtCodProduto: TEdit;
     lbProduto: TLabel;
@@ -51,11 +44,15 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
+    procedure btnBuscarClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
   private
     { Private declarations }
     aCompra : Compras;
     aCtrlCompra : CtrlCompras;
     umFormConsultaCondPgto : TfrmConsultaCondPgto;
+    umFormConsultaProduto : TformConsultaProduto;
+    umFormConsultaForns : TformConsultaFornecedores;
   public
     { Public declarations }
     procedure ConhecaObj(pObj: TObject; pCtrl: TObject); virtual;
@@ -87,15 +84,29 @@ begin
   self.edtDtEmis.Enabled := false;
   self.edtDtCheg.Enabled := false;
   self.edtCodForn.Enabled := false;
-  self.edtQtde.Enabled := false;
-  self.edtVCusto.Enabled := false;
-  self.edtDesc.Enabled := false;
   self.edtProduto.Enabled := false;
+end;
+
+procedure TfrmCadastroCompra.btnBuscarClick(Sender: TObject);
+begin
+   umFormConsultaProduto.ShowModal;
 end;
 
 procedure TfrmCadastroCompra.btnGerarClick(Sender: TObject);
 begin
    umFormConsultaCondPgto.ShowModal;
+end;
+
+procedure TfrmCadastroCompra.btnPesquisarClick(Sender: TObject);
+var aux : string;
+begin
+  inherited;
+  aux := umFormConsultaForns.btnSair.Caption;
+  umFormConsultaForns.btnSair.Caption := 'Selecionar';
+  umFormConsultaForns.ConhecaObj(aCompra.getoForn, nil);
+  umFormConsultaForns.ShowModal;
+  umFormConsultaForns.btnSair.Caption := aux;
+  self.edtCodForn.Text := aCompra.getoForn.getNomeFantasia;
 end;
 
 procedure TfrmCadastroCompra.btnSairClick(Sender: TObject);
@@ -118,9 +129,6 @@ begin
   self.edtDtEmis.Text := datetostr(aCompra.getDtEmissao);
   self.edtDtCheg.Text := datetostr(aCompra.getDtChegada);
   //self.edtCodForn.Text := strtofloat(aCompra.getoForn);
-  self.edtQtde.Text := floattostr(aCompra.getQtde);
-  self.edtVCusto.Text := floattostr(aCompra.getVCusto);
-  self.edtDesc.Text := floattostr(aCompra.getDesconto);
   //self.edtProduto.Text := floattostr(aCompra.getoProduto);
 end;
 
@@ -140,10 +148,6 @@ begin
   self.edtDtEmis.Enabled := true;
   self.edtDtCheg.Enabled := true;
   self.edtCodForn.Enabled := true;
-  self.edtQtde.Enabled := true;
-  self.edtVCusto.Enabled := true;
-  self.edtDesc.Enabled := true;
-  self.edtCodProduto.Enabled := true;
   self.edtProduto.Enabled := true;
 end;
 
@@ -162,16 +166,13 @@ begin
   edtDtEmis.Clear;
   edtDtCheg.Clear;
   edtCodForn.Clear;
-  edtQtde.Clear;
-  edtVCusto.Clear;
-  edtDesc.Clear;
   edtProduto.Clear;
 end;
 
 procedure TfrmCadastroCompra.Sair;
 begin
   inherited;
-
+  Close;
 end;
 
 procedure TfrmCadastroCompra.Salvar;
@@ -227,7 +228,8 @@ end;
 
 procedure TfrmCadastroCompra.setConsulta(pObj: TObject);
 begin
-
+   umformConsultaForns := TFormConsultaFornecedores(pObj);
+   umformConsultaProduto := TFormConsultaProduto(pObj);
 end;
 
 end.

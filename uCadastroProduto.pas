@@ -16,6 +16,12 @@ type
     edtNomeProd: TEdit;
     edtSabor: TEdit;
     edtPreco: TEdit;
+    lbQtde: TLabel;
+    lbVCusto: TLabel;
+    lbDesconto: TLabel;
+    edtQtde: TEdit;
+    edtVCusto: TEdit;
+    edtDesc: TEdit;
   private
     { Private declarations }
     oProd : Produtos;
@@ -43,6 +49,9 @@ begin
   inherited;
   self.edtNomeProd.Enabled := false;
   self.edtSabor.Enabled := false;
+  self.edtQtde.Enabled := false;
+  self.edtVCusto.Enabled := false;
+  self.edtDesc.Enabled := false;
   self.edtPreco.Enabled := false;
 end;
 
@@ -52,6 +61,9 @@ begin
   self.edtCodigo.Text := inttostr(oProd.getCodigo);
   self.edtNomeProd.Text := oProd.getTpProduto;
   self.edtSabor.Text := oProd.getSabor;
+  self.edtQtde.Text := inttostr(oProd.getQtde);
+  self.edtVCusto.Text := floattostr(oProd.getVCusto);
+  self.edtDesc.Text := floattostr(oProd.getDesconto);
   self.edtPreco.Text := floattostr(oProd.getPreco);
 end;
 
@@ -67,6 +79,9 @@ begin
   inherited;
   self.edtNomeProd.Enabled := true;
   self.edtSabor.Enabled := true;
+  self.edtQtde.Enabled := true;
+  self.edtVCusto.Enabled := true;
+  self.edtDesc.Enabled := true;
   self.edtPreco.Enabled := true;
 end;
 
@@ -76,6 +91,9 @@ begin
   edtCodigo.Text := '0';
   edtNomeProd.Clear;
   edtSabor.Clear;
+  edtQtde.Clear;
+  edtVCusto.Clear;
+  edtDesc.Clear;
   edtPreco.Clear;
 end;
 
@@ -110,6 +128,9 @@ begin
         oProd.setCodigo(strtoint(self.edtCodigo.Text));
         oProd.setTpProduto(self.edtNomeProd.Text);
         oProd.setSabor(self.edtSabor.Text);
+        oProd.setQtde(strtoint(self.edtQtde.Text));
+        oProd.setVCusto(strtofloat(self.edtVCusto.Text));
+        oProd.setDesconto(strtofloat(self.edtDesc.Text));
         oProd.setPreco(strtofloat(self.edtPreco.Text));
         msg := aCtrlProd.Salvar(oProd.clone);
         if msg = '' then
