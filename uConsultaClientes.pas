@@ -4,9 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPessoas, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
   uCadastroClientes, uCliente, uCtrlClientes, uColClientes, Data.DB, Vcl.Grids,
-  Vcl.DBGrids;
+  Vcl.DBGrids, uConsultaPessoas;
 
 type
   TFormConsultaClientes = class(TFormConsultaPessoas)
