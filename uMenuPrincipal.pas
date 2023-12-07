@@ -121,7 +121,7 @@ end;
 
 procedure TFormSorveteria.Compras1Click(Sender: TObject);
 begin
-   oConsultaCompras.ShowModal;
+   aInter.PDCompras(aCompra, aCtrlCompra);
 end;
 
 procedure TFormSorveteria.ContasPagas1Click(Sender: TObject);
@@ -210,8 +210,8 @@ end;
 
 procedure TFormSorveteria.Pases1Click(Sender: TObject);
 begin
-   //aInter.PDPaises(oPais, aCtrlPais);
-   oConsultaPais.ShowModal;
+   aInter.PDPaises(oPais, aCtrlPais);
+   //oConsultaPais.ShowModal;
 end;
 
 procedure TFormSorveteria.Produto1Click(Sender: TObject);
@@ -226,7 +226,7 @@ end;
 
 procedure TFormSorveteria.Vendas1Click(Sender: TObject);
 begin
-   oConsultaVendas.ShowModal;
+   aInter.PDVendas(aVenda, aCtrlVenda);
 end;
 
 end.

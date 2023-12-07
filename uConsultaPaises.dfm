@@ -1,7 +1,8 @@
 inherited FormConsultaPaises: TFormConsultaPaises
   Caption = 'Ver Paises'
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  ExplicitWidth = 670
+  ExplicitHeight = 418
   TextHeight = 13
   inherited btnAlterar: TButton
     OnClick = btnAlterarClick
@@ -16,33 +17,6 @@ inherited FormConsultaPaises: TFormConsultaPaises
     OnClick = nil
   end
   inherited DBGrid1: TDBGrid
-    DataSource = DM.DsPaises
     ReadOnly = True
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'CODPAIS'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'PAIS'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'SIGLA'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DDI'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'MOEDA'
-        Visible = True
-      end>
   end
 end

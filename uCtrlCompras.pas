@@ -62,7 +62,7 @@ end;
 procedure CtrlCompras.setDM(pDM: TObject);
 begin
   inherited;
-   aDaoCompras.setDM(pDm);
+   aDaoCompras.setDM(pDM);
 end;
 
 end.

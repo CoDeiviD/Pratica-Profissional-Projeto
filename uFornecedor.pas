@@ -64,7 +64,7 @@ begin
    Endereco := pEndereco;
    Email := pEmail;
    Telefone := pTelefone;
-   oProduto := Produtos.CrieInit(pCodProduto,'','',0.00);
+   oProduto := Produtos.CrieInit(pCodProduto,0,'','',0.00,0.00,0.00);
    aCidade := Cidades.CrieInit(pCodCidade,'','',0);
 end;
 

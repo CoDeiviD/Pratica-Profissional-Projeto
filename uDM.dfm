@@ -12,6 +12,7 @@ object DM: TDM
       'Database=C:\DB\LIGEIRINHO.FDB'
       'Protocol=TCPIP'
       'DriverID=FB')
+    Connected = True
     LoginPrompt = False
     Left = 30
     Top = 60
@@ -450,6 +451,8 @@ object DM: TDM
   object qCompras: TFDQuery
     Connection = FDBanco
     Transaction = FDTrans
+    SQL.Strings = (
+      'select * from Compras')
     Left = 328
     Top = 680
   end

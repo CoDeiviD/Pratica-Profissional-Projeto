@@ -32,15 +32,12 @@ begin
         mCompra := Compras(pObj);
         with umDM.qCompras do
         begin
-           mCompra.setCodigo(FieldByName('CODCOMPRA').Value);
            mCompra.setModelo(FieldByName('MODELO').AsString);
            mCompra.setSerie(FieldByName('SERIE').AsString);
            mCompra.setNumero(FieldByName('NUMERO').Value);
            mCompra.setDtEmissao(FieldByName('DTEMISSAO').Value);
            mCompra.setDtChegada(FieldByName('DTCHEGADA').Value);
-           mCompra.setQtde(FieldByName('QTDE').Value);
-           mCompra.setVCusto(FieldByName('VCUSTO').Value);
-           mCompra.setDesconto(FieldByName('DESCONTO').Value);
+           mCompra.getoForn.setCodigo(FieldByName('CODFORN').Value);
            result := '';
         end;
      except on e:exception do
@@ -72,7 +69,7 @@ var mSql : string;
 begin
    try
       mCompra := Compras(pObj);
-      mSql := 'delete from compras where codCompra =' +quotedstr(inttostr(mCompra.getCodigo));
+      mSql := 'delete from compras where NUMERO =' +quotedstr(inttostr(mCompra.getNumero));
       umDM.FDTrans.StartTransaction;
       umDM.qCompras.Active := false;
       umDM.qCompras.SQL.Clear;
@@ -99,7 +96,7 @@ var mSql : string;
 begin
    mSql := 'select * from compras';
    if pChave <> '' then
-      mSql := 'select * from compras where TpProduto like' +quotedstr('%'+pChave+'%')+ 'order by TpProduto;';
+      mSql := 'select * from compras where MODELO like' +quotedstr('%'+pChave+'%')+ 'order by MODELO;';
    umDM.qCompras.Active := false;
    umDM.qCompras.SQL.Clear;
    umDM.qCompras.SQL.Add(mSql);
@@ -116,24 +113,20 @@ begin
      with umDM.qCompras do
      begin
         if mCompra.getCodigo = 0 then
-           mSql := 'insert into compras(codcompra, modelo, serie, numero, dtemissao, dtchegada, qtde, vcusto, desconto) values (:codcompra, :modelo, :serie, :numero, :dtemissao, :dtchegada, :qtde, :vcusto, :desconto)'
+           mSql := 'insert into compras(modelo, serie, numero, dtemissao, dtchegada) values (:modelo, :serie, :numero, :dtemissao, :dtchegada)'
         else
         begin
-           mSql := 'update Compras set modelo = :modelo, serie = :serie, numero = :numero, dtemissao = :dtemissao, dtchegada = :dtchegada, qtde = :qtde, vcusto = :vcusto, desconto = :desconto';
-           mSql := mSql + ' where codCompra = :CodCompra;';
+           mSql := 'update Compras set  serie = :serie, numero = :numero, dtemissao = :dtemissao, dtchegada = :dtchegada';
+           mSql := mSql + ' where modelo = :modelo;';
         end;
         SQL.Clear;
         SQL.Add(mSql);
         umDM.qCompras.ParamByName('MODELO').Value := mCompra.getModelo;
         umDM.qCompras.ParamByName('SERIE').Value := mCompra.getSerie;
-        umDM.qCompras.ParamByName('NUMERO').Value := mCompra.getNumero;
         umDM.qCompras.ParamByName('DTEMISSAO').Value := mCompra.getDtEmissao;
         umDM.qCompras.ParamByName('DTCHEGADA').Value := mCompra.getDtChegada;
-        umDM.qCompras.ParamByName('QTDE').Value := mCompra.getQtde;
-        umDM.qCompras.ParamByName('VCUSTO').Value := mCompra.getVCusto;
-        umDM.qCompras.ParamByName('DESCONTO').Value := mCompra.getDesconto;
-        if mCompra.getCodigo > 0 then   // <>0
-           umDM.qCompras.ParamByName('CODCOMPRA').Value := mCompra.getCodigo;
+        if mCompra.getNumero > 0 then   // <>0
+           umDM.qCompras.ParamByName('NUMERO').Value := mCompra.getNumero;
         ExecSQL;
      end;
      umDM.FDTrans.Commit;

@@ -35,6 +35,9 @@ begin
            mProduto.setCodigo(FieldByName('CODPRODUTO').Value);
            mProduto.setTpProduto(FieldByName('TPPRODUTO').AsString);
            mProduto.setSabor(FieldByName('SABOR').AsString);
+           mProduto.setQtde(FieldByName('QTDE').Value);
+           mProduto.setVCusto(FieldByName('VCUSTO').Value);
+           mProduto.setDesconto(FieldByName('DESCONTO').Value);
            mProduto.setPreco(FieldByName('PRECO').Value);
            result := '';
         end;
@@ -111,16 +114,19 @@ begin
      with umDM.qProdutos do
      begin
         if mProduto.getCodigo = 0 then
-           mSql := 'insert into produtos(codproduto, TpProduto, sabor, preco) values (:codproduto, :TpProduto, :sabor, :preco)'
+           mSql := 'insert into produtos(codproduto, TpProduto, sabor, qtde, vcusto, desconto, preco) values (:codproduto, :TpProduto, :sabor, :qtde, :vcusto, :desconto :preco)'
         else
         begin
-           mSql := 'update Produtos set TpProduto = :TpProduto, sabor = :sabor, preco = :preco';
+           mSql := 'update Produtos set TpProduto = :TpProduto, sabor = :sabor, qtde = :qtde, vcusto = :vcusto, desconto = :desconto, preco = :preco';
            mSql := mSql + ' where codProduto = :CodProduto;';
         end;
         SQL.Clear;
         SQL.Add(mSql);
         umDM.qProdutos.ParamByName('TPPRODUTO').Value := mProduto.getTpProduto;
         umDM.qProdutos.ParamByName('SABOR').Value := mProduto.getSabor;
+        umDM.qProdutos.ParamByName('QTDE').Value := mProduto.getQtde;
+        umDM.qProdutos.ParamByName('VCUSTO').Value := mProduto.getVCusto;
+        umDM.qProdutos.ParamByName('DESCONTO').Value := mProduto.getDesconto;
         umDM.qProdutos.ParamByName('PRECO').Value := mProduto.getPreco;
         if mProduto.getCodigo > 0 then   // <>0
            umDM.qProdutos.ParamByName('CODPRODUTO').Value := mProduto.getCodigo;
